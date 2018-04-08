@@ -1,0 +1,35 @@
+{
+  "name": "ict-flashcard-master",
+  "version": "1.0.0",
+  "description": "- Subject: SE - Members: Thoa, Phuong Anh, Viet Anh, Hai, Phong",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vietanhdev/iCT-Flashcard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vietanhdev/iCT-Flashcard/issues"
+  },
+  "homepage": "https://github.com/vietanhdev/iCT-Flashcard#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "http": "0.0.0",
+    "morgan": "^1.9.0",
+    "mysql": "^2.15.0",
+    "nodemailer": "^4.6.3",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "socketio": "^1.0.0"
+  }
+}
