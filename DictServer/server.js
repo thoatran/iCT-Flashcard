@@ -29,6 +29,8 @@ app.get('/dictionary/ev', (req, res) => {
   if (lookUpWord === undefined) {
     result['success'] = false;
     result['message'] = "Please specify a word to lookup.";
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(result));
   } else {
 
     // Decode lookup word
