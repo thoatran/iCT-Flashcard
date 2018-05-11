@@ -1,0 +1,69 @@
+
+### DICTIONARY
+// ==================================================================
+// USER APIs FOR DICTIONARY
+/// ### E-V Dictionary
+// Lookup: GET: /api/dictionary/ev?lookup=<word>
+
+// ==================================================================
+// USER APIs FOR USER INFO
+
+// ### User Register
+POST: /api/user/register
+// params: username, password, email, fullname
+// success: return {'success': true}
+// fail: return {'sucess': false, 'message': '<why fail?>'}
+
+// ### User Login
+POST: /api/user/login
+// params: {'username': '<username>', 'password': '<password>'}
+// success: return {'success': true, 'token': '<token>'}
+// fail: return {'success': false}
+
+// ### User Logout
+POST: /api/user/logout
+// params: {'username': '<username>', 'token', '<token>'}
+// success: return {'success': true}
+// fail: return {'success': false}
+
+// ### Check login state
+POST: /api/user/islogin
+// params: {'username': '<username>', 'token': '<token>'}
+// success: return {'success': true, 'isLoggedIn': true}
+// fail: return {'success': false}
+// or fail: return {'success': true, 'isLoggedIn': false}
+
+// ### Update user info
+POST: /api/user/updateinfo
+// params: {'username': '<username>', 'token': '<token>',
+//          'oldPassword': '<oldPassword>'
+//                'newUserInfo': {
+//                      'email'        : '<email>',
+//                      'bio'          : '<bio>',
+//                      'fullname'     : '<fullname>',
+//                      'newPassword'  : '<newPassword>',
+//                 }
+//          }
+//    => 'oldPassword', 'newPassword' are used when user wants to change their password
+//    => all properties of 'newUserInfo' are optional
+// success: return {'success': true}
+// fail: return {'success': false}
+
+// ### Get user info
+POST: /api/user/getinfo
+// params: username, token
+// success: return {'success': true, 'data':{<email, bio, fullname, username, phofile_photo>} }
+
+
+// ==================================================================
+// USER APIs FOR IMAGE MANAGEMENT
+
+// ### Upload image
+// params: {'user': '<username>', 'token', '<token>',
+//      'image': <image-base64>
+//}
+// success: return {'success': true, 'imageUrl': '<image-address>'}
+// fail: return {'success': false}
+// router.route('/image/upload')
+//   .post(ImageController.upload);
+// Lưu ý: Hình ảnh truyền lên trong 1 param và được mã hoá thành dạng base64.

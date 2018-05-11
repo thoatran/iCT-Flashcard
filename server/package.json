@@ -1,0 +1,30 @@
+{
+  "name": "ict-flashcard-server",
+  "version": "1.0.0",
+  "description": "Server for iCTFlashcard",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^2.0.0",
+    "body-parser": "^1.18.2",
+    "cloudinary": "^1.11.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "express-fileupload": "^0.4.0",
+    "mime": "^2.3.1",
+    "morgan": "^1.9.0",
+    "multer": "^1.3.0",
+    "mysql": "^2.15.0",
+    "node-mysql-importer": "0.0.10",
+    "passport-http-bearer": "^1.0.1",
+    "path": "^0.12.7",
+    "readline-sync": "^1.4.9",
+    "request": "^2.85.0",
+    "uid2": "0.0.3"
+  }
+}
