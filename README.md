@@ -3,6 +3,6 @@
 - Subject: SE
 - Members: Thoa, Phuong Anh, Viet Anh, Hai, Phong
 
-# Xem các page đã design:
+# Project Info:
 
-[prototype/ui-design](https://vietanhdev.com/iCT-Flashcard/prototype/ui-design.html)
+- Development Server: [https://ict-flashcard-server.herokuapp.com/](https://ict-flashcard-server.herokuapp.com/)
