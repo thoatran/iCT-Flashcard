@@ -3,6 +3,9 @@ var UserModel = require('../models/user');
 
 var UserController = {};
 
+// Load language file
+var getText = require('../error_msg_vi.json');
+
 // ### User Login
 UserController.login = function(req, res) {
 
@@ -42,7 +45,7 @@ UserController.register = function(req, res) {
     || !req.body.hasOwnProperty("password")
     || !req.body.hasOwnProperty("email")) {
     return res.json({"success": false,
-      "message": "Vui lòng nhập tất cả các ô được yêu cầu!"
+      "message": getText['18406']
     });
   }
 
@@ -54,7 +57,7 @@ UserController.register = function(req, res) {
     ||  /\s/g.test(req.body.password))
   {
     return res.json({"success": false,
-      "message": "Mật khẩu không được chứa dấu cách và không được bỏ trống!"
+      "message": getText['18407']
     });
   }
 
@@ -62,18 +65,17 @@ UserController.register = function(req, res) {
   let lettersRegex = /^[0-9a-zA-Z]+$/;
   if(!req.body.password.match(lettersRegex)) {
     return res.json({"success": false,
-      "message": "Tên đăng nhập chỉ được chứa các kí tự chữ cái a-z hoặc số 0-9!"
+      "message": getText['18408']
     });
   } else {
     UserModel.isAvailableUsername(req.body.username, function(isValidUsername){
       if (isValidUsername) {
         UserModel.register(req.body, function(resp) {
           res.json(resp);
-          console.log("Registered a new user!");
         });
       } else {
         return res.json({"success": false,
-          "message": "Tên đăng nhập đã được sử dụng. Vui lòng chọn tên khác."
+        "message": getText['18409']
         });
       }
     });
@@ -125,7 +127,7 @@ UserController.updateUserInfo = function(req, res) {
     || !req.body.hasOwnProperty("newUserInfo")
   ) {
     return res.json({"success": false,
-      "mesage": "Lỗi xử lí form."
+      "message": getText['18410']
     });
   }
 

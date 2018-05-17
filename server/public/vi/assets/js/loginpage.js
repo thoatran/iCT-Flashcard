@@ -57,7 +57,7 @@ $(function() {
 				} else {
 					localStorage.token = response.token;
             		localStorage.username = loginInfo.username;
-					window.location = "/"; 
+					window.location = "/vi/"; 
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown) {

@@ -1,5 +1,8 @@
 const evDict = require('./dict_data.json');
 
+// Load language file
+var getText = require('../error_msg_vi.json');
+
 var DictionaryModel = {};
 DictionaryModel.lookup = function(word, callback) {
   let result = {};
@@ -23,7 +26,7 @@ DictionaryModel.lookup = function(word, callback) {
   if (!found) {
     result['success'] = false;
     result['word'] = word;
-    result['message'] = "Không tìm thấy từ bạn yêu cầu.";
+    result['message'] = getText['18405'];
     return callback(result);
   }
 };

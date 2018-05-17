@@ -6,6 +6,8 @@ const path = require("path");
 var UserModel = require('../models/user');
 var connection = require('../models/database');
 
+// Load language file
+var getText = require('../error_msg_vi.json');
 
 /*configure our cloudinary*/
 cloudinary.config({
@@ -40,7 +42,7 @@ ImageController.uploadImage = function(req, res) {
         if (isLoggedIn['isLoggedIn'] != true) {
             return res.json({
                 success: false,
-                message:"Permission Denied!"
+                message: getText['18403']
             });
         }
 
@@ -49,7 +51,7 @@ ImageController.uploadImage = function(req, res) {
                 console.log(err);
                 return res.json({
                     success: false,
-                    message:"Failed to upload image"
+                    message: getText['18401']
                 });
             }
     
@@ -63,13 +65,13 @@ ImageController.uploadImage = function(req, res) {
                     if (error) {
                         return res.json({
                             success: false,
-                            message:"Failed writing to database."
+                            message: getText['18402']
                         });
                     }
 
                     return res.json({
                         success: true,
-                        message: "Image uploaded",
+                        message: getText['10401'],
                         imageUrl: result.secure_url
                     });
 
@@ -78,7 +80,7 @@ ImageController.uploadImage = function(req, res) {
             } else {
                 return res.json({
                     success: false,
-                    message:"Failed to upload image"
+                    message: getText['18401']
                 });
             }   
         });
