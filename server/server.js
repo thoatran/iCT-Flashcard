@@ -27,10 +27,15 @@ app.use(function (req, res, next) {
 });
 
 
-
-
 // Serve static pages
-app.use(express.static('public'));
+app.use('/vi', express.static('public/vi'));
+app.use('/en', express.static('public/en'));
+
+// Vietnamese by default
+app.get('/', function(req, res) {
+  res.redirect('/vi/');
+});
+
 
 // Serve api def
 app.get('/apis.txt', function(req, res) {
