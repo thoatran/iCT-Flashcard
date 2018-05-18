@@ -1,5 +1,6 @@
 // Load required packages
-var CollectionController = require('../models/collection');
+var CollectionModel = require('../models/collection');
+var UserModel = require('../models/user');
 
 var CollectionController = {};
 
@@ -8,21 +9,31 @@ var getText = require('../error_msg_vi.json');
 
 
 CollectionController.createCollection = function(req, res) {
-    return UserController.checkValidLogin(req, res, function(userInfo) {
+    if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
+        return res.json({"success": false});
+    }
+    return UserModel.checkValidLogin(req.body.username, req.body.token, function(userInfo) {
         let name = req.body.name || '';
         let description = req.body.description || '';
         let photo = req.body.photo || '';
-        let result = CollectionModel.createCollection(name, description, photo, userInfo['id']); 
+        let result = CollectionModel.createCollection(name, description, photo, userInfo['user_id']); 
         if (result) {
             res.json({'success': true});
         } else {
             res.json({'success': false});
         }
+    }, function(err) {
+        if (err)
+            console.log(err);
+        res.json({"success": false});
     });
 }
 
 CollectionController.deleteCollection = function(req, res) {
-    return UserController.checkValidLogin(req, res, function() {
+    if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
+        return res.json({"success": false});
+    }
+    return UserModel.checkValidLogin(req.body.username, req.body.token, function(userInfo) {
         if (typeof req.body.collection_id === 'undefined') {
             res.json({'success': false});
         }
@@ -33,12 +44,19 @@ CollectionController.deleteCollection = function(req, res) {
         } else {
             res.json({'success': false});
         }
+    }, function(err) {
+        if (err)
+            console.log(err);
+        res.json({"success": false});
     });
 }
 
 CollectionController.editCollection = function(req, res) {
-    return UserController.checkValidLogin(req, res, function(userInfo) {
 
+    if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
+        return res.json({"success": false});
+    }
+    return UserModel.checkValidLogin(req.body.username, req.body.token, function(userInfo) {
         if (typeof req.body.collection_id === 'undefined') {
             res.json({'success': false});
         }
@@ -51,7 +69,7 @@ CollectionController.editCollection = function(req, res) {
         }
 
         // Does user own the collection?
-        if (collectionInfo.user_id != userInfo['id']) {
+        if (collectionInfo.user_id != userInfo['user_id']) {
             res.json({'success': false});
         }
 
@@ -75,7 +93,10 @@ CollectionController.editCollection = function(req, res) {
         } else {
             res.json({'success': false});
         }
-
+    }, function(err) {
+        if (err)
+            console.log(err);
+        res.json({"success": false});
     });
 }
 
