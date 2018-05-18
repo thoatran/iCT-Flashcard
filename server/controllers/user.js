@@ -6,6 +6,7 @@ var UserController = {};
 // Load language file
 var getText = require('../error_msg_vi.json');
 
+
 // ### User Login
 UserController.login = function(req, res) {
 
@@ -13,11 +14,12 @@ UserController.login = function(req, res) {
     return res.json({"success": false});
   }
 
-  // convert username to lowercase
-  req.body.username = String(req.body.username).toLowerCase();
-
-  UserModel.login(req.body.username, req.body.password, function(resp) {
-    res.json(resp);
+  return UserModel.login(req.body.username, req.body.password, function(token) {
+    res.json({"success": true, "token": token});
+  }, function( err ) {
+    if (err)
+      console.log(err);
+    res.json({"success": false});
   });
 
 }
@@ -29,11 +31,12 @@ UserController.logout = function(req, res) {
     return;
   }
 
-  // convert username to lowercase
-  req.body.username = String(req.body.username).toLowerCase();
-
-  UserModel.logout(req.body.username, req.body.token, function(resp) {
-    res.json(resp);
+  UserModel.logout(req.body.username, req.body.token, function(){
+    return res.json({"success": true});
+  }, function( err ){
+    if (err)
+      console.log(err);
+    res.json({"success": false});
   });
 
 }
@@ -68,16 +71,14 @@ UserController.register = function(req, res) {
       "message": getText['18408']
     });
   } else {
-    UserModel.isAvailableUsername(req.body.username, function(isValidUsername){
-      if (isValidUsername) {
-        UserModel.register(req.body, function(resp) {
-          res.json(resp);
-        });
-      } else {
-        return res.json({"success": false,
+    UserModel.isAvailableUsername(req.body.username, function(){
+      UserModel.register(req.body, function(resp) {
+        res.json({"success": true});
+      });
+    }, function() {
+      return res.json({"success": false,
         "message": getText['18409']
         });
-      }
     });
   }
 
@@ -92,7 +93,13 @@ UserController.checkValidLogin = function(req, res) {
   }
 
   UserModel.checkValidLogin(req.body.username, req.body.token, function(resp) {
+    resp.success = true;
+    resp["isLoggedIn"] = true;
     res.json(resp);
+  }, function(err) {
+    if (err)
+      console.log(err);
+    res.json({"success": false});
   });
 
 }
@@ -105,18 +112,22 @@ UserController.getUserInfo = function(req, res) {
     return res.json({"success": false});
   }
 
-  // convert username to lowercase
-  req.body.username = String(req.body.username).toLowerCase();
-
-  UserModel.checkValidLogin(req.body.username, req.body.token, function(resp) {
-    if (resp["success"] == false || resp["isLoggedIn"] == false ) {
-      res.json({"success": false});
-    } else {
-      UserModel.getUserInfo(req.body["username"], function(resp) {
+  return UserModel.checkValidLogin(req.body.username, req.body.token, function(resp) {
+      UserModel.getUserInfo(req.body["username"], function(data) {
+        let resp = {}
+        resp.success = true;
+        resp.data = data;
         res.json(resp);
+      }, function(err) {
+        if (err)
+          console.log(err);
+        res.json({"success": false});
       });
-    }
-});
+  }, function(err) {
+    if (err)
+      console.log(err);
+    res.json({"success": false});
+  });
 
 }
 
@@ -131,17 +142,18 @@ UserController.updateUserInfo = function(req, res) {
     });
   }
 
-  // convert username to lowercase
-  req.body.username = String(req.body.username).toLowerCase();
-
-  UserModel.checkValidLogin(req.body.username, req.body.token, function(resp) {
-      if (resp["success"] == false || resp["isLoggedIn"] == false ) {
+  UserModel.checkValidLogin(req.body.username, req.body.token, function() {
+      UserModel.updateUserInfo(req.body["username"], req.body["newUserInfo"], function() {
+        res.json({"success": true});
+      }, function() {
+        if (err)
+          console.log(err);
         res.json({"success": false});
-      } else {
-        UserModel.updateUserInfo(req.body["username"], req.body["newUserInfo"], function(resp) {
-          res.json(resp);
-        });
-      }
+      });
+  }, function(err) {
+    if (err)
+      console.log(err);
+    res.json({"success": false});
   });
 
 }

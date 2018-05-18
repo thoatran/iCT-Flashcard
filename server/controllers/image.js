@@ -37,14 +37,7 @@ ImageController.deleteImage = function (publicId,resourceType,callback){
 
 ImageController.uploadImage = function(req, res) {
 
-    UserModel.checkValidLogin(req.body.username, req.body.token, function(isLoggedIn) {
-
-        if (isLoggedIn['isLoggedIn'] != true) {
-            return res.json({
-                success: false,
-                message: getText['18403']
-            });
-        }
+    return UserModel.checkValidLogin(req, res, function(userInfo) {
 
         cloudinary.v2.uploader.upload(req.body.imageURI,function (err, result) {
             if(err) {
@@ -60,7 +53,7 @@ ImageController.uploadImage = function(req, res) {
                 // Save image in image list of user
                 connection.query(`INSERT INTO images
                 (user_id, image) VALUES (?, ?);
-                `, [isLoggedIn['user_id'], result.secure_url], function (error) {
+                `, [userInfo['user_id'], result.secure_url], function (error) {
 
                     if (error) {
                         return res.json({
@@ -87,6 +80,11 @@ ImageController.uploadImage = function(req, res) {
 
 
 
+    }, function() {
+        return res.json({
+            success: false,
+            message: getText['18403']
+        });
     });
 
 }

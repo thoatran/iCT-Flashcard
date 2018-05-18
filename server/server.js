@@ -10,6 +10,7 @@ var path = require('path');
 var UserController = require('./controllers/user');
 var DictionaryController = require('./controllers/dictionary');
 var ImageController = require('./controllers/image');
+var CollectionController = require('./controllers/collection');
 
 // Create our Express application
 var app = express();
@@ -134,6 +135,18 @@ router.route('/image/upload')
 
 // ==================================================================
 // USER APIs FOR COLLECTION MANAGEMENT
+// ### Create collection
+router.route('/collection/create')
+  .post(CollectionController.createCollection);
+// ### Edit collection
+router.route('/collection/edit')
+  .post(CollectionController.editCollection);
+// ### Delete collection
+router.route('/collection/delete')
+.post(CollectionController.deleteCollection);
+// ### Edit collection
+router.route('/collection/edit')
+  .post(CollectionController.editCollection);
 
 
 // ### Start the server

@@ -6,25 +6,34 @@ const saltRounds = 10;
 var connection = require('../models/database');
 
 var UserModel = {};
-UserModel.login = function(user, pass, callback) {
-	// console.log("USER", user, pass);
+
+
+UserModel.usernameStandardlize = function(username) {
+	if (typeof username != "string") {
+		return "error##";
+	} else {
+		return username.toLowerCase();
+	}
+}
+
+
+UserModel.login = function(user, pass, cbSuccess, cbFail) {
 
 	// Query password
-	connection.query(`SELECT * FROM users WHERE username = ?;`, [user], function (error, results, fields) {
+	connection.query(`SELECT * FROM users WHERE username = ?;`, [UserModel.usernameStandardlize(user)], function (error, results, fields) {
 
 		if (error) {
-			console.log(error);
-			return callback({"success": false});
+			return cbFail(error);
 		}
 	
 		if (results.length == 0) {
-			return callback({"success": false});
+			return cbFail("Result length = 0.");
 		}
 
 		// Load hash from your password DB.
 		bcrypt.compare(pass, results[0].password, function(err, resp) {
 			if (err || resp == false) {
-				return callback({"success": false});
+				return cbFail();
 			} else { // Check login info: ok
 
 				// => gen new token
@@ -35,14 +44,14 @@ UserModel.login = function(user, pass, callback) {
 					let query = connection.query(`INSERT INTO tokens (user_id, token, token_exp) VALUES
 					(?, ?, DATE_ADD(NOW(), INTERVAL 1 DAY));`,
 					[results[0].id,
-					token], function(err, resp){
+					token], function(err){
 
 						if (err) {
-							return callback({"success": false});
+							return cbFail(err);
 						}
 
 						// Send token to client
-						return callback({"success": true, "token": token});
+						return cbSuccess(token);
 					});
 
 				});
@@ -54,19 +63,18 @@ UserModel.login = function(user, pass, callback) {
 };
 
 
-UserModel.logout = function(user, token, callback) {
+UserModel.logout = function(user, token,  cbSuccess, cbFail) {
 
 	connection.query(`SELECT id FROM users
 		WHERE users.username = ?
-	`, [user, token], function (error, results) {
+	`, [this.usernameStandardlize(user), token], function (error, results) {
 
 			if (error) {
-				console.log(error);
-				return callback({"success": false});
+				return cbFail(error);
 			}
 			
 			if (results.length == 0) {
-				return callback({"success": false});
+				return cbFail();
 			}
 			
 
@@ -76,21 +84,20 @@ UserModel.logout = function(user, token, callback) {
 			`, [user_id, token], function (error) {
 				
 				if (error) {
-					console.log(error);
-					return callback({"success": false});
+					return cbFail(error);
 				}
 
-				return callback({"success": true});
+				return cbSuccess();
 			
 			});
 			
 	});
 };
 
-UserModel.checkValidLogin = function(user, token, callback) {
+UserModel.checkValidLogin = function(user, token, cbSuccess, cbFail) {
 	
 	// Convert username to lowercase
-	user = String(String(user).toLowerCase());
+	user = this.usernameStandardlize(user);
 	token = String(token);
 	
 	// Query password
@@ -102,17 +109,11 @@ UserModel.checkValidLogin = function(user, token, callback) {
 		`, [user, token], function (error, results) {
 
 			if (error) {
-				console.log(error);
-				return callback({"success": false});
+				return cbFail(error);
 			}
 		
 			if (results.length == 0) {
-				return callback(
-					{
-						"success": true,
-						"isLoggedIn": false
-					}
-				);
+				return cbFail();
 			} else {
 
 				let displayName = results[0].fullname;
@@ -122,10 +123,8 @@ UserModel.checkValidLogin = function(user, token, callback) {
 					displayName = results[0].username;
 				}
 
-				return callback(
+				return cbSuccess(
 					{
-						"success": true,
-						"isLoggedIn": true,
 						"displayName": displayName,
 						"user_id": results[0].id
 					}
@@ -136,32 +135,30 @@ UserModel.checkValidLogin = function(user, token, callback) {
 };
 
 
-UserModel.isAvailableUsername = function(username, callback) {
+UserModel.isAvailableUsername = function(username, cbSuccess, cbFail) {
 	connection.query(`SELECT * FROM users
 		WHERE username = ?
-		`, [username], function (error, results) {
+		`, [this.usernameStandardlize(username)], function (error, results) {
 
 			if (error) {
-				console.log(error);
-				return callback(false);
+				return cbFail(err);
 			}
 		
 			if (results.length == 0) {
-				return callback(true);
+				return cbSuccess();
 			} else {
-				return callback(false);
+				return cbFail('Result length = 0.');
 			}
 		
 	});
 };
 
 
-UserModel.register = function(registerInfo, callback) {
+UserModel.register = function(registerInfo, cbSuccess, cbFail) {
 	bcrypt.hash(registerInfo.password, saltRounds, function(err, hashedPassword) {
 
 		if (err) {
-			console.log(err);
-			return callback({"success": false});
+			cbFail(err);
 		}
 
 		connection.query(`INSERT INTO users (fullname, username, password, email) 
@@ -169,36 +166,32 @@ UserModel.register = function(registerInfo, callback) {
 		`, [registerInfo.fullname, registerInfo.username, hashedPassword, registerInfo.email], function (error, results) {
 
 			if (error) {
-				console.log(error);
-				return callback({"success": false});
+				cbFail(error);
 			}
 		
-			return callback({"success": true});
+			return cbSuccess();
 		
 		});
 	});
 };
 
 
-UserModel.getUserInfo = function(username, callback) {
+UserModel.getUserInfo = function(username, cbSuccess, cbFail) {
 	connection.query(`SELECT username, email, fullname, bio, profile_photo
 	FROM users
 	WHERE username = ?
-	`, [username], function (error, results) {
+	`, [this.usernameStandardlize(username)], function (error, results) {
 
 		if (error) {
-			console.log(error);
-			return callback({"success": false});
+			cbFail(error);
 		}
 
-		return callback({"success": true,
-			"data": results[0]
-		});
+		return cbSuccess(results[0]);
 	
 	});
 }
 
-UserModel.updateUserInfo = function(username, newUserInfo, callback) {
+UserModel.updateUserInfo = function(username, newUserInfo, cbSuccess, cbFail) {
 
 	let updateQueryArr = [];
 	let newValuesArr = [];
@@ -225,11 +218,11 @@ UserModel.updateUserInfo = function(username, newUserInfo, callback) {
 	}
 
 	if (newValuesArr.length == 0) {
-		return callback({"success": true});
+		return cbFail(error);
 	}
 
 	// Push username to use in query
-	newValuesArr.push(username);
+	newValuesArr.push(this.usernameStandardlize(username));
 
 	// Update info
 	connection.query(`UPDATE users
@@ -237,9 +230,9 @@ UserModel.updateUserInfo = function(username, newUserInfo, callback) {
 		WHERE username = ?
 		`, newValuesArr, function (error) {
 		if (error) {
-			return callback({"success": false});
+			return cbFail(error);
 		} else {
-			return callback({"success": true});
+			return cbSuccess();
 		}
 	});
 
