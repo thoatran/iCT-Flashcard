@@ -28,7 +28,7 @@ $(function() {
 				        $('#error-message').show();
                     }
 				} else {
-					window.location = "/login.html"; 
+					window.location = "login.html"; 
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown) {

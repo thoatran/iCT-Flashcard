@@ -25,8 +25,8 @@ CREATE TABLE tokens (
 CREATE TABLE collections (
     id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id INT(20) UNSIGNED NOT NULL,
-    profile_photo VARCHAR(255),
-    name VARCHAR(255) DEFAULT 'Chưa có tên',
+    photo VARCHAR(255),
+    name VARCHAR(255) DEFAULT 'Undefined',
     description VARCHAR(255) DEFAULT '',
     FOREIGN KEY (user_id) REFERENCES users(id)
 ) DEFAULT CHARSET = utf8;

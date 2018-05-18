@@ -100,10 +100,16 @@ $(document).ready(function() {
 
 
 function updateUserInfo(data) {
-    $('#profile_photo').attr('src', '/vi/assets/images/profile_photo/' + data.profile_photo);
+    if (data.profile_photo) {
+        $('#profile_photo').attr('src', '/vi/assets/images/profile_photo/' + data.profile_photo);
+    } else {
+        $('#profile_photo').attr('src', '/vi/assets/images/profile_photo/default-profile-photo.png');
+    }
+   
     $('#userinfo-fullname').val(data.fullname);
     $('#userinfo-bio').val(data.bio);
     $('#userinfo-email').val(data.email);
 }
+
 
 
