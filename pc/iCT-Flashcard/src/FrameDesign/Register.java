@@ -1,4 +1,4 @@
-package pc;
+package FrameDesign;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -20,6 +20,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.border.LineBorder;
+
+import ClassDesign.Network;
 
 public class Register extends JFrame {
 

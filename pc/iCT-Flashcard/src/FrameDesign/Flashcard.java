@@ -1,4 +1,4 @@
-package pc;
+package FrameDesign;
 
 public class Flashcard {
 	private String title;
@@ -28,6 +28,13 @@ public class Flashcard {
 	}
 	public void setImage(String image) {
 		this.image = image;
+	}
+	
+	public void printInfor() {
+		System.out.println(this.title);
+		System.out.println(this.ipapron);
+		System.out.println(this.content);
+		System.out.println(this.image);
 	}
 
 }

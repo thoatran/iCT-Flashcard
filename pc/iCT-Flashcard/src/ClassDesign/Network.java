@@ -1,15 +1,23 @@
 /*
+
+
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pc;
+package ClassDesign;
 
 import com.google.gson.Gson;
+
+import FrameDesign.DictWord;
+import FrameDesign.WordNotFound;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -68,7 +76,7 @@ public class Network {
 
     }
     
-    public void getLoginState(String username, String password) throws IOException {
+    public CheckLogin getLoginState(String username, String password) throws IOException {
 		 
 		 String urlParameters  = "username="+username+"&password="+password;
 		 byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
@@ -103,8 +111,9 @@ public class Network {
 	        wr.close();
 	        String result = responseSB.toString();
 	        System.out.println(result);
-	        result.split(";");
-	        
+	        Gson gson = new Gson();
+	        CheckLogin check = gson.fromJson(result, CheckLogin.class); 
+	        return check;
 	        	
 	 }
 	 
@@ -143,6 +152,47 @@ public class Network {
 	        String result = responseSB.toString();
 	        System.out.println(result);
 
+	 }
+	 
+	 public void writeFlashcardData() throws IOException {
+		 	String urlString =  "https://ict-flashcard-server.herokuapp.com/pinned-flashcard.json";
+	        URL url = new URL(urlString);
+	        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+	        con.setRequestMethod("GET");
+	        con.setRequestProperty("Content-Type", "application/json");
+	        con.setRequestProperty("Accept", "application/json");
+
+	        int responseCode = con.getResponseCode();
+	        System.out.println("nSending 'GET' request to URL : " + url);
+	        System.out.println("Response Code : " + responseCode);
+
+	        BufferedReader in = new BufferedReader(
+	                new InputStreamReader(con.getInputStream()));
+	        String output;
+	        StringBuffer response = new StringBuffer();
+	        
+	        Gson gson = new Gson();
+	        PrintWriter out = new PrintWriter("flashcard.txt");
+
+	        while ((output = in.readLine()) != null) {
+	            response.append(output);
+	        }
+	        String outString = response.toString();
+	        outString.trim();
+	        System.out.println(outString);
+	        
+//        	Flashcard[] data = gson.fromJson(output, Flashcard[].class); 
+//        	
+//        	for (int i = 0; i < data.length; i++) {
+//        	out.println(data[i].getTitle());
+//        	out.println(data[i].getIpapron());
+//        	out.println(data[i].getContent());
+//        	out.println(data[i].getImage());
+//        	data[i].printInfor();
+//        	}
+        	
+	        in.close();
+	        out.close();
 	 }
 
 }

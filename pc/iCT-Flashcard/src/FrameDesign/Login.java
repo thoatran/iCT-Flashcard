@@ -1,4 +1,4 @@
-package pc;
+package FrameDesign;
 
 import java.awt.EventQueue;
 
@@ -26,6 +26,11 @@ import java.awt.Desktop;
 
 import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
+
+import ClassDesign.CheckLogin;
+import ClassDesign.Network;
+import ClassDesign.User;
+
 import javax.swing.JTextPane;
 
 public class Login extends JFrame {
@@ -70,24 +75,7 @@ public class Login extends JFrame {
 		UsernameLogin.setColumns(10);
 		
 		JButton btnLogin = new JButton("\u0110\u0103ng nh\u1EADp");
-		btnLogin.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent arg0) {
-				Network check = new Network();
-				String user = UsernameLogin.getText();
-				String pw = PasswordLogin.getText();
-				System.out.println("Login Infor: " + user +" - "+ pw);
-				try {
-					check.getLoginState(user, pw);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Dashboard main = new Dashboard();
-				main.setVisible(true);
-				dispose();
-			}
-		});
+
 		btnLogin.setForeground(new Color(255, 255, 255));
 		btnLogin.setBackground(new Color(65, 105, 225));
 		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -203,6 +191,45 @@ public class Login extends JFrame {
 		LoginFalsePane.setBounds(143, 314, 346, 31);
 		contentPane.add(LoginFalsePane);
 		LoginFalsePane.setVisible(false);
+		
+		btnLogin.addActionListener(new ActionListener() {
+			@SuppressWarnings({ "deprecation", "unused" })
+			public void actionPerformed(ActionEvent arg0) {
+				Network check = new Network();
+				CheckLogin loginState = new CheckLogin();
+				User mainuser;
+				String user = UsernameLogin.getText();
+				String pw = PasswordLogin.getText();
+				System.out.println("Login Infor: " + user +" - "+ pw);
+				try {
+					loginState = check.getLoginState(user, pw);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(loginState.getSuccess().equals("true")) {
+					mainuser = User.getUser();
+					mainuser.setToken(loginState.getToken());
+					mainuser.setUsername(user);
+					mainuser.setPassword(pw);
+					System.out.println(mainuser.getToken());
+				Dashboard main = new Dashboard();
+				main.setVisible(true);
+//				try {
+//					check.writeFlashcardData();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				dispose();
+				} else {
+					LoginFalsePane.setVisible(true);
+					UsernameLogin.setText(null);
+					PasswordLogin.setText(null);
+				}
+				
+			}
+		});
 		
 		setUndecorated(true);
 	}

@@ -1,4 +1,4 @@
-package pc;
+package FrameDesign;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -122,7 +122,7 @@ public class Dashboard extends JFrame {
 		
 		JPanel side_panel = new JPanel();
 		side_panel.setBackground(new Color(245, 245, 245));
-		side_panel.setBounds(10, 0, 202, 556);
+		side_panel.setBounds(0, 0, 212, 556);
 		contentPane.add(side_panel);
 		side_panel.setLayout(null);
 		
@@ -345,7 +345,7 @@ public class Dashboard extends JFrame {
 		lbUsername.setBounds(248, 24, 132, 22);
 		Account.add(lbUsername);
 		
-		JLabel lbFname = new JLabel("Họ và tên");
+		JLabel lbFname = new JLabel("H�? và tên");
 		lbFname.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lbFname.setBounds(87, 168, 78, 22);
 		Account.add(lbFname);
@@ -392,7 +392,7 @@ public class Dashboard extends JFrame {
 		btnEditProfile.setBounds(223, 398, 181, 22);
 		Account.add(btnEditProfile);
 		
-		JLabel btnLogout = new JLabel("Đăng xuất");
+		JLabel btnLogout = new JLabel("�?ăng xuất");
 		btnLogout.setHorizontalAlignment(SwingConstants.CENTER);
 		btnLogout.setForeground(new Color(30, 144, 255));
 		btnLogout.setFont(new Font("Tahoma", Font.ITALIC, 14));
@@ -479,7 +479,7 @@ public class Dashboard extends JFrame {
 		
 		JTextPane textPaneDescription = new JTextPane();
 		textPaneDescription.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textPaneDescription.setText("iCT FLashcard là một ứng dụng cho phép người dùng tạo các bộ Flashcard để học từ vựng một cách dễ dàng, trực quan qua hình ảnh.");
+		textPaneDescription.setText("iCT FLashcard là một ứng dụng cho phép ngư�?i dùng tạo các bộ Flashcard để h�?c từ vựng một cách dễ dàng, trực quan qua hình ảnh.");
 		textPaneDescription.setBounds(58, 107, 495, 51);
 		About.add(textPaneDescription);
 		//Description.setLineWrap();
