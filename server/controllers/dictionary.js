@@ -3,6 +3,9 @@ var DictionaryModel = require('../models/dictionary');
 
 var DictionaryController = {};
 
+// Load language file
+var getText = require('../error_msg_vi.json');
+
 /// ### E-V Dictionary
 DictionaryController.lookup = function(req, res) {
 
@@ -11,7 +14,7 @@ DictionaryController.lookup = function(req, res) {
   
     if (lookUpWord === undefined) {
       result['success'] = false;
-      result['message'] = "Vui lòng nhập từ để thực hiện tra cứu.";
+      result['message'] = getText['18404'];
       res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify(result));
     } else {

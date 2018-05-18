@@ -6,6 +6,8 @@ const path = require("path");
 var UserModel = require('../models/user');
 var connection = require('../models/database');
 
+// Load language file
+var getText = require('../error_msg_vi.json');
 
 /*configure our cloudinary*/
 cloudinary.config({
@@ -35,21 +37,14 @@ ImageController.deleteImage = function (publicId,resourceType,callback){
 
 ImageController.uploadImage = function(req, res) {
 
-    UserModel.checkValidLogin(req.body.username, req.body.token, function(isLoggedIn) {
-
-        if (isLoggedIn['isLoggedIn'] != true) {
-            return res.json({
-                success: false,
-                message:"Permission Denied!"
-            });
-        }
+    return UserModel.checkValidLogin(req, res, function(userInfo) {
 
         cloudinary.v2.uploader.upload(req.body.imageURI,function (err, result) {
             if(err) {
                 console.log(err);
                 return res.json({
                     success: false,
-                    message:"Failed to upload image"
+                    message: getText['18401']
                 });
             }
     
@@ -58,18 +53,18 @@ ImageController.uploadImage = function(req, res) {
                 // Save image in image list of user
                 connection.query(`INSERT INTO images
                 (user_id, image) VALUES (?, ?);
-                `, [isLoggedIn['user_id'], result.secure_url], function (error) {
+                `, [userInfo['user_id'], result.secure_url], function (error) {
 
                     if (error) {
                         return res.json({
                             success: false,
-                            message:"Failed writing to database."
+                            message: getText['18402']
                         });
                     }
 
                     return res.json({
                         success: true,
-                        message: "Image uploaded",
+                        message: getText['10401'],
                         imageUrl: result.secure_url
                     });
 
@@ -78,13 +73,18 @@ ImageController.uploadImage = function(req, res) {
             } else {
                 return res.json({
                     success: false,
-                    message:"Failed to upload image"
+                    message: getText['18401']
                 });
             }   
         });
 
 
 
+    }, function() {
+        return res.json({
+            success: false,
+            message: getText['18403']
+        });
     });
 
 }
