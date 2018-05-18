@@ -51,7 +51,7 @@ CollectionController.deleteCollection = function(req, res) {
     });
 }
 
-CollectionController.editCollection = function(req, res) {
+CollectionController.updateCollection = function(req, res) {
 
     if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
         return res.json({"success": false});
