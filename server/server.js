@@ -11,6 +11,7 @@ var UserController = require('./controllers/user');
 var DictionaryController = require('./controllers/dictionary');
 var ImageController = require('./controllers/image');
 var CollectionController = require('./controllers/collection');
+var FlashcardController = require('./controllers/flashcard');
 
 // Create our Express application
 var app = express();
@@ -138,15 +139,32 @@ router.route('/image/upload')
 // ### Create collection
 router.route('/collection/create')
   .post(CollectionController.createCollection);
-// ### Edit collection
-router.route('/collection/edit')
-  .post(CollectionController.editCollection);
+// ### Update collection
+router.route('/collection/update')
+  .post(CollectionController.updateCollection);
 // ### Delete collection
 router.route('/collection/delete')
 .post(CollectionController.deleteCollection);
-// ### Edit collection
-router.route('/collection/edit')
-  .post(CollectionController.editCollection);
+// ### Get collection
+router.route('/collection/get')
+.post(CollectionController.getCollection);
+
+
+// ==================================================================
+// USER APIs FOR FLASHCARD MANAGEMENT
+// ### Create flashcard
+router.route('/flashcard/create')
+  .post(FlashcardController.createFlashcard);
+// ### Update flashcard
+router.route('/flashcard/update')
+  .post(FlashcardController.updateFlashcard);
+// ### Delete flashcard
+router.route('/flashcard/delete')
+.post(FlashcardController.deleteFlashcard);
+// ### Get flashcard
+router.route('/flashcard/get')
+.post(FlashcardController.getFlashcard);
+
 
 
 // ### Start the server

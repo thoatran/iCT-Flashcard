@@ -49,6 +49,29 @@ CollectionModel.getCollectionInfo = function(collection_id) {
   });
 }
 
+CollectionModel.getFlashcards = function(collection_id) {
+    let flashcards = [];
+    connection.query(`SELECT id
+    FROM cards
+    WHERE collection_id = ?
+    `, [collection_id], function (error, results) {
+  
+        if (error) {
+            return flashcards;
+        }
+  
+        if (results < 1) {
+            return flashcards;
+        }
+    
+        for (let i = 0; i < results.length; i++) {
+            flashcards.push(results[i].id);
+        }
+
+        return flashcards;
+    });
+  }
+
 
 CollectionModel.updateCollection = function(collectionInfo) {
   connection.query(`UPDATE collections
