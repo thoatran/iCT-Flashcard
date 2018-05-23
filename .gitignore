@@ -1,3 +1,6 @@
 node_modules
 password.txt
 pass.txt
+server/config/database.js
+server/config/image.js
+server/config/database-remote.js
