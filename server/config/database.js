@@ -1,8 +1,8 @@
 const dbConfig  = {
-    host: "buxwaylqi-mysql.services.clever-cloud.com",
-    user: "ui25zum68dwzn2xb",
-    password: "1Izj4q6AXIXDWaZK6HU",
-    database: "buxwaylqi",
+    host: "localhost",
+    user: "root",
+    password: "156432",
+    database: "ictflashcard",
     port     : 3306,
     acquireTimeout: 10000
 };

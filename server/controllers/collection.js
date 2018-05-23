@@ -100,4 +100,34 @@ CollectionController.updateCollection = function(req, res) {
     });
 }
 
+
+CollectionController.getCollection = function(req, res) {
+
+    if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
+        return res.json({"success": false});
+    }
+    return UserModel.checkValidLogin(req.body.username, req.body.token, function(userInfo) {
+        if (typeof req.body.collection_id === 'undefined') {
+            res.json({'success': false});
+        }
+
+        let collection_id = req.body.collection_id;
+        let collectionInfo = CollectionModel.getCollectionInfo(collection_id);
+
+        if (!collectionInfo) {
+            res.json({'success': false});
+        }
+
+        collectionInfo.flashcards = CollectionModel.getFlashcards(collection_id);
+        res.json({'success': true,
+            'data': collectionInfo
+        });
+        
+    }, function(err) {
+        if (err)
+            console.log(err);
+        res.json({"success": false});
+    });
+}
+
 module.exports = CollectionController;
