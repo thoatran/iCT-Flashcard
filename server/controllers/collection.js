@@ -105,6 +105,30 @@ CollectionController.updateCollection = function(req, res) {
     });
 }
 
+CollectionController.getAllCollection = function(req, res) {
+
+    if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
+        return res.json({"success": false});
+    }
+    return UserModel.checkValidLogin(req.body.username, req.body.token, function(userInfo) {
+
+        // Get data
+        CollectionModel.getAllCollection(userInfo["user_id"], function(data) {
+            res.json({'success': true,
+                "data": data
+            });
+        }, function(){
+            // Fail
+            res.json({'success': false});
+        });
+
+    }, function(err) {
+        if (err)
+            console.log(err);
+        res.json({"success": false});
+    });
+}
+
 
 CollectionController.getCollection = function(req, res) {
 

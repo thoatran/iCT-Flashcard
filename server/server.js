@@ -148,6 +148,9 @@ router.route('/collection/delete')
 // ### Get collection
 router.route('/collection/get')
 .post(CollectionController.getCollection);
+// ### Get all collection
+router.route('/collection/getall')
+.post(CollectionController.getAllCollection);
 
 
 // ==================================================================
