@@ -145,19 +145,26 @@ router.route('/collection/update')
 // ### Delete collection
 router.route('/collection/delete')
 .post(CollectionController.deleteCollection);
+// ### Get collection
+router.route('/collection/get')
+.post(CollectionController.getCollection);
 
 
 // ==================================================================
 // USER APIs FOR FLASHCARD MANAGEMENT
 // ### Create flashcard
 router.route('/flashcard/create')
-  .post(flashcardController.createFlashcard);
+  .post(FlashcardController.createFlashcard);
 // ### Update flashcard
 router.route('/flashcard/update')
-  .post(flashcardController.updateFlashcard);
+  .post(FlashcardController.updateFlashcard);
 // ### Delete flashcard
 router.route('/flashcard/delete')
-.post(flashcardController.deleteFlashcard);
+.post(FlashcardController.deleteFlashcard);
+// ### Get flashcard
+router.route('/flashcard/get')
+.post(FlashcardController.getFlashcard);
+
 
 
 // ### Start the server

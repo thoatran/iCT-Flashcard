@@ -1,8 +1,8 @@
 const dbConfig  = {
-    host: "***REMOVED***",
-    user: "***REMOVED***",
-    password: "***REMOVED***",
-    database: "***REMOVED***",
+    host: "localhost",
+    user: "root",
+    password: "156432",
+    database: "ictflashcard",
     port     : 3306,
     acquireTimeout: 10000
 };
