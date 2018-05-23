@@ -4,6 +4,7 @@
 $(document).ready(function(){
     // Update Page Info first
     updatePageInfo();
+    //console.log(NaviGetCurrentPage());
     NaviGoto(NaviGetCurrentPage());
 });
 
@@ -11,6 +12,7 @@ $(document).ready(function(){
 function NaviGetCurrentPage() {
     let url = new URI(window.location.href);
     if (url.search(true)["get"] !== undefined) {
+        
         return url.search(true)["get"];
     } else {
         return "home"; // return homepage if cannot find page address in get query
@@ -37,7 +39,26 @@ function NaviGoto(page) {
         success: function(data) {
             // Update page content
             $( "#page-content-ajax" ).html(data);
-            history.pushState(null, null, window.location.pathname + "?get=" + page);
+            
+        
+            // Update history
+            var queryParameters = {}, queryString = location.search.substring(1), re = /([^&=]+)=([^&]*)/g, m;
+        
+            while (m = re.exec(queryString)) {
+                queryParameters[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+            }
+
+
+            console.log($.param(queryParameters));
+
+            // Get old page
+            var oldpage = queryParameters['get'];
+            if (oldpage != page) {
+                history.pushState(null, null, window.location.pathname + "?get=" + page);
+            } else {
+                history.pushState(null, null,  window.location.pathname + "?"+  $.param(queryParameters));
+            }
+
         }, error: function(xhr) {
             if (page != "404") {
                 NaviGoto("404");

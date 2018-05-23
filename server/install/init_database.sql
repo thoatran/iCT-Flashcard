@@ -49,6 +49,3 @@ CREATE TABLE `images` (
     `image` VARCHAR(255),
     FOREIGN KEY (user_id) REFERENCES users(id)
 ) DEFAULT CHARSET = utf8;
-
-INSERT INTO tokens (user_id, token, token_exp)
-VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 1 DAY));

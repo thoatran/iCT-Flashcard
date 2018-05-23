@@ -14,19 +14,17 @@
     <div class="row">
         <div class="col-md-3">
             <div class="card-collection-info-wrapper mb-3" style="position: relative;">
-                <img src="assets/images/placeholder333x333.png" class="rounded img-thumbnail" style="max-width: 10rem">
-                <button class="btn btn-light" style="position: absolute;
-                                            bottom: 0;
-                                            left: 0;
-                                            opacity: 0.8;">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                    Thay đổi
-                </button>
+                <img id="collection-image" src="assets/images/placeholder333x333.png" class="rounded img-thumbnail" style="max-width: 10rem">
+
+                <div class="form-group">
+                    <input type="file" class="form-control-file" id="input-collection-fphoto" aria-describedby="selectCollectionPhotoHelp">
+                    <small id="selectCollectionPhotoHelp" class="form-text text-muted">Upload hình đại diện cho bộ flashcard của bạn. Vui lòng chọn file tại đây.</small>
+                </div>
             </div>
 
-            <input class="form-control" type="text" placeholder="Tên gói flashcard">
-            <input class="form-control mt-1" type="text" placeholder="Mô tả ngắn">
-            <button class="btn btn-primary mt-1">
+            <input id="input-collection-name" class="form-control" type="text" placeholder="Tên gói flashcard">
+            <input id="input-collection-description" class="form-control mt-1" type="text" placeholder="Mô tả ngắn">
+            <button id="btn-save-collection-info" class="btn btn-primary mt-1">
                 Lưu lại chỉnh sửa
             </button>
         

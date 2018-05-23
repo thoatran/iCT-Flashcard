@@ -16,12 +16,13 @@ CollectionController.createCollection = function(req, res) {
         let name = req.body.name || '';
         let description = req.body.description || '';
         let photo = req.body.photo || '';
-        let result = CollectionModel.createCollection(name, description, photo, userInfo['user_id']); 
-        if (result) {
-            res.json({'success': true});
-        } else {
-            res.json({'success': false});
-        }
+        CollectionModel.createCollection(name, description, photo, userInfo['user_id'], function(collection_id) {
+            res.json({"success": true,
+                "collection_id": collection_id
+            });
+        }, function() {
+            res.json({"success": false});
+        });
     }, function(err) {
         if (err)
             console.log(err);
@@ -38,12 +39,14 @@ CollectionController.deleteCollection = function(req, res) {
             res.json({'success': false});
         }
 
-        let result = CollectionModel.deleteCollection(req.body.collection_id); 
-        if (result) {
+        CollectionModel.deleteCollection(req.body.collection_id, function() {
+            // Success
             res.json({'success': true});
-        } else {
+        }, function() {
+            // Fail
             res.json({'success': false});
-        }
+        }); 
+
     }, function(err) {
         if (err)
             console.log(err);
@@ -62,37 +65,39 @@ CollectionController.updateCollection = function(req, res) {
         }
 
         let collection_id = req.body.collection_id;
-        let collectionInfo = CollectionModel.getCollectionInfo(collection_id);
+        CollectionModel.getCollectionInfo(collection_id, function(collectionInfo) {
+            // Success
+            // Does user own the collection?
+            if (collectionInfo.user_id != userInfo['user_id']) {
+                res.json({'success': false});
+            }
 
-        if (!collectionInfo) {
+            // Modify collection info
+            if (typeof req.body.name != 'undefined') {
+                collectionInfo.name = req.body.name;
+            }
+            if (typeof req.body.description != 'undefined') {
+                collectionInfo.description = req.body.description;
+            } 
+            if (typeof req.body.photo != 'undefined') {
+                collectionInfo.photo = req.body.photo;
+            } 
+            
+
+            // Update in database
+            let result = CollectionModel.updateCollection(collectionInfo, function() {
+                // Success
+                res.json({'success': true});
+            }, function() {
+                // Fail
+                res.json({'success': false});
+            });
+
+        }, function(){
+            // Fail
             res.json({'success': false});
-        }
+        });
 
-        // Does user own the collection?
-        if (collectionInfo.user_id != userInfo['user_id']) {
-            res.json({'success': false});
-        }
-
-        // Modify collection info
-        if (typeof req.body.name != 'undefined') {
-            collectionInfo.name = req.body.name;
-        }
-        if (typeof req.body.description != 'undefined') {
-            collectionInfo.description = req.body.description;
-        } 
-        if (typeof req.body.photo != 'undefined') {
-            collectionInfo.photo = req.body.photo;
-        } 
-        
-
-        // Update in database
-        let result = CollectionModel.updateCollection(collectionInfo);
-
-        if (result) {
-            res.json({'success': true});
-        } else {
-            res.json({'success': false});
-        }
     }, function(err) {
         if (err)
             console.log(err);
@@ -112,17 +117,23 @@ CollectionController.getCollection = function(req, res) {
         }
 
         let collection_id = req.body.collection_id;
-        let collectionInfo = CollectionModel.getCollectionInfo(collection_id);
-
-        if (!collectionInfo) {
+        CollectionModel.getCollectionInfo(collection_id, function(collectionInfo) {
+            // Success
+            collectionInfo.flashcards = CollectionModel.getFlashcards(collection_id);
+           
+            if (collectionInfo.photo == "") {
+                collectionInfo.photo = "assets/images/placeholder333x333.png";
+            }
+           
+            res.json({'success': true,
+                'data': collectionInfo
+            });
+        }, function() {
+            // Fail
             res.json({'success': false});
-        }
-
-        collectionInfo.flashcards = CollectionModel.getFlashcards(collection_id);
-        res.json({'success': true,
-            'data': collectionInfo
         });
-        
+
+
     }, function(err) {
         if (err)
             console.log(err);

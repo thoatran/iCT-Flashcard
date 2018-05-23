@@ -1,50 +1,52 @@
 // Load language file
 var getText = require('../error_msg_vi.json');
+var connection = require('../models/database');
+
 
 var CollectionModel = {};
-CollectionModel.createCollection = function(name, description, photo, user_id) {
+CollectionModel.createCollection = function(name, description, photo, user_id, cbSuccess, cbFail) {
   connection.query(`INSERT INTO collections (user_id, name, description, photo) 
   VALUES (?, ?, ?, ?)
-  `, [user_id, name, description, photo], function (error) {
+  `, [user_id, name, description, photo], function (error, result) {
 
       if (error) {
-          return false;
+          return cbFail();
       }
   
-      return true;
+      return cbSuccess(result.insertId);
   
   });
 };
 
-CollectionModel.deleteCollection = function(collection_id) {
+CollectionModel.deleteCollection = function(collection_id, cbSuccess, cbFail) {
   connection.query(`DELETE FROM collections 
     WHERE id = ?
   `, [collection_id], function (error) {
 
       if (error) {
-          return false;
+          return cbFail();
       }
   
-      return true;
+      return cbSuccess();
   
   });
 };
 
-CollectionModel.getCollectionInfo = function(collection_id) {
+CollectionModel.getCollectionInfo = function(collection_id, cbSuccess, cbFail) {
   connection.query(`SELECT id, user_id, name, description, photo
   FROM collections
   WHERE id = ?
   `, [collection_id], function (error, results) {
 
       if (error) {
-          return false;
+        cbFail();
       }
 
       if (results < 1) {
-          return false;
+        cbFail();
       }
   
-      return results[0];
+      cbSuccess(results[0]);
   
   });
 }
@@ -73,16 +75,16 @@ CollectionModel.getFlashcards = function(collection_id) {
   }
 
 
-CollectionModel.updateCollection = function(collectionInfo) {
+CollectionModel.updateCollection = function(collectionInfo, cbSuccess, cbFail) {
   connection.query(`UPDATE collections
   SET name = ?, description = ?, photo = ?
   WHERE id = ?
   `, [collectionInfo.name, collectionInfo.description, collectionInfo.photo, collectionInfo.id], function (error) {
 
       if (error) {
-          return false;
+            return cbFail();
       }
-      return true;
+      return cbSuccess();
   
   });
 }
