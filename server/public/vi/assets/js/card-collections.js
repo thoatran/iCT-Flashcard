@@ -1,3 +1,31 @@
+var deleteCollection = function(collection_id, collection_name) {
+    // Confirm box
+    var txt;
+    var r = confirm("Bạn muốn xóa bộ flashcard \""+collection_name+"\" ?");
+    if (r == true) {
+        // Create a new collection
+        $.ajax({
+            url: "/api/collection/delete",
+            type: "post",
+            data: {"username": localStorage.username,
+                "token": localStorage.token,
+                "collection_id": collection_id
+            },
+            success: function (response) {
+                if (response['success'] != false) {
+                    // refresh page
+                    location.reload();
+                } else {
+                    alert("Có lỗi xảy ra.")
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("Có lỗi xảy ra.")
+            }
+        });
+    }
+}
+
 $(document).ready(function(){
 
     // Function to create Collection
@@ -23,6 +51,8 @@ $(document).ready(function(){
         });
         
     });
+
+    
 
     // Create a new collection
     $.ajax({
@@ -50,7 +80,7 @@ $(document).ready(function(){
                                         <a href="/vi/navi.html?get=view-card-collection&collection_id=`+collectionList[i].id+`">Xem</a> |
                                         <a href="/vi/navi.html?get=review-card-collection&collection_id=`+collectionList[i].id+`">Ôn tập</a> |
                                         <a href="/vi/navi.html?get=edit-card-collection&collection_id=`+collectionList[i].id+`">Chỉnh sửa</a> |
-                                        <a href="alert('not implemented')">Xoá</a>
+                                        <a href="javascript:void" onclick="deleteCollection(`+collectionList[i].id+`,'` + collectionList[i].name + `' )">Xoá</a>
                                     </div>
                                 
                                 </div>
@@ -62,6 +92,14 @@ $(document).ready(function(){
 
                 }
 
+                if (!collectionList || collectionList.length == 0) {
+                    $("#collection-list-view").html(`
+                        <div class="alert alert-dark">
+                            Bạn chưa có bộ flashcard nào. Vui lòng tạo thêm.
+                        </div>
+                    `);
+                }
+
             } else {
                 alert("Có lỗi xảy ra.")
             }
@@ -71,4 +109,5 @@ $(document).ready(function(){
         }
     });
 
+    
 });

@@ -42,12 +42,97 @@ FlashcardController.createFlashcard = function(req, res) {
             let remember_score = 0;
 
 
-            FlashcardModel.createFlashcard(word, pronunciation, meaning, image, order, remember_score, collectionInfo["id"], function() {
+            FlashcardModel.createFlashcard(word, pronunciation, meaning, image, order, remember_score, collectionInfo["id"], function(flashcard_id) {
                 // Success
-                res.json({'success': true});
+                res.json({'success': true,
+                        'flashcardInfo': {
+                            'id': flashcard_id
+                        }
+                });
             }, function() {
                 // Fail
                 res.json({'success': false});
+            });
+
+        }, function() {
+
+            // Fail
+            return res.json({"success": false,
+                "message": getText[18411]
+            });
+        });
+
+        
+    }, function(err) {
+        if (err)
+            console.log(err);
+        res.json({"success": false});
+    });
+}
+
+FlashcardController.updateAll = function(req, res) {
+    if (!req.body.hasOwnProperty("username") ||
+    !req.body.hasOwnProperty("token") || 
+    !req.body.hasOwnProperty("collection_id") ||
+    !req.body.hasOwnProperty("data")
+    ) {
+        return res.json({"success": false,
+        "message": getText[18412]
+        });
+    }
+
+    // Check user login
+    return UserModel.checkValidLogin(req.body.username, req.body.token, function(userInfo) {
+        
+        // Check collection existance
+        CollectionModel.getCollectionInfo(req.body.collection_id, function(collectionInfo) {
+
+            // Success
+
+            // Check permission
+            if (collectionInfo["user_id" ] != userInfo["user_id"]) {
+                return res.json({"success": false,
+                    "message": getText[18403]
+                });
+            }
+
+            // Delete old values
+            FlashcardModel.deleteAllFlashcardByCollectionId(req.body.collection_id, function() {
+                // Success
+                // Ignore error
+                let flashcardList = req.body.data;
+                let countVar = 0;
+
+
+                let execAddCard = function() {
+                    // done with progress
+                    if (countVar >= flashcardList.length) {
+                        return res.json({"success": true});
+                    }
+                        
+                    let flashcard = flashcardList[countVar];
+                    let word = flashcard.word || '';
+                    let image = flashcard.image || '';
+                    let pronunciation = flashcard.pronunciation || '';
+                    let meaning = flashcard.meaning || '';
+                    let order = flashcard.order || -1; // -1 is unordered
+                    let remember_score = 0;
+
+                    FlashcardModel.createFlashcard(word, pronunciation, meaning, image, order, remember_score, req.body.collection_id, function(flashcard_id) {
+                        // Success
+                        countVar++;
+                        return execAddCard();
+                    }, function() {
+                        // Fail
+                        return res.json({"success": false});
+                    });
+                }
+
+                execAddCard();
+
+            }, function() {
+                // Fail
+                return res.json({"success": false});
             });
 
         }, function() {
@@ -80,10 +165,10 @@ FlashcardController.updateFlashcard = function(req, res) {
     return UserModel.checkValidLogin(req.body.username, req.body.token, function(userInfo) {
 
         // Check permission
-        FlashcardModel.havePermission(username, flashcard_id, function() {
+        FlashcardModel.havePermission(req.body.username, req.body.flashcard_id, function() {
             // Success
             // Get old info
-            FlashcardModel.getFlashcardInfo(flashcard_id, function(flashcardInfo) {
+            FlashcardModel.getFlashcardInfo(req.body.flashcard_id, function(flashcardInfo) {
                 // Success
 
                 // Modify flashcard info
@@ -107,7 +192,7 @@ FlashcardController.updateFlashcard = function(req, res) {
                 }
                 
                 // Update info
-                FlashcardModel.updateFlashcardInfo(flashcardInfo, function() {
+                return FlashcardModel.updateFlashcard(flashcardInfo, function() {
                     return res.json({"success": true});
                 }, function() {
                     return res.json({"success": false});
@@ -200,6 +285,50 @@ FlashcardController.deleteFlashcard = function(req, res) {
             return res.json({"success": false,
             "message": getText[18403]
             });
+        });
+
+    }, function(err) {
+        if (err)
+            console.log(err);
+        res.json({"success": false});
+    });
+}
+
+
+// Get all flashcard in a collection
+FlashcardController.getAllFlashcard = function(req, res) {
+
+    if (!req.body.hasOwnProperty("username") || 
+    !req.body.hasOwnProperty("token") ||
+    !req.body.hasOwnProperty("collection_id")
+    ) {
+        return res.json({"success": false});
+    }
+    return UserModel.checkValidLogin(req.body.username, req.body.token, function(userInfo) {
+
+
+        CollectionModel.getCollectionInfo(req.body.collection_id, function(collectionInfo){
+            // Success
+            // Check permission to access collection
+            if (userInfo["user_id"] != collectionInfo["user_id"]) {
+                return res.json({"success": false,
+                    "message": getText[18403]
+                });
+            }
+
+            // Get data
+            CollectionModel.getFlashcards(req.body.collection_id, function(data) {
+                res.json({'success': true,
+                    "data": data
+                });
+            }, function(){
+                // Fail
+                res.json({'success': false});
+            });
+
+        }, function() {
+            // Fail
+            res.json({'success': false});
         });
 
     }, function(err) {

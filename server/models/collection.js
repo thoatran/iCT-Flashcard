@@ -19,17 +19,31 @@ CollectionModel.createCollection = function(name, description, photo, user_id, c
 };
 
 CollectionModel.deleteCollection = function(collection_id, cbSuccess, cbFail) {
-  connection.query(`DELETE FROM collections 
-    WHERE id = ?
+  
+  // Delete flashcard first
+  connection.query(`DELETE FROM cards 
+    WHERE collection_id = ?
   `, [collection_id], function (error) {
 
       if (error) {
           return cbFail();
       }
   
-      return cbSuccess();
+      return connection.query(`DELETE FROM collections 
+      WHERE id = ?
+      `, [collection_id], function (error) {
+    
+          if (error) {
+              return cbFail();
+          }
+      
+          return cbSuccess();
+      
+      });
   
   });
+  
+ 
 };
 
 CollectionModel.getCollectionInfo = function(collection_id, cbSuccess, cbFail) {
@@ -39,14 +53,14 @@ CollectionModel.getCollectionInfo = function(collection_id, cbSuccess, cbFail) {
   `, [collection_id], function (error, results) {
 
       if (error) {
-        cbFail();
+        return cbFail();
       }
 
       if (results < 1) {
-        cbFail();
+        return cbFail();
       }
   
-      cbSuccess(results[0]);
+      return cbSuccess(results[0]);
   
   });
 }
@@ -58,11 +72,7 @@ CollectionModel.getAllCollection = function(user_id, cbSuccess, cbFail) {
     `, [user_id], function (error, results) {
   
         if (error) {
-          cbFail();
-        }
-  
-        if (results < 1) {
-          cbFail();
+          return cbFail();
         }
     
         cbSuccess(results);
@@ -70,26 +80,22 @@ CollectionModel.getAllCollection = function(user_id, cbSuccess, cbFail) {
     });
   }
 
-CollectionModel.getFlashcards = function(collection_id) {
+CollectionModel.getFlashcards = function(collection_id, cbSuccess, cbFail) {
     let flashcards = [];
-    connection.query(`SELECT id
+    connection.query(`SELECT *
     FROM cards
     WHERE collection_id = ?
     `, [collection_id], function (error, results) {
   
         if (error) {
-            return flashcards;
-        }
-  
-        if (results < 1) {
-            return flashcards;
+            return cbFail();
         }
     
         for (let i = 0; i < results.length; i++) {
-            flashcards.push(results[i].id);
+            flashcards.push(results[i]);
         }
 
-        return flashcards;
+        return cbSuccess(flashcards);
     });
   }
 

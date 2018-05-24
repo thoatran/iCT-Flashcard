@@ -167,7 +167,12 @@ router.route('/flashcard/delete')
 // ### Get flashcard
 router.route('/flashcard/get')
 .post(FlashcardController.getFlashcard);
-
+// ### Get all flashcard
+router.route('/flashcard/getall')
+.post(FlashcardController.getAllFlashcard);
+// ### Update all flashcard
+router.route('/flashcard/updateall')
+.post(FlashcardController.updateAll);
 
 
 // ### Start the server
