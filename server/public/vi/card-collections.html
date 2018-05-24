@@ -1,106 +1,14 @@
 <div class="my-3 p-3 bg-white rounded box-shadow">
     <h3 class="d-flex border-bottom border-gray pb-2 mb-2">Các bộ Flashcard bạn đang có</h3>
     <div class="p-1">
-        <a href="javascript:void" class="btn btn-success">
+        <a id="new-collection" href="javascript:void" class="btn btn-success">
             <i class="fa fa-plus-square-o" aria-hidden="true"></i>
             Tạo mới
         </a>
     </div>
     <div class="flashcard-collections">
         <div class="container">
-            <div class="row">
-                <div class="flashcard-collection col-md-3 p-1">
-                    <div class="card" style="width: 100%;">
-                        <img class="card-img-top" src="assets/images/placeholder333x333.png">
-                        <div class="card-body">
-                           <h4 class="card-title">Card collection name</h4>
-                            <p class="card-text">Card collection description.</p>
-                            
-                            <div class="collection-actions">
-                                <a href="#">Xem</a> |
-                                <a href="#">Ôn tập</a> |
-                                <a href="#">Chỉnh sửa</a> |
-                                <a href="#">Xoá</a>
-                            </div>
-                           
-                        </div>
-                    </div>
-                </div>
-                <div class="flashcard-collection col-md-3 p-1">
-                    <div class="card" style="width: 100%;">
-                        <img class="card-img-top" src="assets/images/placeholder333x333.png">
-                        <div class="card-body">
-                           <h4 class="card-title">Card collection name</h4>
-                            <p class="card-text">Card collection description.</p>
-                            <div class="collection-actions">
-                                <a href="#">Xem</a> |
-                                <a href="#">Ôn tập</a> |
-                                <a href="#">Chỉnh sửa</a> |
-                                <a href="#">Xoá</a>
-                            </div>    
-                        </div>
-                    </div>
-                </div>
-                <div class="flashcard-collection col-md-3 p-1">
-                    <div class="card" style="width: 100%;">
-                        <img class="card-img-top" src="assets/images/placeholder333x333.png">
-                        <div class="card-body">
-                           <h4 class="card-title">Card collection name</h4>
-                            <p class="card-text">Card collection description.</p>
-                            <div class="collection-actions">                                 <a href="#">Xem</a> |                                 <a href="#">Ôn tập</a> |                                 <a href="#">Chỉnh sửa</a> |                                 <a href="#">Xoá</a>                             </div> 
-                        </div>
-                    </div>
-                </div>
-                <div class="flashcard-collection col-md-3 p-1">
-                    <div class="card" style="width: 100%;">
-                        <img class="card-img-top" src="assets/images/placeholder333x333.png">
-                        <div class="card-body">
-                           <h4 class="card-title">Card collection name</h4>
-                            <p class="card-text">Card collection description.</p>
-                            <div class="collection-actions">                                 <a href="#">Xem</a> |                                 <a href="#">Ôn tập</a> |                                 <a href="#">Chỉnh sửa</a> |                                 <a href="#">Xoá</a>                             </div> 
-                        </div>
-                    </div>
-                </div>
-                <div class="flashcard-collection col-md-3 p-1">
-                    <div class="card" style="width: 100%;">
-                        <img class="card-img-top" src="assets/images/placeholder333x333.png">
-                        <div class="card-body">
-                            <h4 class="card-title">Card collection name</h4>
-                            <p class="card-text">Card collection description.</p>
-                            <div class="collection-actions">                                 <a href="#">Xem</a> |                                 <a href="#">Ôn tập</a> |                                 <a href="#">Chỉnh sửa</a> |                                 <a href="#">Xoá</a>                             </div> 
-                        </div>
-                    </div>
-                </div>
-                <div class="flashcard-collection col-md-3 p-1">
-                    <div class="card" style="width: 100%;">
-                        <img class="card-img-top" src="assets/images/placeholder333x333.png">
-                        <div class="card-body">
-                            <h4 class="card-title">Card collection name</h4>
-                            <p class="card-text">Card collection description.</p>
-                            <div class="collection-actions">                                 <a href="#">Xem</a> |                                 <a href="#">Ôn tập</a> |                                 <a href="#">Chỉnh sửa</a> |                                 <a href="#">Xoá</a>                             </div> 
-                        </div>
-                    </div>
-                </div>
-                <div class="flashcard-collection col-md-3 p-1">
-                    <div class="card" style="width: 100%;">
-                        <img class="card-img-top" src="assets/images/placeholder333x333.png">
-                        <div class="card-body">
-                            <h4 class="card-title">Card collection name</h4>
-                            <p class="card-text">Card collection description.</p>
-                            <div class="collection-actions">                                 <a href="#">Xem</a> |                                 <a href="#">Ôn tập</a> |                                 <a href="#">Chỉnh sửa</a> |                                 <a href="#">Xoá</a>                             </div> 
-                        </div>
-                    </div>
-                </div>
-                <div class="flashcard-collection col-md-3 p-1">
-                    <div class="card" style="width: 100%;">
-                        <img class="card-img-top" src="assets/images/placeholder333x333.png">
-                        <div class="card-body">
-                            <h4 class="card-title">Card collection name</h4>
-                            <p class="card-text">Card collection description.</p>
-                            <div class="collection-actions">                                 <a href="#">Xem</a> |                                 <a href="#">Ôn tập</a> |                                 <a href="#">Chỉnh sửa</a> |                                 <a href="#">Xoá</a>                             </div> 
-                        </div>
-                    </div>
-                </div>
+            <div id="collection-list-view" class="row">
                 
             </div>
         </div>
@@ -120,3 +28,6 @@
     border-radius: 2px;
 }
 </style>
+
+<script src="assets/js/card-collections.js
+"></script>

@@ -1,5 +1,6 @@
 const evDict = require('./dict_data.json');
 
+
 // Load language file
 var getText = require('../error_msg_vi.json');
 

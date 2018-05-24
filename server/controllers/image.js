@@ -37,7 +37,11 @@ ImageController.deleteImage = function (publicId,resourceType,callback){
 
 ImageController.uploadImage = function(req, res) {
 
-    return UserModel.checkValidLogin(req, res, function(userInfo) {
+    if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
+        return res.json({"success": false});
+    }
+
+    return UserModel.checkValidLogin(req.body.username, req.body.token, function(userInfo) {
 
         cloudinary.v2.uploader.upload(req.body.imageURI,function (err, result) {
             if(err) {

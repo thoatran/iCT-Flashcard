@@ -1,88 +1,115 @@
 // Load language file
 var getText = require('../error_msg_vi.json');
+var connection = require('../models/database');
+
 
 var CollectionModel = {};
-CollectionModel.createCollection = function(name, description, photo, user_id) {
+CollectionModel.createCollection = function(name, description, photo, user_id, cbSuccess, cbFail) {
   connection.query(`INSERT INTO collections (user_id, name, description, photo) 
   VALUES (?, ?, ?, ?)
-  `, [user_id, name, description, photo], function (error) {
+  `, [user_id, name, description, photo], function (error, result) {
 
       if (error) {
-          return false;
+          return cbFail();
       }
   
-      return true;
+      return cbSuccess(result.insertId);
   
   });
 };
 
-CollectionModel.deleteCollection = function(collection_id) {
-  connection.query(`DELETE FROM collections 
-    WHERE id = ?
+CollectionModel.deleteCollection = function(collection_id, cbSuccess, cbFail) {
+  
+  // Delete flashcard first
+  connection.query(`DELETE FROM cards 
+    WHERE collection_id = ?
   `, [collection_id], function (error) {
 
       if (error) {
-          return false;
+          return cbFail();
       }
   
-      return true;
+      return connection.query(`DELETE FROM collections 
+      WHERE id = ?
+      `, [collection_id], function (error) {
+    
+          if (error) {
+              return cbFail();
+          }
+      
+          return cbSuccess();
+      
+      });
   
   });
+  
+ 
 };
 
-CollectionModel.getCollectionInfo = function(collection_id) {
+CollectionModel.getCollectionInfo = function(collection_id, cbSuccess, cbFail) {
   connection.query(`SELECT id, user_id, name, description, photo
   FROM collections
   WHERE id = ?
   `, [collection_id], function (error, results) {
 
       if (error) {
-          return false;
+        return cbFail();
       }
 
       if (results < 1) {
-          return false;
+        return cbFail();
       }
   
-      return results[0];
+      return cbSuccess(results[0]);
   
   });
 }
 
-CollectionModel.getFlashcards = function(collection_id) {
+CollectionModel.getAllCollection = function(user_id, cbSuccess, cbFail) {
+    connection.query(`SELECT id, user_id, name, description, photo
+    FROM collections
+    WHERE user_id = ?
+    `, [user_id], function (error, results) {
+  
+        if (error) {
+          return cbFail();
+        }
+    
+        cbSuccess(results);
+    
+    });
+  }
+
+CollectionModel.getFlashcards = function(collection_id, cbSuccess, cbFail) {
     let flashcards = [];
-    connection.query(`SELECT id
+    connection.query(`SELECT *
     FROM cards
     WHERE collection_id = ?
     `, [collection_id], function (error, results) {
   
         if (error) {
-            return flashcards;
-        }
-  
-        if (results < 1) {
-            return flashcards;
+            return cbFail();
         }
     
         for (let i = 0; i < results.length; i++) {
-            flashcards.push(results[i].id);
+            flashcards.push(results[i]);
         }
 
-        return flashcards;
+        return cbSuccess(flashcards);
     });
   }
 
 
-CollectionModel.updateCollection = function(collectionInfo) {
+CollectionModel.updateCollection = function(collectionInfo, cbSuccess, cbFail) {
   connection.query(`UPDATE collections
   SET name = ?, description = ?, photo = ?
   WHERE id = ?
   `, [collectionInfo.name, collectionInfo.description, collectionInfo.photo, collectionInfo.id], function (error) {
 
       if (error) {
-          return false;
+            return cbFail();
       }
-      return true;
+      return cbSuccess();
   
   });
 }

@@ -108,6 +108,10 @@ HOMEPAGE
 .flashcard .back .card {
     padding: 0.5rem;
 }
+
+img.card-img-top {
+    max-height: 180px;
+}
   
 
 

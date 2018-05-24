@@ -148,6 +148,9 @@ router.route('/collection/delete')
 // ### Get collection
 router.route('/collection/get')
 .post(CollectionController.getCollection);
+// ### Get all collection
+router.route('/collection/getall')
+.post(CollectionController.getAllCollection);
 
 
 // ==================================================================
@@ -164,7 +167,12 @@ router.route('/flashcard/delete')
 // ### Get flashcard
 router.route('/flashcard/get')
 .post(FlashcardController.getFlashcard);
-
+// ### Get all flashcard
+router.route('/flashcard/getall')
+.post(FlashcardController.getAllFlashcard);
+// ### Update all flashcard
+router.route('/flashcard/updateall')
+.post(FlashcardController.updateAll);
 
 
 // ### Start the server
