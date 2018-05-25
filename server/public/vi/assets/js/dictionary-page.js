@@ -28,10 +28,10 @@ $(document).ready(function() {
                     $( "#meaning-wrapper" ).html(`
                     <h3 style="display:inline" class="word text-primary border-bottom border-gray">`+data.word+`</h3>
                     <span style="display:inline" class="ipapron text-secondary">`+data.ipapron+`</span>
-                    <button style="display:inline;" type="button" class="btn btn-outline-dark btn-sm">
+                    <!--<button style="display:inline;" type="button" class="btn btn-outline-dark btn-sm">
                         <i class="fa fa-plus-square-o" aria-hidden="true"></i>
                         Tạo flashcard
-                    </button>
+                    </button>-->
                     <div>
                         <button class="btn btn-light" onclick='responsiveVoice.speak("`+data.word+`", "UK English Female");' >🔊 UK</button>
                         <button class="btn btn-light" onclick='responsiveVoice.speak("`+data.word+`", "US English Female");' >🔊 US</button>

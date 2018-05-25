@@ -153,8 +153,6 @@ CollectionController.getCollection = function(req, res) {
         return CollectionModel.getCollectionInfo(collection_id, function(collectionInfo) {
             // Success
             
-            //collectionInfo.flashcards = CollectionModel.getFlashcards(collection_id);
-           
             if (collectionInfo.photo == "") {
                 collectionInfo.photo = "assets/images/placeholder333x333.png";
             }
