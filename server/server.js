@@ -118,6 +118,12 @@ router.route('/user/updateinfo')
   .post(UserController.updateUserInfo);
 
 
+// ### User forgot password
+router.route('/user/forgot_password')
+  .post(UserController.forgotPassword);
+  
+
+
 // ==================================================================
 // USER APIs FOR IMAGE MANAGEMENT
 // ### Upload image

@@ -16,7 +16,6 @@ UserModel.usernameStandardlize = function(username) {
 	}
 }
 
-
 UserModel.login = function(user, pass, cbSuccess, cbFail) {
 
 	// Query password
@@ -163,7 +162,7 @@ UserModel.register = function(registerInfo, cbSuccess, cbFail) {
 
 		connection.query(`INSERT INTO users (fullname, username, password, email) 
 		VALUES (?, ?, ?, ?)
-		`, [registerInfo.fullname, registerInfo.username, hashedPassword, registerInfo.email], function (error, results) {
+		`, [registerInfo.fullname, registerInfo.username, hashedPassword, registerInfo.email.toLowerCase()], function (error, results) {
 
 			if (error) {
 				cbFail(error);
@@ -198,7 +197,7 @@ UserModel.updateUserInfo = function(username, newUserInfo, cbSuccess, cbFail) {
 
 	if (newUserInfo.hasOwnProperty("email")) {
 		updateQueryArr.push(" email = ? ");
-		newValuesArr.push(newUserInfo["email"]);
+		newValuesArr.push(newUserInfo["email"].toLowerCase());
 	}
 
 	if (newUserInfo.hasOwnProperty("fullname")) {
@@ -241,6 +240,22 @@ UserModel.updateUserInfo = function(username, newUserInfo, cbSuccess, cbFail) {
 		}
 	});
 
+}
+
+
+UserModel.verifyEmail = function(email, cbSuccess, cbFail) {
+	connection.query(`SELECT username
+	FROM users
+	WHERE email = ?
+	`, [email.toLowerCase()], function (error, results) {
+
+		if (error) {
+			cbFail(error);
+		} else if (results.length < 1) {
+			cbFail(error);
+		} else return cbSuccess(results[0]);
+		
+	});
 }
 
 module.exports = UserModel;

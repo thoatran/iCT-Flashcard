@@ -6,6 +6,8 @@ var UserController = {};
 // Load language file
 var getText = require('../error_msg_vi.json');
 
+var MailService = require('../services/mailer');
+
 
 // ### User Login
 UserController.login = function(req, res) {
@@ -155,6 +157,49 @@ UserController.updateUserInfo = function(req, res) {
       console.log(err);
     res.json({"success": false});
   });
+
+}
+
+
+// ### Forgot password
+UserController.forgotPassword = function(req, res) {
+
+	if (!req.body.hasOwnProperty("email")) {
+		return res.json({"success": false,
+		"message": getText['18410']
+		});
+	}
+
+	let userEmail = req.body.email;
+	// Verify email
+	UserModel.verifyEmail(userEmail, function(userInfo) {
+    
+    
+    // Random a new password
+		let newUserInfo = {};
+		newUserInfo.newPassword = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    
+
+    // Update in database
+		UserModel.updateUserInfo(userInfo.username, newUserInfo,
+		function(){
+      res.json({"success": true}); // Return true because of security reason
+      console.log(newUserInfo.newPassword);
+
+      MailService.sendMail(userEmail, getText['18419'], 
+      getText['18420'] + newUserInfo.newPassword
+      );
+
+		}, function(){
+			res.json({"success": false});
+		});
+
+		
+	}, function(err) {
+	  if (err)
+		console.log(err);
+	  res.json({"success": true}); // Return true because of security reason
+	});
 
 }
 

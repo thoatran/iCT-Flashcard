@@ -62,16 +62,19 @@ $(document).ready(function() {
 
         if ($('#inp-old-password').val() == '') {
             alert("Vui lòng nhập mật khẩu cũ.");
+            hideLoadingModal();
             return;
         }
 
         if ($('#inp-new-password').val() == '') {
             alert("Vui lòng nhập mật khẩu mới.");
+            hideLoadingModal();
             return;
         }
 
         if ($('#inp-new-password').val() != $('#inp-new-password-2').val()) {
             alert("Hai lần nhập mật khẩu mới phải trùng nhau!");
+            hideLoadingModal();
             return;
         }
 
@@ -96,8 +99,8 @@ $(document).ready(function() {
                 hideLoadingModal();
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                hideLoadingModal();
                 alert("Xảy ra lỗi trong quá trình cập nhật mật khẩu. Xin vui lòng thử lại.");
+                hideLoadingModal();
             }
         });
         
