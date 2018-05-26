@@ -28,6 +28,7 @@ CREATE TABLE collections (
     photo VARCHAR(255),
     name VARCHAR(255) DEFAULT 'Undefined',
     description VARCHAR(255) DEFAULT '',
+    `remember_score` INT(3) DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users(id)
 ) DEFAULT CHARSET = utf8;
 

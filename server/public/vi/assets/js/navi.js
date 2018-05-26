@@ -15,7 +15,7 @@ function NaviGetCurrentPage() {
         
         return url.search(true)["get"];
     } else {
-        return "home"; // return homepage if cannot find page address in get query
+        return "card-collections"; // return homepage if cannot find page address in get query
     }
 }
 
@@ -49,16 +49,21 @@ function NaviGoto(page, isKeepParam) {
                 queryParameters[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
             }
 
-            console.log($.param(queryParameters));
+            
 
             // Get old page
             var oldpage = queryParameters['get'];
-            if (isKeepParam)
+            if (isKeepParam) {
+                queryParameters['get'] = page;
                 history.pushState(null, null,  window.location.pathname + "?"+  $.param(queryParameters));
-            else if (oldpage != page)
+            } else if (oldpage != page) {
+                queryParameters['get'] = page;
                 history.pushState(null, null, window.location.pathname + "?get=" + page);
-            else
+            } else {
+                queryParameters['get'] = page;
                 history.pushState(null, null,  window.location.pathname + "?"+  $.param(queryParameters));
+            }   
+                
 
         }, error: function(xhr) {
             if (page != "404") {

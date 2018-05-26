@@ -47,7 +47,7 @@ CollectionModel.deleteCollection = function(collection_id, cbSuccess, cbFail) {
 };
 
 CollectionModel.getCollectionInfo = function(collection_id, cbSuccess, cbFail) {
-  connection.query(`SELECT id, user_id, name, description, photo
+  connection.query(`SELECT id, user_id, name, description, photo, remember_score
   FROM collections
   WHERE id = ?
   `, [collection_id], function (error, results) {
@@ -102,9 +102,9 @@ CollectionModel.getFlashcards = function(collection_id, cbSuccess, cbFail) {
 
 CollectionModel.updateCollection = function(collectionInfo, cbSuccess, cbFail) {
   connection.query(`UPDATE collections
-  SET name = ?, description = ?, photo = ?
+  SET name = ?, description = ?, photo = ?, remember_score = ?
   WHERE id = ?
-  `, [collectionInfo.name, collectionInfo.description, collectionInfo.photo, collectionInfo.id], function (error) {
+  `, [collectionInfo.name, collectionInfo.description, collectionInfo.photo, collectionInfo.remember_score, collectionInfo.id], function (error) {
 
       if (error) {
             return cbFail();

@@ -7,36 +7,79 @@
                 <a class="nav-link" href="javascript:void" onclick="NaviGoto('edit-card-collection', true)">Chỉnh sửa</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="javascript:void" onclick="NaviGoto('review-card-collection', true)">Ôn tập</a>
+                <a class="nav-link active" href="javascript:void" >Ôn tập</a>
             </li>
         </ul>
     
         <div class="row">
             <div class="col-md-3">
                 <div class="card-collection-info-wrapper mb-3" style="position: relative;">
-                    <img src="assets/images/placeholder333x333.png" class="rounded img-thumbnail" style="max-width: 10rem">
+                    <img id="collection-photo" src="assets/images/placeholder333x333.png" class="rounded img-thumbnail" style="max-width: 10rem">
                 </div>
     
     
-                <h3>Tên gói flashcard</h3>
-                <p>Mô tả ngắn</p>
+                <h3 id="collection-name">Tên gói flashcard</h3>
+                <p id="collection-description">Mô tả ngắn</p>
     
             
             </div>
-        
-            <div class="col-md-9 col-md-offset-1">
-                    <div class="review-progress">
-                        <p>1/10</p>
-                        <div class="progress">
-                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        
-                    </div>
-                    
+
+            <div id="welcome-screen" class="col-md-9 col-md-offset-1" >
+                <div class="jumbotron bg-light">
+                    <h1>Ôn tập flashcard</h1> 
+                    <p>Chào mừng bạn đến với nội dung ôn tập. Bạn sẽ có thời gian <span id="quiz-time">{{ thời gian }}</span> giây để trả lời <span class="quiz-nquestion">{{ số câu hỏi }}</span> câu hỏi liên quan đến các flashcard trong bộ flashcard này. Khi bạn sẵn sàng, hãy ấn Bắt đầu</p>
+                    <button onclick="Quiz.start()" type="button" class="btn btn-primary btn-lg p-3">Bắt đầu</button>
+                </div>
             </div>
+            
+            <div id="countdown-screen" class="col-md-9 col-md-offset-1" style="display: none">
+                <div class="jumbotron bg-light text-center">
+                    <button type="button" class="btn btn-warning btn-lg p-5" style="border: 1rem solid #eee; color: #fff;  border-radius: 1rem; font-size: 5rem; line-height: 0.8" id="countdown-to-start">3</button>
+                </div>
+            </div>
+
+            <div id="quiz-screen" class="col-md-9 col-md-offset-1" style="display: none">
+                <h3 class="border-bottom border-gray mb-3">Ôn tập</h3>
+                <div id="review-progress-bar">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <h4 class="text-right">Câu hỏi: <span id="quiz-quest-number"> 0 </span> / <span class="quiz-nquestion">{{ số câu hỏi }}</span> -  Thời gian: <span id="remain-time"> {{ thời gian còn lại }} </span> giây</h4>
+                
+                <button id="quiz-question" type="button" class="btn btn-success btn-block pt-4 pb-4">{{Question}}</button>
+                <div id="quiz-answers" class="jumbotron bg-light">
+                    <button type="button" class="btn btn-danger btn-lg">Đáp án 1</button>
+                    <button type="button" class="btn btn-danger btn-lg">Đáp án 2</button>
+                    <button type="button" class="btn btn-danger btn-lg">Đáp án 3</button>
+                    <button type="button" class="btn btn-danger btn-lg">Đáp án 4</button>
+                </div>
+
+                <div id="quiz-correct" style="display:none; position: fixed; top: 50%; left: 50%; font-size: 8rem; color: #00c123; text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+                ">
+                    Chính xác!
+                </div>
+
+                <div id="quiz-wrong" style="display:none; position: fixed; top: 50%; left: 50%; font-size: 8rem; color: #ff0000; text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+                ">
+                    Sai rồi!
+                </div>
+
+            </div>
+
+            <div id="endquiz-screen" class="col-md-9 col-md-offset-1" style="display: none" style="display: none">
+                <h3 class="border-bottom border-gray mb-3">Bạn đã kết thúc phần ôn tập</h3>
+
+                <div class="jumbotron bg-light">
+                    <h1>Kết quả:</h1> 
+                    <p style="font-size: 4rem;">Số câu đúng: <span id="quiz-correct-number"  style="color:#00c123"></span>/<span class="quiz-nquestion"></span> </p>
+                </div>
+                
+            </div>
+
         </div>
     </div>
     
-    <!-- TODO -->
-    <script src="assets/js/view-card-collection.js"></script>
+ 
+    <script src="assets/js/review-card-collection.js"></script>
     
