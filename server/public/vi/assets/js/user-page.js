@@ -108,7 +108,6 @@ $(document).ready(function() {
    
 });
 
-
 function updateUserInfo(data) {
     if (data.profile_photo) {
         $('#profile_photo').attr('src', data.profile_photo);
