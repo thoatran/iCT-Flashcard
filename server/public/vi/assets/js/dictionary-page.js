@@ -36,13 +36,12 @@ function findWord(word) {
                 </div>
                 <p class="meaning"><pre>`+data.meaning+`</pre></p>
                 `);
+                updateRecentWordList(word);
             }
 
         }, error: function(xhr) {
             $( "#meaning-wrapper" ).html("Không tìm thấy từ bạn yêu cầu.");
         }});
-
-        updateRecentWordList(word);
 
 }
 
