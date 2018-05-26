@@ -15,7 +15,7 @@ function NaviGetCurrentPage() {
         
         return url.search(true)["get"];
     } else {
-        return "home"; // return homepage if cannot find page address in get query
+        return "card-collections"; // return homepage if cannot find page address in get query
     }
 }
 
