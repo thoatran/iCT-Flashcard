@@ -108,7 +108,7 @@ $(document).ready(function() {
 
 function updateUserInfo(data) {
     if (data.profile_photo) {
-        $('#profile_photo').attr('src', '/vi/assets/images/profile_photo/' + data.profile_photo);
+        $('#profile_photo').attr('src', data.profile_photo);
     } else {
         $('#profile_photo').attr('src', '/vi/assets/images/profile_photo/default-profile-photo.png');
     }
@@ -119,4 +119,73 @@ function updateUserInfo(data) {
 }
 
 
+//  Function to upload images
+function ajaxUploadFile(base64, callback) {
+    data = {
+        "username": localStorage.username,
+        "token": localStorage.token,
+        imageURI: base64
+    }
 
+    $.ajax({
+        type: "POST",
+        url: "/api/image/upload",
+        data: data,
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            callback(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+
+}
+
+var updateProfilePhoto = function(flashcard_id) {
+    showLoadingModal();
+    // Update the image
+    let file = document.getElementById('btn-select-profilephoto');
+    if (file.files.length) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            ajaxUploadFile(reader.result, function(response) {
+
+                if (!response.success) {
+                    // Clear loading screen
+                    hideLoadingModal();
+                    return alert("Có lỗi xảy ra khi upload hình ảnh");
+                }
+
+                // Update info 
+                updateQuery = {};
+                updateQuery.username = localStorage.username;
+                updateQuery.token = localStorage.token;
+                updateQuery.newUserInfo = {};
+                updateQuery.newUserInfo.profile_photo = response.imageUrl;
+    
+                $.ajax({
+                    url: "/api/user/updateinfo",
+                    type: "post",
+                    data: updateQuery,
+                    success: function (response) {
+                        if (response['success'] != false) {
+                            alert("Cập nhật ảnh đại diện thành công.");
+                            location.reload();
+                        } else {
+                            alert("Xảy ra lỗi trong quá trình cập nhật thông tin. Xin vui lòng thử lại.");
+                        }
+                        hideLoadingModal();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        hideLoadingModal();
+                        alert("Xảy ra lỗi trong quá trình cập nhật thông tin. Xin vui lòng thử lại.");
+                    }
+                });
+
+            });
+        };
+        reader.readAsDataURL(file.files[0]);
+    }
+}

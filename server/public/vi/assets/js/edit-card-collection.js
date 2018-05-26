@@ -327,7 +327,7 @@ $(document).ready(function(){
 
     // =============== END OF PAGE CONTENT ================
 
-    //  Function to upload files
+    //  Function to upload images
     function ajaxUploadFile(base64, callback) {
         data = {
             "username": localStorage.username,

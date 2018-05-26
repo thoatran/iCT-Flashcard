@@ -211,6 +211,11 @@ UserModel.updateUserInfo = function(username, newUserInfo, cbSuccess, cbFail) {
 		newValuesArr.push(newUserInfo["bio"]);
 	}
 
+	if (newUserInfo.hasOwnProperty("profile_photo")) {
+		updateQueryArr.push(" profile_photo = ? ");
+		newValuesArr.push(newUserInfo["profile_photo"]);
+	}
+
 	if (newUserInfo.hasOwnProperty("newPassword")) {
 		let hashPass = bcrypt.hashSync(newUserInfo['newPassword'], saltRounds);
 		updateQueryArr.push(" password = ? ");
