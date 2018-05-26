@@ -18,6 +18,8 @@ $(document).ready(function(){
                 $("#collection-name").html(response.data.name);
                 $("#collection-description").html(response.data.description);
                 $("#collection-photo").attr("src", response.data.photo);
+                $("#collection-remember-score").html(response.data.remember_score);
+                $("#collection-remember-progress").css("width", response.data.remember_score + "%");
 
             } else {
                 // redirect to collection page if error

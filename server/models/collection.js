@@ -66,7 +66,7 @@ CollectionModel.getCollectionInfo = function(collection_id, cbSuccess, cbFail) {
 }
 
 CollectionModel.getAllCollection = function(user_id, cbSuccess, cbFail) {
-    connection.query(`SELECT id, user_id, name, description, photo
+    connection.query(`SELECT id, user_id, name, description, photo, remember_score
     FROM collections
     WHERE user_id = ?
     `, [user_id], function (error, results) {

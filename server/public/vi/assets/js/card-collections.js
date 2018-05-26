@@ -74,14 +74,18 @@ $(document).ready(function(){
                                 <img class="card-img-top" src="`+collectionList[i].photo+`">
                                 <div class="card-body">
                                 <h4 class="card-title">`+collectionList[i].name+`</h4>
-                                    <p class="card-text">`+collectionList[i].description+`</p>
-                                    
-                                    <div class="collection-actions">
-                                        <a href="/vi/navi.html?get=view-card-collection&collection_id=`+collectionList[i].id+`">Xem</a> |
-                                        <a href="/vi/navi.html?get=review-card-collection&collection_id=`+collectionList[i].id+`">Ôn tập</a> |
-                                        <a href="/vi/navi.html?get=edit-card-collection&collection_id=`+collectionList[i].id+`">Chỉnh sửa</a> |
-                                        <a href="javascript:void" onclick="deleteCollection(`+collectionList[i].id+`,'` + collectionList[i].name + `' )">Xoá</a>
-                                    </div>
+                                <p class="card-text">`+collectionList[i].description+`</p>
+                                <p class="m-0">Đã thuộc: `+collectionList[i].remember_score+`%</p>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar" style="width:`+collectionList[i].remember_score+`%"></div>
+                                </div>
+
+                                <div class="collection-actions">
+                                    <a href="/vi/navi.html?get=view-card-collection&collection_id=`+collectionList[i].id+`">Xem</a> |
+                                    <a href="/vi/navi.html?get=review-card-collection&collection_id=`+collectionList[i].id+`">Ôn tập</a> |
+                                    <a href="/vi/navi.html?get=edit-card-collection&collection_id=`+collectionList[i].id+`">Chỉnh sửa</a> |
+                                    <a href="javascript:void" onclick="deleteCollection(`+collectionList[i].id+`,'` + collectionList[i].name + `' )">Xoá</a>
+                                </div>
                                 
                                 </div>
                             </div>
