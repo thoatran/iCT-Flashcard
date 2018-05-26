@@ -22,6 +22,7 @@ $(document).ready(function() {
 
     // Handle save button
     $('#save-user-info').click(function() {
+        showLoadingModal();
         updateQuery = {};
         updateQuery.username = localStorage.username;
         updateQuery.token = localStorage.token;
@@ -41,8 +42,10 @@ $(document).ready(function() {
                 } else {
                     alert("Xảy ra lỗi trong quá trình cập nhật thông tin. Xin vui lòng thử lại.");
                 }
+                hideLoadingModal();
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                hideLoadingModal();
                 alert("Xảy ra lỗi trong quá trình cập nhật thông tin. Xin vui lòng thử lại.");
             }
         });
@@ -52,6 +55,8 @@ $(document).ready(function() {
 
     // Handle changing password
     $('#btn-change-password').click(function(event) {
+
+        showLoadingModal();
 
         event.preventDefault();
 
@@ -88,8 +93,10 @@ $(document).ready(function() {
                 } else {
                     alert("Xảy ra lỗi trong quá trình cập nhật mật khẩu. Xin vui lòng thử lại.");
                 }
+                hideLoadingModal();
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                hideLoadingModal();
                 alert("Xảy ra lỗi trong quá trình cập nhật mật khẩu. Xin vui lòng thử lại.");
             }
         });
