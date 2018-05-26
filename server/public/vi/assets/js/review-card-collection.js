@@ -107,6 +107,8 @@ Quiz.startQuestion = function(qid) {
         $("#quiz-quest-number").html(qid+1);
         $("#quiz-question").html(this.questions[qid].question);
         $("#quiz-question").attr("question-id", qid);
+        $("#quiz-progress").attr("aria-valuenow", parseInt((qid+1) / this.questions.length * 100));
+        $("#quiz-progress").css("width", parseInt((qid+1) / this.questions.length * 100) + "%");
         // Print Answers
         $("#quiz-answers").html("");
         for (let i = 0; i < this.questions[qid].answers.length; i++) {
