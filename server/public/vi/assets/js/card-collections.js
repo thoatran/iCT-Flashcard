@@ -81,10 +81,21 @@ $(document).ready(function(){
                                 </div>
 
                                 <div class="collection-actions">
-                                    <a href="/vi/navi.html?get=view-card-collection&collection_id=`+collectionList[i].id+`">Xem</a> |
-                                    <a href="/vi/navi.html?get=review-card-collection&collection_id=`+collectionList[i].id+`">Ôn tập</a> |
-                                    <a href="/vi/navi.html?get=edit-card-collection&collection_id=`+collectionList[i].id+`">Chỉnh sửa</a> |
-                                    <a href="javascript:void" onclick="deleteCollection(`+collectionList[i].id+`,'` + collectionList[i].name + `' )">Xoá</a>
+                                    <a class="btn btn-light" href="/vi/navi.html?get=view-card-collection&collection_id=`+collectionList[i].id+`">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                    Xem</a> |
+                                    <a class="btn btn-light" href="/vi/navi.html?get=review-card-collection&collection_id=`+collectionList[i].id+`">
+                                    <i class="fa fa-leanpub" aria-hidden="true"></i>
+                                    Ôn tập
+                                    </a> |
+                                    <a class="btn btn-light" href="/vi/navi.html?get=edit-card-collection&collection_id=`+collectionList[i].id+`">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    Chỉnh sửa
+                                    </a> |
+                                    <a class="btn btn-light" href="javascript:void" onclick="deleteCollection(`+collectionList[i].id+`,'` + collectionList[i].name + `' )">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    Xoá
+                                    </a>
                                 </div>
                                 
                                 </div>
