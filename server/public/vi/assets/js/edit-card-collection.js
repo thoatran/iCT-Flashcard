@@ -1,3 +1,14 @@
+// Each card has an order in a collection.
+// This function compare two cards' order
+function compareCardOrder(a,b) {
+    if (a.order < b.order)
+        return -1;
+    if (a.order > b.order)
+        return 1;
+    return 0;
+}
+  
+  
 $(document).ready(function(){
 
     // Global variables
@@ -59,15 +70,14 @@ $(document).ready(function(){
         flashcard.remember_score = inp.remember_score;
 
         if (typeof insertIndex == "number") {
-            this.data.unshift(flashcard);
+            this.data.splice(insertIndex, 0, flashcard);
             this.addFlashcardDOM(flashcard, true, insertIndex);
-        } else
-        if (shouldPrepend) {
+        } else if (shouldPrepend) {
             this.data.unshift(flashcard);
             this.addFlashcardDOM(flashcard, true);
         } else {
             this.data.push(flashcard);
-            this.addFlashcardDOM(flashcard);
+            this.addFlashcardDOM(flashcard, false);
         }
 
         // Handle focus event
@@ -142,6 +152,10 @@ $(document).ready(function(){
                 
                     let flashcard = {};
                     flashcard.id = response.flashcardInfo.id;
+                    flashcard.word = "";
+                    flashcard.meaning = "";
+                    flashcard.image = "";
+                    flashcard.pronunciation = "";
                     LocalFlashcardList.add(flashcard, true, insertIndex);
                     LocalFlashcardList.changeCardFocus(flashcard.id);
 
@@ -174,6 +188,8 @@ $(document).ready(function(){
             $('html, body').animate({
                 scrollTop: $("#flashcard-"+flashcard_id).offset().top
             }, 500);
+            $.scrollTo('#flashcard-tree');
+            $('#flashcard-tree').scrollTo("#flashcard-"+flashcard_id);
         }
     }
     LocalFlashcardList.removeFlashcardDOM = function (flashcard_id) {
@@ -243,9 +259,10 @@ $(document).ready(function(){
 
 
         if (typeof insertIndex == "number" && insertIndex > 0) {
-            $('#flashcard-tree .flashcard-wrapper:eq('+insertIndex+')').after(DOMElem);
-        } else
-        if (shouldPrepend) {
+            $('#flashcard-tree .flashcard-wrapper:eq('+(insertIndex-1)+')').after(DOMElem);
+        } else if (insertIndex === 0) {
+            $("#flashcard-tree").prepend(DOMElem);
+        } else if (shouldPrepend) {
             $("#flashcard-tree").prepend(DOMElem);
         } else {
             $("#flashcard-tree").append(DOMElem);
@@ -310,6 +327,10 @@ $(document).ready(function(){
                 // Re-init local list
                 LocalFlashcardList.init();
 
+                // Re-order by order number
+                response.data.sort(compareCardOrder);
+
+                // Add card to the list
                 for (i = 0; i < response.data.length; i++) {
                     LocalFlashcardList.add(response.data[i]);
                 }
