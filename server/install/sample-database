@@ -1,0 +1,174 @@
+-- MySQL dump 10.13  Distrib 5.5.41, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: ***REMOVED***
+-- ------------------------------------------------------
+-- Server version	5.5.41-0ubuntu0.12.04.1-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `cards`
+--
+
+DROP TABLE IF EXISTS `cards`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cards` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `collection_id` int(20) unsigned NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `word` varchar(255) DEFAULT NULL,
+  `pronunciation` varchar(255) DEFAULT NULL,
+  `meaning` text,
+  `order` int(10) DEFAULT NULL,
+  `remember_score` int(3) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `collection_id` (`collection_id`),
+  CONSTRAINT `cards_ibfk_1` FOREIGN KEY (`collection_id`) REFERENCES `collections` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cards`
+--
+
+LOCK TABLES `cards` WRITE;
+/*!40000 ALTER TABLE `cards` DISABLE KEYS */;
+INSERT INTO `cards` VALUES (18,1,'https://res.cloudinary.com/thoatt/image/upload/v1527318574/nocg5sa9jamvdftjjlcc.jpg','pig','/pig/','Con heo',-1,0),(19,1,'https://res.cloudinary.com/thoatt/image/upload/v1527318517/gzuzndbmlhebfs3rdtev.jpg','cow','/kaʊ/','Con bò',-1,0),(20,1,'https://res.cloudinary.com/thoatt/image/upload/v1527318623/csnbahmi1uoyypso6uea.jpg','bear','/beə[r]/','Con gấu',-1,0),(21,1,'https://res.cloudinary.com/thoatt/image/upload/v1527318461/vvqfifwf9uq2ohxo0jfj.jpg','bird','/bɜ:d/','Con chim',-1,0),(22,1,'https://res.cloudinary.com/thoatt/image/upload/v1527178314/dhvxhuufbysz3iczm8vi.png','buffalo','/\'bʌfələʊ/','Con trâu',-1,0),(23,1,'https://res.cloudinary.com/thoatt/image/upload/v1527178278/jdrit2lssfxgw46z8voo.jpg','Frog','/frɒg/','Con ếch',-1,0),(24,1,'https://res.cloudinary.com/thoatt/image/upload/v1527178264/s3dlqou6tcpvpj7bz2o3.jpg','mouse','/Phát âm/','Con chuột',-1,0),(31,2,'https://res.cloudinary.com/thoatt/image/upload/v1527325936/sk2pvfysz0mcyyt61xue.jpg','knee','/niː/','Đầu gối',-1,0),(32,2,'https://res.cloudinary.com/thoatt/image/upload/v1527325836/aemuasyzgnjk4i7ssn3z.jpg','tongue','/tʌŋ/','Lưỡi',-1,0),(33,2,'https://res.cloudinary.com/thoatt/image/upload/v1527325751/calzanpnwter9c2bvaul.jpg','hair','/her/','Tóc',-1,0),(34,2,'https://res.cloudinary.com/thoatt/image/upload/v1527325696/sj91ejavdjji71sufjlf.jpg','brest','/brest/','Ngực',-1,0),(35,2,'https://res.cloudinary.com/thoatt/image/upload/v1527325638/xt2rijptymx0f0xjtk5x.jpg','back',' /bæk/','Lưng',-1,0),(36,2,'https://res.cloudinary.com/thoatt/image/upload/v1527325578/pxl1uwvmag3zoqkzcipz.jpg','arm','/ɑːrm/','Cánh tay',-1,0),(52,3,'https://res.cloudinary.com/thoatt/image/upload/v1527331100/lbexz8dc0ppeiqi1e3lg.jpg','Wheat','/wi:t/','Lúa mì',-1,0),(53,3,'https://res.cloudinary.com/thoatt/image/upload/v1527331033/h1jtqbfzceeps8zezzoz.jpg','Pine','/pain/','Cây thông',-1,0),(54,3,'https://res.cloudinary.com/thoatt/image/upload/v1527330987/b8mzs55a5bl1wazvjdkn.jpg','Moss','/mɔs/','Rêu xanh',-1,0),(55,3,'https://res.cloudinary.com/thoatt/image/upload/v1527330873/xhdmqhikd2jqpmnhmy7l.jpg','Mushroom','/’mʌ∫rum/','Nấm',-1,0),(56,3,'https://res.cloudinary.com/thoatt/image/upload/v1527330824/idhzarjuurheckdzfiai.jpg','Catus','/kæktəs/','Cây xương rồng',-1,0),(57,3,'https://res.cloudinary.com/thoatt/image/upload/v1527330775/r5cngphevatcxb0povje.jpg','Flower','/’flauə/','Hoa',-1,0),(58,3,'https://res.cloudinary.com/thoatt/image/upload/v1527330667/syptgonsqy6shmosy0ip.jpg','Coconut tree','/ˈkəʊkənʌt triː/','Cây dừa',-1,0),(59,3,'https://res.cloudinary.com/thoatt/image/upload/v1527330607/u6l3irewwunkktya4sld.jpg','Apple tree','/ˈæpl triː/:','Cây táo',-1,0),(60,3,'https://res.cloudinary.com/thoatt/image/upload/v1527330482/e1tufnvyua7vsfvmet2t.jpg','beech','/bi:t∫/','Cây sồi',-1,0);
+/*!40000 ALTER TABLE `cards` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `collections`
+--
+
+DROP TABLE IF EXISTS `collections`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `collections` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(20) unsigned NOT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT 'Undefined',
+  `description` varchar(255) DEFAULT '',
+  `remember_score` int(3) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `collections_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `collections`
+--
+
+LOCK TABLES `collections` WRITE;
+/*!40000 ALTER TABLE `collections` DISABLE KEYS */;
+INSERT INTO `collections` VALUES (1,1,'https://res.cloudinary.com/thoatt/image/upload/v1527178246/llk0rzil6lobaum2wte1.jpg','Động vật','Các flashcard về các loài động vật',0),(2,1,'https://res.cloudinary.com/thoatt/image/upload/v1527325530/q0gbcebbr6qurhgf3d2i.jpg','Cơ thể','Các bộ phận trên cơ thể người',83),(3,1,'https://res.cloudinary.com/thoatt/image/upload/v1527330480/dscquazj8r13navhaxta.jpg','Các loài cây','Từ vựng về các loài cây tiếng Anh',88);
+/*!40000 ALTER TABLE `collections` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `images`
+--
+
+DROP TABLE IF EXISTS `images`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `images` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(20) unsigned NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `images_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `images`
+--
+
+LOCK TABLES `images` WRITE;
+/*!40000 ALTER TABLE `images` DISABLE KEYS */;
+INSERT INTO `images` VALUES (1,1,NULL),(2,1,NULL),(3,1,'https://res.cloudinary.com/thoatt/image/upload/v1525766523/kdb0z19debbb0zx0627x.png'),(4,1,'https://res.cloudinary.com/thoatt/image/upload/v1527178246/llk0rzil6lobaum2wte1.jpg'),(5,1,'https://res.cloudinary.com/thoatt/image/upload/v1527178264/s3dlqou6tcpvpj7bz2o3.jpg'),(6,1,'https://res.cloudinary.com/thoatt/image/upload/v1527178278/jdrit2lssfxgw46z8voo.jpg'),(7,1,'https://res.cloudinary.com/thoatt/image/upload/v1527178314/dhvxhuufbysz3iczm8vi.png'),(8,1,'https://res.cloudinary.com/thoatt/image/upload/v1527318461/vvqfifwf9uq2ohxo0jfj.jpg'),(9,1,'https://res.cloudinary.com/thoatt/image/upload/v1527318517/gzuzndbmlhebfs3rdtev.jpg'),(10,1,'https://res.cloudinary.com/thoatt/image/upload/v1527318574/nocg5sa9jamvdftjjlcc.jpg'),(11,1,'https://res.cloudinary.com/thoatt/image/upload/v1527318623/csnbahmi1uoyypso6uea.jpg'),(12,1,'https://res.cloudinary.com/thoatt/image/upload/v1527325209/l5zrmcbsk5slwgckwr5w.jpg'),(13,1,'https://res.cloudinary.com/thoatt/image/upload/v1527325530/q0gbcebbr6qurhgf3d2i.jpg'),(14,1,'https://res.cloudinary.com/thoatt/image/upload/v1527325578/pxl1uwvmag3zoqkzcipz.jpg'),(15,1,'https://res.cloudinary.com/thoatt/image/upload/v1527325638/xt2rijptymx0f0xjtk5x.jpg'),(16,1,'https://res.cloudinary.com/thoatt/image/upload/v1527325696/sj91ejavdjji71sufjlf.jpg'),(17,1,'https://res.cloudinary.com/thoatt/image/upload/v1527325751/calzanpnwter9c2bvaul.jpg'),(18,1,'https://res.cloudinary.com/thoatt/image/upload/v1527325836/aemuasyzgnjk4i7ssn3z.jpg'),(19,1,'https://res.cloudinary.com/thoatt/image/upload/v1527325936/sk2pvfysz0mcyyt61xue.jpg'),(20,1,'https://res.cloudinary.com/thoatt/image/upload/v1527330480/dscquazj8r13navhaxta.jpg'),(21,1,'https://res.cloudinary.com/thoatt/image/upload/v1527330482/e1tufnvyua7vsfvmet2t.jpg'),(22,1,'https://res.cloudinary.com/thoatt/image/upload/v1527330607/u6l3irewwunkktya4sld.jpg'),(23,1,'https://res.cloudinary.com/thoatt/image/upload/v1527330667/syptgonsqy6shmosy0ip.jpg'),(24,1,'https://res.cloudinary.com/thoatt/image/upload/v1527330775/r5cngphevatcxb0povje.jpg'),(25,1,'https://res.cloudinary.com/thoatt/image/upload/v1527330824/idhzarjuurheckdzfiai.jpg'),(26,1,'https://res.cloudinary.com/thoatt/image/upload/v1527330873/xhdmqhikd2jqpmnhmy7l.jpg'),(27,1,'https://res.cloudinary.com/thoatt/image/upload/v1527330987/b8mzs55a5bl1wazvjdkn.jpg'),(28,1,'https://res.cloudinary.com/thoatt/image/upload/v1527331033/h1jtqbfzceeps8zezzoz.jpg'),(29,1,'https://res.cloudinary.com/thoatt/image/upload/v1527331100/lbexz8dc0ppeiqi1e3lg.jpg');
+/*!40000 ALTER TABLE `images` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tokens`
+--
+
+DROP TABLE IF EXISTS `tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tokens` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `token` varchar(255) NOT NULL,
+  `user_id` int(20) unsigned NOT NULL,
+  `token_exp` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tokens`
+--
+
+LOCK TABLES `tokens` WRITE;
+/*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
+INSERT INTO `tokens` VALUES (1,'de1ff6b8088085c3f6626ef2b4c34a21c0e979b2',1,'2018-05-18 13:50:55'),(2,'bd9156e3a6061b4911896e0071733013bfdcccc0',1,'2018-05-18 18:21:53'),(3,'230bb0e125f4db5229d64140155d674621f37f0c',1,'2018-05-18 18:57:30'),(4,'e690950efd2277d7c83b3a38042b6cb5967aa7fe',1,'2018-05-19 02:23:19'),(8,'528878f330af6f46890dbded9e7cb478d9edb3c8',3,'2018-05-19 03:34:23'),(10,'84e6ec4b346023904644374f77a2780f6f1feec4',1,'2018-05-24 07:54:49'),(11,'b758b96bc4c3e600f02e24e0e4bd6b65848aa278',1,'2018-05-24 16:43:43'),(12,'285443a01f9f598cfb2614017d7d65e1610db680',1,'2018-05-25 18:10:27'),(14,'a73b795596abc2d23920170c1600864f972f5b1f',5,'2018-05-26 14:07:29'),(15,'e8ca93f338fe5af046a1f9baf016f7bdebdfbefc',5,'2018-05-26 14:07:59'),(16,'76a8816992d00ff2a06fee419180d205e4f44f3b',5,'2018-05-26 14:08:17'),(24,'ac53d65b9599816388fc1462907c3ce02c2f4d9b',1,'2018-05-27 12:40:29'),(25,'a17f5a291b78aad8d19cde75a7a612ef2a952875',1,'2018-05-28 08:17:45');
+/*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(200) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `fullname` varchar(200) DEFAULT NULL,
+  `bio` text,
+  `profile_photo` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'admin','$2b$10$nnZsVRnuXVYsramR9Nr.E.waLw3iXvSk62qOyt14Vw5/kmT75w/3S','vietanh@vietanhdev.com','ICT Team','ICT Group X.\n- Trần Thị Thoa\n- Bùi Thị Phương Anh\n- Nguyễn Việt Anh\n- Phạm Nguyên Khánh Phong\n- Trần Vũ Hải','https://res.cloudinary.com/thoatt/image/upload/v1527325209/l5zrmcbsk5slwgckwr5w.jpg'),(3,'vietanh','$2b$10$5298w6a9Y/bNtBF2ecsMGuwVjY0N8sOJ33UdOqGz.HMZhfaOZjr/q','admin@admin.com','sdasdasd','Xin chào các bạn',NULL),(4,'julioklaus','$2b$10$3NGXrc8WVvXcyBbBCUyIeO19dVnvAI8eKoMG6g5FUnVjjyX4pkI9.','tieuvuhau@gmail.com','Tran Vu Hai',NULL,NULL),(5,'noone','$2b$10$tRRLmGAFUNP9Pc.CjEzWFecTBmh/jVci5xRCu5Rb6BSLaCPZo80GS','tieuvuhau@gmail.com','Tran Vu Hai',NULL,NULL);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-05-28  3:11:01
