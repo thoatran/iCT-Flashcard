@@ -59,6 +59,15 @@ $(document).ready(function(){
         });
         cb();
     }
+    LocalFlashcardList.getCardIndex = function(flashcard_id) {
+        console.log("Flashcard ID: " + flashcard_id);
+        for (let i = 0; i < this.data.length; i++) {
+            if (this.data[i].id == flashcard_id) {
+                return i;
+            }
+        }
+        return -1;
+    }
     LocalFlashcardList.add = function(inp, shouldPrepend, insertIndex) {
         // Create a new flashcard in local list
         let flashcard = {};
@@ -96,6 +105,48 @@ $(document).ready(function(){
             let r = confirm("Bạn muốn xóa flashcard của từ: \""+flashcard.word+"\" ?");
             if (r == true) {
                 LocalFlashcardList.delete(flashcard.id);
+            }
+        });
+
+        // Handle move-up event
+        $("#flashcard-tree").on('click', '#flashcard-' + flashcard.id + " button.move-up", function(){
+            let cardIndex = LocalFlashcardList.getCardIndex(flashcard.id);
+
+            if (cardIndex >= 1) {
+
+                LocalFlashcardList.removeFlashcardDOM(flashcard.id);
+                LocalFlashcardList.removeFlashcardDOM(LocalFlashcardList.data[cardIndex - 1].id);
+
+                LocalFlashcardList.addFlashcardDOM(LocalFlashcardList.data[cardIndex - 1], false, cardIndex-1);
+                LocalFlashcardList.addFlashcardDOM(LocalFlashcardList.data[cardIndex], false, cardIndex-1);
+                
+                LocalFlashcardList.changeCardFocus(flashcard.id);
+
+                let tmp = LocalFlashcardList.data[cardIndex - 1];
+                LocalFlashcardList.data[cardIndex - 1] = LocalFlashcardList.data[cardIndex];
+                LocalFlashcardList.data[cardIndex] = tmp;
+
+            }
+        });
+
+        // Handle move-down event
+        $("#flashcard-tree").on('click', '#flashcard-' + flashcard.id + " button.move-down", function(){
+            let cardIndex = LocalFlashcardList.getCardIndex(flashcard.id);
+
+            if (cardIndex >=  0 && cardIndex < LocalFlashcardList.data.length - 1) {
+
+                LocalFlashcardList.removeFlashcardDOM(flashcard.id);
+                LocalFlashcardList.removeFlashcardDOM(LocalFlashcardList.data[cardIndex + 1].id);
+
+                LocalFlashcardList.addFlashcardDOM(LocalFlashcardList.data[cardIndex + 1], false, cardIndex);
+                LocalFlashcardList.addFlashcardDOM(LocalFlashcardList.data[cardIndex], false, cardIndex + 1);
+
+                LocalFlashcardList.changeCardFocus(flashcard.id);
+
+                let tmp = LocalFlashcardList.data[cardIndex + 1];
+                LocalFlashcardList.data[cardIndex + 1] = LocalFlashcardList.data[cardIndex];
+                LocalFlashcardList.data[cardIndex] = tmp;
+
             }
         });
 
@@ -188,8 +239,6 @@ $(document).ready(function(){
             $('html, body').animate({
                 scrollTop: $("#flashcard-"+flashcard_id).offset().top
             }, 500);
-            $.scrollTo('#flashcard-tree');
-            $('#flashcard-tree').scrollTo("#flashcard-"+flashcard_id);
         }
     }
     LocalFlashcardList.removeFlashcardDOM = function (flashcard_id) {
@@ -245,12 +294,12 @@ $(document).ready(function(){
                 <button class="delete btn btn-danger">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                 </button>
-                <!--<button class="btn btn-info">
+                <button class="move-up btn btn-info">
                         <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
                 </button>
-                <button class="btn btn-info">
+                <button class="move-down btn btn-info">
                         <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
-                </button>-->
+                </button>
             </div>
 
             <div style="clear: both;"></div>
