@@ -100,6 +100,7 @@ router.route('/user/islogin')
 router.route('/user/getinfo')
   .post(UserController.getUserInfo);
 
+
 // ### Update user info
 // params: {'username': '<username>', 'token', '<token>',
 //          'oldPassword': '<oldPassword>'
@@ -122,7 +123,6 @@ router.route('/user/updateinfo')
 router.route('/user/forgot_password')
   .post(UserController.forgotPassword);
   
-
 
 // ==================================================================
 // USER APIs FOR IMAGE MANAGEMENT
