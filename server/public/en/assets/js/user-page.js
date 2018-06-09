@@ -11,11 +11,11 @@ $(document).ready(function() {
             if (response['success'] != false && typeof response['data'] !== 'undefined') {
                 return updateUserInfo(response['data']);
             } else {
-                alert("Xảy ra lỗi trong quá trình tải thông tin. Xin vui lòng tải lại trang.");
+                alert("Error happened when loading information.Please reload.");
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            alert("Xảy ra lỗi trong quá trình tải thông tin. Xin vui lòng tải lại trang.");
+            alert("Error happened when loading information.Please reload.");
         }
     });
 
@@ -37,16 +37,16 @@ $(document).ready(function() {
             data: updateQuery,
             success: function (response) {
                 if (response['success'] != false) {
-                    alert("Cập nhật thông tin thành công.");
+                    alert("Finished updating information");
                     location.reload();
                 } else {
-                    alert("Xảy ra lỗi trong quá trình cập nhật thông tin. Xin vui lòng thử lại.");
+                    alert("Error happened when updating information.Please reload.");
                 }
                 hideLoadingModal();
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 hideLoadingModal();
-                alert("Xảy ra lỗi trong quá trình cập nhật thông tin. Xin vui lòng thử lại.");
+                alert("Error happened when updating information.Please reload.");
             }
         });
         
@@ -61,19 +61,19 @@ $(document).ready(function() {
         event.preventDefault();
 
         if ($('#inp-old-password').val() == '') {
-            alert("Vui lòng nhập mật khẩu cũ.");
+            alert("Input old password");
             hideLoadingModal();
             return;
         }
 
         if ($('#inp-new-password').val() == '') {
-            alert("Vui lòng nhập mật khẩu mới.");
+            alert("Input new password");
             hideLoadingModal();
             return;
         }
 
         if ($('#inp-new-password').val() != $('#inp-new-password-2').val()) {
-            alert("Hai lần nhập mật khẩu mới phải trùng nhau!");
+            alert("2 times for inputing new password must be matched");
             hideLoadingModal();
             return;
         }
@@ -92,14 +92,14 @@ $(document).ready(function() {
             data: updateQuery,
             success: function (response) {
                 if (response['success'] != false) {
-                    alert("Cập nhật mật khẩu thành công.");
+                    alert("Finished updating password");
                 } else {
-                    alert("Xảy ra lỗi trong quá trình cập nhật mật khẩu. Xin vui lòng thử lại.");
+                    alert("Error happened when updating password.Please reload.");
                 }
                 hideLoadingModal();
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                alert("Xảy ra lỗi trong quá trình cập nhật mật khẩu. Xin vui lòng thử lại.");
+                alert("Error happened when updating password.Please reload.");
                 hideLoadingModal();
             }
         });
@@ -157,7 +157,7 @@ var updateProfilePhoto = function(flashcard_id) {
                 if (!response.success) {
                     // Clear loading screen
                     hideLoadingModal();
-                    return alert("Có lỗi xảy ra khi upload hình ảnh");
+                    return alert("Error happened when uplaoing image");
                 }
 
                 // Update info 
@@ -173,16 +173,16 @@ var updateProfilePhoto = function(flashcard_id) {
                     data: updateQuery,
                     success: function (response) {
                         if (response['success'] != false) {
-                            alert("Cập nhật ảnh đại diện thành công.");
+                            alert("Finished uploading profile picture");
                             location.reload();
                         } else {
-                            alert("Xảy ra lỗi trong quá trình cập nhật thông tin. Xin vui lòng thử lại.");
+                            alert("Error happened when updating information.Please reload.");
                         }
                         hideLoadingModal();
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         hideLoadingModal();
-                        alert("Xảy ra lỗi trong quá trình cập nhật thông tin. Xin vui lòng thử lại.");
+                        alert("Error happened when updating information.Please reload.");
                     }
                 });
 
