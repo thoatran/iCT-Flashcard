@@ -1,3 +1,9 @@
 eclipse.preferences.version=1
-encoding//src/pc/Dashboard.java=UTF-8
-encoding//src/pc/Dictionary.java=UTF-8
+encoding//src/ClassDesign/Network.java=UTF-8
+encoding//src/ClassDesign/User.java=UTF-8
+encoding//src/FrameDesign/AddWord.java=UTF-8
+encoding//src/FrameDesign/Dashboard.java=UTF-8
+encoding//src/FrameDesign/Dictionary.java=UTF-8
+encoding//src/FrameDesign/ForgotPassword.java=UTF-8
+encoding//src/FrameDesign/Login.java=UTF-8
+encoding//src/FrameDesign/Register.java=UTF-8

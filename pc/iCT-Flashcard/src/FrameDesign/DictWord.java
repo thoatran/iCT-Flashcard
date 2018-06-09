@@ -1,4 +1,4 @@
-package pc;
+package FrameDesign;
 
 public class DictWord {
 	private String success;

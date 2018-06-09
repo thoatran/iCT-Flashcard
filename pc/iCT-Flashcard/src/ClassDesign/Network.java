@@ -1,15 +1,24 @@
 /*
+
+
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pc;
+package ClassDesign;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import FrameDesign.DictWord;
+import FrameDesign.WordNotFound;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -68,7 +77,7 @@ public class Network {
 
     }
     
-    public void getLoginState(String username, String password) throws IOException {
+    public CheckLogin getLoginState(String username, String password) throws IOException {
 		 
 		 String urlParameters  = "username="+username+"&password="+password;
 		 byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
@@ -103,12 +112,13 @@ public class Network {
 	        wr.close();
 	        String result = responseSB.toString();
 	        System.out.println(result);
-	        result.split(";");
-	        
+	        Gson gson = new Gson();
+	        CheckLogin check = gson.fromJson(result, CheckLogin.class); 
+	        return check;
 	        	
 	 }
 	 
-	 public void register(String user, String pw, String email, String fname) throws IOException {
+	 public RegisterUser register(String user, String pw, String email, String fname) throws IOException {
 		 String urlParameters  = "username="+user+"&password="+pw+"&email="+email+"&fullname="+fname;
 		 byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
 		 int    postDataLength = postData.length;
@@ -141,8 +151,122 @@ public class Network {
 	        br.close();
 	        wr.close();
 	        String result = responseSB.toString();
-	        System.out.println(result);
+	        Gson gson = new Gson();
+	        RegisterUser reg = gson.fromJson(result, RegisterUser.class);
+	        
+	        System.out.println(reg.getSuccess());
+	        return reg;
 
+	 }
+	 
+	    public UserInfor getUserInfor(String username, String token) throws IOException {
+			 
+			 String urlParameters  = "username="+username+"&token="+token;
+			 byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
+			 int    postDataLength = postData.length;
+			 String request        = "https://ict-flashcard-server.herokuapp.com/api/user/getinfo";
+			 URL    url            = new URL( request );
+			 HttpURLConnection connection= (HttpURLConnection) url.openConnection();           
+			 connection.setDoOutput( true );
+			 connection.setInstanceFollowRedirects( false );
+			 connection.setRequestMethod( "POST" );
+			 connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
+			 connection.setRequestProperty( "charset", "utf-8");
+			 connection.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+			 connection.setUseCaches( false );
+		         
+		        // Write data
+
+			DataOutputStream wr = new DataOutputStream( connection.getOutputStream());
+				   wr.write( postData );
+				
+		         
+		        // Read response
+		        StringBuilder responseSB = new StringBuilder();
+		        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+		          
+		        String line;
+		        while ( (line = br.readLine()) != null)
+		            responseSB.append(line);
+		                 
+		        // Close streams
+		        br.close();
+		        wr.close();
+		        String result = responseSB.toString();
+		        System.out.println(result);
+		        Gson gson = new Gson();
+		        UserInfor check = gson.fromJson(result, UserInfor.class); 
+		        return check;
+		        	
+		 }
+	 
+public Success Logout(String username, String token) throws IOException {
+		 
+		 String urlParameters  = "username="+username+"&token="+token;
+		 byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
+		 int    postDataLength = postData.length;
+		 String request        = "https://ict-flashcard-server.herokuapp.com/api/user/logout";
+		 URL    url            = new URL( request );
+		 HttpURLConnection connection= (HttpURLConnection) url.openConnection();           
+		 connection.setDoOutput( true );
+		 connection.setInstanceFollowRedirects( false );
+		 connection.setRequestMethod( "POST" );
+		 connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
+		 connection.setRequestProperty( "charset", "utf-8");
+		 connection.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+		 connection.setUseCaches( false );
+	         
+	        // Write data
+
+		DataOutputStream wr = new DataOutputStream( connection.getOutputStream());
+			   wr.write( postData );
+			
+	         
+	        // Read response
+	        StringBuilder responseSB = new StringBuilder();
+	        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	          
+	        String line;
+	        while ( (line = br.readLine()) != null)
+	            responseSB.append(line);
+	                 
+	        // Close streams
+	        br.close();
+	        wr.close();
+	        String result = responseSB.toString();
+	        System.out.println(result);
+	        Gson gson = new Gson();
+	        Success check = gson.fromJson(result, Success.class); 
+	        return check;
+	        	
+	 }
+
+	 public Success updateUserInfor(String username, String token, String oldPassword, Profile newUserInfor) throws IOException {
+		 
+		 String request = "https://ict-flashcard-server.herokuapp.com/api/user/updateinfo";
+		 JsonObject subobj = new JsonObject();
+		 if(newUserInfor.getEmail() != null) {
+			 subobj.addProperty("email", newUserInfor.getEmail());
+		 }
+		 if(newUserInfor.getBio() != null) {
+		 subobj.addProperty("bio", newUserInfor.getBio());
+		 }
+		 if(newUserInfor.getFullname() != null) {
+		 subobj.addProperty("fullname", newUserInfor.getFullname());
+		 }
+		 if(newUserInfor.getNewPassword() != null) {
+		 subobj.addProperty("newPassword", newUserInfor.getNewPassword());
+		 }
+		 JsonObject raw = new JsonObject();
+		 raw.addProperty("username", username);
+		 raw.addProperty("token", token);
+		 raw.addProperty("oldPassword", oldPassword);
+		 raw.add("newUserInfo", subobj);
+	         
+	    // Gson gson = new Gson();
+	     Success check = new Success(); 
+	     return check;
+	        	
 	 }
 
 }
