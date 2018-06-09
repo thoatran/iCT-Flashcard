@@ -269,8 +269,8 @@ $(document).ready(function(){
                         onchange="$.fn.updateFlashcardPhoto(`+flashcardInfo.id+`)">
                     </div>
                     <div class="card-body">
-                        <input type="text" class="inp-word form-control" placeholder="Từ vựng">
-                        <input type="text" class="inp-pronon form-control mt-1" placeholder="Phát âm">
+                        <input type="text" class="inp-word form-control" placeholder="Word">
+                        <input type="text" class="inp-pronon form-control mt-1" placeholder="Pronounciation">
                     </div>
                     <div class="card-footer text-muted flip-card-btn">
                         Front
@@ -280,7 +280,7 @@ $(document).ready(function(){
             <div class="back p-1">
                 <div class="card">
                     <div class="card-body">
-                            <textarea class="inp-meaning form-control" rows="9" placeholder="Ý nghĩa"></textarea>
+                            <textarea class="inp-meaning form-control" rows="9" placeholder="Meaning"></textarea>
                     </div>
                     <div class="card-footer text-muted flip-card-btn">
                         Back
@@ -370,7 +370,7 @@ $(document).ready(function(){
             console.log(response);
             
             if (!response.success) {
-                alert("Some errors happened Vui lòng thử lại.");
+                alert("Some errors happened .Please check.");
             } else {
 
                 // Re-init local list
@@ -467,7 +467,7 @@ $(document).ready(function(){
                         error: function(jqXHR, textStatus, errorThrown) {
                             // Clear loading screen
                             hideLoadingModal();
-                            alert("Some errors happened Vui lòng thử lại.");
+                            alert("Some errors happened .Please check.");
                         }
                     });
 
@@ -527,7 +527,7 @@ $(document).ready(function(){
                     if (!response.success) {
                         // Clear loading screen
                         hideLoadingModal();
-                        return alert("Có lỗi xảy ra khi upload hình ảnh");
+                        return alert("Some errors happened when uploading image");
                     }
 
                     let imageUrl = response.imageUrl;
@@ -549,7 +549,7 @@ $(document).ready(function(){
                                 // Reload the page
                                 $("#flashcard-"+flashcard_id+"  img").attr("src", imageUrl);
                             } else {
-                                alert("Some errors happened Vui lòng thử lại.");
+                                alert("Some errors happened .Please check.");
                             }
                             // Clear loading screen
                             hideLoadingModal();
@@ -557,7 +557,7 @@ $(document).ready(function(){
                         error: function(jqXHR, textStatus, errorThrown) {
                             // Clear loading screen
                             hideLoadingModal();
-                            alert("Some errors happened Vui lòng thử lại.");
+                            alert("Some errors happened .Please check.");
                         }
                     });
 
@@ -577,7 +577,7 @@ $(document).ready(function(){
                 },
                 success: function (response) {
                     if (response['success'] != false) {
-                        alert("Đã thay đổi thông tin bộ flashcard.");
+                        alert("Finished editting collectin information");
                     } else {
                         alert("Some errors happened.Please check");
                     }

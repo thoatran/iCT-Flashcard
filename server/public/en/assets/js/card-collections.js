@@ -1,7 +1,7 @@
 var deleteCollection = function(collection_id, collection_name) {
     // Confirm box
     var txt;
-    var r = confirm("You wwant to delete the collection: \""+collection_name+"\" ?");
+    var r = confirm("You want to delete the collection: \""+collection_name+"\" ?");
     if (r == true) {
         // Create a new collection
         $.ajax({
@@ -83,18 +83,18 @@ $(document).ready(function(){
                                 <div class="collection-actions">
                                     <a class="btn btn-light" href="/vi/navi.html?get=view-card-collection&collection_id=`+collectionList[i].id+`">
                                     <i class="fa fa-eye" aria-hidden="true"></i>
-                                    Xem</a> |
+                                    Show</a> |
                                     <a class="btn btn-light" href="/vi/navi.html?get=review-card-collection&collection_id=`+collectionList[i].id+`">
                                     <i class="fa fa-leanpub" aria-hidden="true"></i>
-                                    Ôn tập
+                                    Review
                                     </a> |
                                     <a class="btn btn-light" href="/vi/navi.html?get=edit-card-collection&collection_id=`+collectionList[i].id+`">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    Chỉnh sửa
+                                    Edit
                                     </a> |
                                     <a class="btn btn-light" href="javascript:void" onclick="deleteCollection(`+collectionList[i].id+`,'` + collectionList[i].name + `' )">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
-                                    Xoá
+                                    Delete
                                     </a>
                                 </div>
                                 
@@ -110,7 +110,7 @@ $(document).ready(function(){
                 if (!collectionList || collectionList.length == 0) {
                     $("#collection-list-view").html(`
                         <div class="alert alert-dark">
-                            Bạn chưa có bộ flashcard nào. Vui lòng tạo thêm.
+                            You haven't had any collection. Please create new one!
                         </div>
                     `);
                 }
