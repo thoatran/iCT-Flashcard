@@ -1,3 +1,6 @@
+// Import language service
+var Language = require('../services/language');
+
 const cloudinary = require('cloudinary')
       ,config     = require('../config/image.js').cloudinary;
 const path = require("path");
@@ -21,7 +24,7 @@ cloudinary.config({
 var ImageController = {};
 
 ImageController.deleteImage = function (publicId,resourceType,callback){ 
-    console.log(resourceType);//image,video,raw
+    const getText = Language.getText(req);
 
     cloudinary.api.delete_resources(publicId, function(result) {
         console.log(result);
@@ -37,6 +40,7 @@ ImageController.deleteImage = function (publicId,resourceType,callback){
 
 
 ImageController.uploadImage = function(req, res) {
+    const getText = Language.getText(req);
 
     if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
         return res.json({"success": false});

@@ -16,18 +16,22 @@
     <script
   src="assets/js/navi.js"></script>
     <script>
-        window.location.href = "/vi/navi.html";
+        if (!localStorage.language) {
+            localStorage.language = "vi";
+        }
+
+        window.location.href = "/"+localStorage.language+"/navi.html";
         function updatePageInfo() {
 
             // Check support for HTML5 Local Storage
             if (typeof(Storage) === "undefined") {
                 if (NaviGetCurrentPage() != 'browser-not-supported') {
-                    window.location = "/vi/navi.html?get=browser-not-supported";
+                    window.location = "/"+localStorage.language+"/navi.html?get=browser-not-supported";
                 }
             }
 
             if (!localStorage.username || !localStorage.token) {
-                window.location = "/vi/login.html"; 
+                window.location = "/"+localStorage.language+"/login.html"; 
             }
 
             $.ajax({
@@ -40,7 +44,7 @@
                     if (response['success'] != false && response['isLoggedIn'] == true) {
                         return updateUserInfo(response);
                     } else {
-                        window.location = "/vi/login.html"; 
+                        window.location = "/"+localStorage.language+"/login.html"; 
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
