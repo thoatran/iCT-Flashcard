@@ -227,7 +227,7 @@ UserModel.updateUserInfo = function(username, newUserInfo, cbSuccess, cbFail) {
 	}
 
 	if (newValuesArr.length == 0) {
-		return cbFail(error);
+		return cbFail();
 	}
 
 	// Push username to use in query
