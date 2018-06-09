@@ -48,7 +48,20 @@ app.get('/apis.txt', function(req, res) {
 var router = express.Router();
 
 // Register all our routes with /api
-app.use('/api/', router);
+app.use('/:lang/api/', function (req, res, next) {
+  if (req.params.lang.toLowerCase() == "vi") {
+    req.conf_language = "vi";
+  } else {
+    req.conf_language = "en";
+  } 
+  next();
+}, router);
+
+// Default langauge is Vietnamese
+app.use('/api/', function (req, res, next) {
+  req.conf_language = "vi";
+  next();
+}, router);
 
 
 // ==================================================================
@@ -100,6 +113,7 @@ router.route('/user/islogin')
 router.route('/user/getinfo')
   .post(UserController.getUserInfo);
 
+
 // ### Update user info
 // params: {'username': '<username>', 'token', '<token>',
 //          'oldPassword': '<oldPassword>'
@@ -122,7 +136,6 @@ router.route('/user/updateinfo')
 router.route('/user/forgot_password')
   .post(UserController.forgotPassword);
   
-
 
 // ==================================================================
 // USER APIs FOR IMAGE MANAGEMENT

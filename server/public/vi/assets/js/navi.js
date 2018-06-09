@@ -139,3 +139,16 @@ function hideLoadingModal() {
     $("#loading-modal").hide();
     $("#loading-modal").remove();
 }
+
+
+// Function to change global language
+function changeLanguage(lang) {
+    localStorage.language = lang;
+
+    if (lang == "en") {
+        window.location = "/en/";
+    } else {
+        window.location = "/vi/";
+    }
+    
+}

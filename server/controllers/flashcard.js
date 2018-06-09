@@ -1,3 +1,6 @@
+// Import language service
+var Language = require('../services/language');
+
 // Load required packages
 const FlashcardModel = require('../models/flashcard');
 const CollectionModel = require('../models/collection');
@@ -10,6 +13,8 @@ var getText = require('../languages/vi.json');
 
 
 FlashcardController.createFlashcard = function(req, res) {
+    const getText = Language.getText(req);
+
     if (!req.body.hasOwnProperty("username") ||
     !req.body.hasOwnProperty("token") || 
     !req.body.hasOwnProperty("collection_id")
@@ -71,6 +76,8 @@ FlashcardController.createFlashcard = function(req, res) {
 }
 
 FlashcardController.updateAll = function(req, res) {
+    const getText = Language.getText(req);
+
     if (!req.body.hasOwnProperty("username") ||
     !req.body.hasOwnProperty("token") || 
     !req.body.hasOwnProperty("collection_id") ||
@@ -152,6 +159,8 @@ FlashcardController.updateAll = function(req, res) {
 }
 
 FlashcardController.updateFlashcard = function(req, res) {
+    const getText = Language.getText(req);
+
     if (!req.body.hasOwnProperty("username") ||
     !req.body.hasOwnProperty("token") || 
     !req.body.hasOwnProperty("flashcard_id")
@@ -218,6 +227,9 @@ FlashcardController.updateFlashcard = function(req, res) {
 }
 
 FlashcardController.getFlashcard = function(req, res) {
+    const getText = Language.getText(req);
+
+
     if (!req.body.hasOwnProperty("username") ||
     !req.body.hasOwnProperty("token") || 
     !req.body.hasOwnProperty("flashcard_id")
@@ -257,6 +269,9 @@ FlashcardController.getFlashcard = function(req, res) {
 }
 
 FlashcardController.deleteFlashcard = function(req, res) {
+    const getText = Language.getText(req);
+
+
     if (!req.body.hasOwnProperty("username") ||
     !req.body.hasOwnProperty("token") || 
     !req.body.hasOwnProperty("flashcard_id")
@@ -297,6 +312,8 @@ FlashcardController.deleteFlashcard = function(req, res) {
 
 // Get all flashcard in a collection
 FlashcardController.getAllFlashcard = function(req, res) {
+    const getText = Language.getText(req);
+
 
     if (!req.body.hasOwnProperty("username") || 
     !req.body.hasOwnProperty("token") ||

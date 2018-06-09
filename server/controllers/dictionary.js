@@ -1,3 +1,6 @@
+// Import language service
+var Language = require('../services/language');
+
 // Load required packages
 var DictionaryModel = require('../models/dictionary');
 
@@ -8,6 +11,7 @@ var getText = require('../languages/vi.json');
 
 /// ### E-V Dictionary
 DictionaryController.lookup = function(req, res) {
+    const getText = Language.getText(req);
 
     let lookUpWord = req.query['lookup'];
     let result = {};
