@@ -2,6 +2,8 @@
 var getText = require('../languages/vi.json');
 var connection = require('../models/database');
 
+var UserModel = require('../models/user');
+
 var FlashcardModel = {};
 FlashcardModel.createFlashcard = function(word, pronunciation, meaning, image, order, remember_score, collection_id, cbSuccess, cbFail) {
     connection.query(`INSERT INTO cards (collection_id, word, pronunciation, meaning, \`order\`, remember_score, image) 
@@ -27,11 +29,13 @@ FlashcardModel.havePermission = function(checking_username, flashcard_id, cbSucc
             return cbFail();
         }
 
-        if (results < 1) {
+        if (results.length < 1) {
             return cbFail();
         }
     
         let collection_id = results[0].collection_id;
+
+        console.log("DEBUG: Collection id: " + collection_id);
 
         connection.query(`SELECT user_id
         FROM collections
@@ -42,11 +46,13 @@ FlashcardModel.havePermission = function(checking_username, flashcard_id, cbSucc
                 return cbFail();
             }
     
-            if (results < 1) {
+            if (results.length < 1) {
                 return cbFail();
             }
 
             let user_id = results[0].user_id;
+
+            console.log("DEBUG: user id: " + user_id);
 
             connection.query(`SELECT username
             FROM users
@@ -57,13 +63,15 @@ FlashcardModel.havePermission = function(checking_username, flashcard_id, cbSucc
                     return cbFail();
                 }
         
-                if (results < 1) {
+                if (results.length < 1) {
                     return cbFail();
                 }
 
                 let username = results[0].username;
 
-                if (checking_username == username)
+                console.log("DEBUG: username: " + username);
+
+                if (UserModel.usernameStandardlize(checking_username) == username)
                     return cbSuccess();
                 else return cbFail();
 
