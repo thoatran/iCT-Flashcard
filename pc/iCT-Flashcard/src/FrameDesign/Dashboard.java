@@ -260,7 +260,7 @@ public class Dashboard extends JFrame {
 		divPanel.setBackground(new Color(245, 245, 245));
 		
 		JButton btnAddCard = new JButton("Tạo mới");
-		btnAddCard.setBounds(34, 59, 115, 37);
+		btnAddCard.setBounds(34, 59, 130, 37);
 		Home.add(btnAddCard);
 		btnAddCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -312,7 +312,7 @@ public class Dashboard extends JFrame {
 		Account.add(pfFname);
 		pfFname.setColumns(10);
 		pfFname.setText(User.getUser().getFullname());
-		pfFname.enable(false);
+		pfFname.setEditable(false);
 		
 		pfEmail = new JTextField();
 		pfEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -320,7 +320,7 @@ public class Dashboard extends JFrame {
 		pfEmail.setBounds(175, 334, 290, 31);
 		Account.add(pfEmail);
 		pfEmail.setText(User.getUser().getEmail());
-		pfEmail.enable(false);
+		pfEmail.setEditable(false);
 		
 		JLabel btnChangePw = new JLabel("Thay đổi mật khẩu");
 		btnChangePw.setForeground(new Color(30, 144, 255));

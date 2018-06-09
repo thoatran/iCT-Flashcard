@@ -17,13 +17,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-
-public class CollectionManagement {
-	public Success createCol(String username, String token, String photoUrl, String name, String description) throws IOException {
-		String urlParameters  = "username="+username+"&token="+token+"&photo="+photoUrl+"&name="+name+"&description="+description;
+public class FlashcardManagement {
+	public Success createFlashcard(String username, String token, String collection_id, String word, String pronunciation, String meaning, String image, int order) throws IOException {
+		String urlParameters  = "username="+username+"&token="+token+"&collection_id="+collection_id+"&word="+word+"&pronunciation="+pronunciation+"&meaning="+meaning+"&image="+image+"&order="+order;
 		 byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
 		 int    postDataLength = postData.length;
-		 String request        = "https://ict-flashcard-server.herokuapp.com/api/collection/create";
+		 String request        = "https://ict-flashcard-server.herokuapp.com/api/fashcard/create";
 		 URL    url            = new URL( request );
 		 HttpURLConnection connection= (HttpURLConnection) url.openConnection();           
 		 connection.setDoOutput( true );
@@ -58,11 +57,11 @@ public class CollectionManagement {
 	        return check;
 	}
 	
-	public Success updateCol(String username, String token, String colection_id, String photoUrl, String name, String description, String remember_score) throws IOException {
-		String urlParameters  = "username="+username+"&token="+token+"&colection_id="+colection_id+"&photo="+photoUrl+"&name="+name+"&description="+description+"&remember_score="+remember_score;
+	public Success updateFlashcard(String username, String token, String flashcard_id, String word, String pronunciation, String meaning, String image, int order) throws IOException {
+		String urlParameters  = "username="+username+"&token="+token+"&flashcard_id="+flashcard_id+"&word="+word+"&pronunciation="+pronunciation+"&meaning="+meaning+"&image="+image+"&order="+order;
 		 byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
 		 int    postDataLength = postData.length;
-		 String request        = "https://ict-flashcard-server.herokuapp.com/api/collection/update";
+		 String request        = "https://ict-flashcard-server.herokuapp.com/api/fashcard/update";
 		 URL    url            = new URL( request );
 		 HttpURLConnection connection= (HttpURLConnection) url.openConnection();           
 		 connection.setDoOutput( true );
@@ -97,11 +96,11 @@ public class CollectionManagement {
 	        return check;
 	}
 	
-	public Success deleteCol(String username, String token, String colection_id) throws IOException {
-		String urlParameters  = "username="+username+"&token="+token+"&colection_id="+colection_id;
+	public Success deleteFlashcard(String username, String token, String flashcard_id) throws IOException {
+		String urlParameters  = "username="+username+"&token="+token+"&flashcard_id="+flashcard_id;
 		 byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
 		 int    postDataLength = postData.length;
-		 String request        = "https://ict-flashcard-server.herokuapp.com/api/collection/delete";
+		 String request        = "https://ict-flashcard-server.herokuapp.com/api/fashcard/delete";
 		 URL    url            = new URL( request );
 		 HttpURLConnection connection= (HttpURLConnection) url.openConnection();           
 		 connection.setDoOutput( true );
@@ -136,11 +135,11 @@ public class CollectionManagement {
 	        return check;
 	}
 	
-	public CollectionInfor getColInfo(String username, String token, String colection_id) throws IOException {
-		String urlParameters  = "username="+username+"&token="+token+"&colection_id="+colection_id;
+	public FlashcardInfor getFlashcardInfor(String username, String token, String flashcard_id) throws IOException {
+		String urlParameters  = "username="+username+"&token="+token+"&flashcard_id="+flashcard_id;
 		 byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
 		 int    postDataLength = postData.length;
-		 String request        = "https://ict-flashcard-server.herokuapp.com /api/collection/get";
+		 String request        = "https://ict-flashcard-server.herokuapp.com/api/fashcard/get";
 		 URL    url            = new URL( request );
 		 HttpURLConnection connection= (HttpURLConnection) url.openConnection();           
 		 connection.setDoOutput( true );
@@ -171,15 +170,15 @@ public class CollectionManagement {
 	        String result = responseSB.toString();
 	        System.out.println(result);
 	        Gson gson = new Gson();
-	        CollectionInfor check = gson.fromJson(result, CollectionInfor.class); 
+	        FlashcardInfor check = gson.fromJson(result, FlashcardInfor.class); 
 	        return check;
 	}
 	
-	public CollectionInfor getAllColInfo(String username, String token) throws IOException {
-		String urlParameters  = "username="+username+"&token="+token;
+	public FlashcardInfor getAllFlashcardInfor(String username, String token, String collection_id) throws IOException {
+		String urlParameters  = "username="+username+"&token="+token+"&collection_id="+collection_id;
 		 byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
 		 int    postDataLength = postData.length;
-		 String request        = "https://ict-flashcard-server.herokuapp.com/api/collection/getall";
+		 String request        = "https://ict-flashcard-server.herokuapp.com/api/fashcard/getall";
 		 URL    url            = new URL( request );
 		 HttpURLConnection connection= (HttpURLConnection) url.openConnection();           
 		 connection.setDoOutput( true );
@@ -210,9 +209,8 @@ public class CollectionManagement {
 	        String result = responseSB.toString();
 	        System.out.println(result);
 	        Gson gson = new Gson();
-	        CollectionInfor check = gson.fromJson(result, CollectionInfor.class); 
+	        FlashcardInfor check = gson.fromJson(result, FlashcardInfor.class); 
 	        return check;
 	}
-	
 
 }

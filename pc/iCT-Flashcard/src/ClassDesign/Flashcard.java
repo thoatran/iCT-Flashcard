@@ -1,27 +1,36 @@
 package ClassDesign;
 
 public class Flashcard {
-	private String title;
-	private String ipapron;
-	private String content;
+	private String collection_id;
+	private String id;
+	private String word;
+	private String pronunciation;
+	private String meaning;
 	private String image;
-	public String getTitle() {
-		return title;
+	private int order;
+	public String getCollection_id() {
+		return collection_id;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setCollection_id(String collection_id) {
+		this.collection_id = collection_id;
 	}
-	public String getIpapron() {
-		return ipapron;
+	public String getId() {
+		return id;
 	}
-	public void setIpapron(String ipapron) {
-		this.ipapron = ipapron;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getContent() {
-		return content;
+	public String getPronunciation() {
+		return pronunciation;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setPronunciation(String pronunciation) {
+		this.pronunciation = pronunciation;
+	}
+	public String getWord() {
+		return word;
+	}
+	public void setWord(String word) {
+		this.word = word;
 	}
 	public String getImage() {
 		return image;
@@ -29,12 +38,18 @@ public class Flashcard {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	public void printInfor() {
-		System.out.println(this.title);
-		System.out.println(this.ipapron);
-		System.out.println(this.content);
-		System.out.println(this.image);
+	public String getMeaning() {
+		return meaning;
 	}
+	public void setMeaning(String meaning) {
+		this.meaning = meaning;
+	}
+	public int getOrder() {
+		return order;
+	}
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
 
 }

@@ -31,13 +31,11 @@ public class AddWord extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField inputWord;
 	private JTextField inputPronounciation;
 	private JTextField inputMean;
-	private JTextField pathPicture;
-	private JTextField txtBFlashcard;
-	private JTextField txtT;
-	private JTextField txtPhinm;
+	private JTextField nameCol;
+	private JTextField txtWord;
+	private JTextField txtPronunciation;
 
 	/**
 	 * Launch the application.
@@ -60,7 +58,7 @@ public class AddWord extends JFrame {
 	 */
 	public AddWord() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(350, 210, 700, 400);
+		setBounds(300, 210, 700, 400);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new LineBorder(new Color(192, 192, 192), 2));
@@ -121,42 +119,6 @@ public class AddWord extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JPanel PrePanel = new JPanel();
-		PrePanel.setBounds(187, 189, -147, -175);
-		panel.add(PrePanel);
-		PrePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		PrePanel.setBackground(new Color(255, 255, 255));
-		PrePanel.setLayout(null);
-		
-		JButton btnUploadPicture = new JButton("Upload");
-		btnUploadPicture.setBounds(48, 167, 81, 25);
-		PrePanel.add(btnUploadPicture);
-		btnUploadPicture.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
-		inputWord = new JTextField();
-		inputWord.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		inputWord.setBounds(27, 70, 123, 25);
-		PrePanel.add(inputWord);
-		inputWord.setBackground(new Color(255, 255, 255));
-		inputWord.setColumns(10);
-		
-		JLabel lbWord = new JLabel("T\u1EEB");
-		lbWord.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbWord.setBounds(27, 45, 46, 14);
-		PrePanel.add(lbWord);
-		
-		pathPicture = new JTextField();
-		pathPicture.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		pathPicture.setColumns(10);
-		pathPicture.setBackground(Color.WHITE);
-		pathPicture.setBounds(27, 131, 123, 25);
-		PrePanel.add(pathPicture);
-		
-		JLabel lbPicture = new JLabel("H\u00ECnh \u1EA3nh");
-		lbPicture.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbPicture.setBounds(27, 106, 72, 14);
-		PrePanel.add(lbPicture);
-		
 		JPanel BehindPanel = new JPanel();
 		BehindPanel.setBounds(193, 13, 1, 1);
 		panel.add(BehindPanel);
@@ -187,22 +149,10 @@ public class AddWord extends JFrame {
 		lbMean.setBounds(24, 105, 46, 26);
 		BehindPanel.add(lbMean);
 		
-		JLabel lbBehind = new JLabel("M\u1EB7t sau");
-		lbBehind.setBounds(217, 245, 181, 23);
-		panel.add(lbBehind);
-		lbBehind.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbBehind.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		JLabel lbPre = new JLabel("M\u1EB7t tr\u01B0\u1EDBc");
-		lbPre.setBounds(13, 245, 181, 23);
-		panel.add(lbPre);
-		lbPre.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbPre.setHorizontalAlignment(SwingConstants.CENTER);
-		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(13, 13, 181, 221);
+		panel_2.setBounds(13, 0, 181, 234);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -211,93 +161,139 @@ public class AddWord extends JFrame {
 		panel_2.add(panel_5);
 		panel_5.setLayout(null);
 		
-		JButton button_1 = new JButton("Upload ảnh");
-		button_1.setBounds(48, 89, 89, 23);
-		panel_5.add(button_1);
+		JButton btnFlcPicture = new JButton("Thay hình");
+		btnFlcPicture.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser chooser = new JFileChooser();
+				chooser.showOpenDialog(null);
+				File f = chooser.getSelectedFile();
+				String filename = f.getAbsolutePath();
+				System.out.println(filename);
+			}
+		});
+		btnFlcPicture.setForeground(new Color(105, 105, 105));
+		btnFlcPicture.setBounds(48, 89, 89, 23);
+		panel_5.add(btnFlcPicture);
 		
-		txtT = new JTextField();
-		txtT.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtT.setText("Từ");
-		txtT.setBounds(10, 134, 161, 31);
-		panel_2.add(txtT);
-		txtT.setColumns(10);
+		txtWord = new JTextField();
+		txtWord.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtWord.setText("Từ");
+		txtWord.setBounds(10, 134, 161, 31);
+		panel_2.add(txtWord);
+		txtWord.setColumns(10);
 		
-		txtPhinm = new JTextField();
-		txtPhinm.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtPhinm.setText("Phiên âm");
-		txtPhinm.setColumns(10);
-		txtPhinm.setBounds(10, 179, 161, 31);
-		panel_2.add(txtPhinm);
+		txtPronunciation = new JTextField();
+		txtPronunciation.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtPronunciation.setText("Phiên âm");
+		txtPronunciation.setColumns(10);
+		txtPronunciation.setBounds(10, 179, 161, 31);
+		panel_2.add(txtPronunciation);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		panel_3.setBackground(Color.WHITE);
-		panel_3.setBounds(217, 13, 181, 221);
+		panel_3.setBounds(217, 0, 181, 234);
 		panel.add(panel_3);
 		panel_3.setLayout(null);
 		
-		JTextPane txtpnNgha = new JTextPane();
-		txtpnNgha.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtpnNgha.setText("Nghĩa");
-		txtpnNgha.setBounds(20, 26, 140, 173);
-		txtpnNgha.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		panel_3.add(txtpnNgha);
+		JTextPane txtMeaning = new JTextPane();
+		txtMeaning.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtMeaning.setText("Nghĩa của từ");
+		txtMeaning.setBounds(20, 26, 140, 173);
+		txtMeaning.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		panel_3.add(txtMeaning);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		panel_6.setBackground(new Color(245, 245, 245));
+		panel_6.setBounds(13, 233, 181, 32);
+		panel.add(panel_6);
+		panel_6.setLayout(null);
+		
+		JLabel lblMtTrc = new JLabel("Mặt trước");
+		lblMtTrc.setForeground(new Color(128, 128, 128));
+		lblMtTrc.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMtTrc.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblMtTrc.setBounds(0, 0, 181, 32);
+		panel_6.add(lblMtTrc);
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		panel_7.setBackground(new Color(245, 245, 245));
+		panel_7.setBounds(217, 233, 181, 32);
+		panel.add(panel_7);
+		panel_7.setLayout(null);
+		
+		JLabel lblMtSau = new JLabel("Mặt sau");
+		lblMtSau.setForeground(new Color(128, 128, 128));
+		lblMtSau.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMtSau.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblMtSau.setBounds(0, 0, 181, 32);
+		panel_7.add(lblMtSau);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(23, 85, 176, 276);
+		panel_1.setBounds(23, 43, 176, 318);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(0, 11, 176, 110);
+		panel_4.setBounds(25, 0, 120, 108);
 		panel_1.add(panel_4);
 		panel_4.setLayout(null);
 		
-		JButton button = new JButton("Upload ảnh");
-		button.addActionListener(new ActionListener() {
+		nameCol = new JTextField();
+		nameCol.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		nameCol.setText("Bộ Flashcard");
+		nameCol.setBounds(10, 144, 156, 30);
+		panel_1.add(nameCol);
+		nameCol.setColumns(10);
+		
+		JTextArea DescriptionCol = new JTextArea();
+		DescriptionCol.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		DescriptionCol.setText("Mô tả");
+		DescriptionCol.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		DescriptionCol.setBackground(Color.WHITE);
+		DescriptionCol.setBounds(10, 185, 156, 80);
+		panel_1.add(DescriptionCol);
+		
+		JButton btUploadCol = new JButton("Upload ảnh");
+		btUploadCol.setForeground(new Color(105, 105, 105));
+		btUploadCol.setBounds(35, 110, 97, 23);
+		panel_1.add(btUploadCol);
+		
+		JButton btnLuThayi = new JButton("Lưu thay đổi");
+		btnLuThayi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//update collection infor
 			}
 		});
-		button.setBounds(42, 87, 89, 23);
-		panel_4.add(button);
-		
-		txtBFlashcard = new JTextField();
-		txtBFlashcard.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtBFlashcard.setText("Bộ Flashcard");
-		txtBFlashcard.setBounds(10, 132, 156, 30);
-		panel_1.add(txtBFlashcard);
-		txtBFlashcard.setColumns(10);
-		
-		JTextArea txtrMT = new JTextArea();
-		txtrMT.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtrMT.setText("Mô tả");
-		txtrMT.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		txtrMT.setBackground(Color.WHITE);
-		txtrMT.setBounds(10, 173, 156, 80);
-		panel_1.add(txtrMT);
+		btnLuThayi.setForeground(new Color(255, 255, 255));
+		btnLuThayi.setBackground(new Color(100, 149, 237));
+		btnLuThayi.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnLuThayi.setBounds(10, 273, 156, 34);
+		panel_1.add(btnLuThayi);
+		btUploadCol.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser chooser = new JFileChooser();
+				chooser.showOpenDialog(null);
+				File f = chooser.getSelectedFile();
+				String filename = f.getAbsolutePath();
+				System.out.println(filename);
+			}
+		});
 		
 		JLabel label = new JLabel("");
 		label.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
+				//update the flashcard and refresh the panel to add other flashcard
 			}
 		});
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setIcon(new ImageIcon(AddWord.class.getResource("/images/right-arrow (1).png")));
 		label.setBounds(644, 179, 46, 71);
 		contentPane.add(label);
-		
-		btnUploadPicture.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFileChooser chooser = new JFileChooser();
-				chooser.showOpenDialog(null);
-				File f = chooser.getSelectedFile();
-				String filename = f.getAbsolutePath();
-				pathPicture.setText(filename);
-			}
-		});
 		
 		setUndecorated(true);
 	}

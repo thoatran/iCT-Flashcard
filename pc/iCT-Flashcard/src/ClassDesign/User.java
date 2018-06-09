@@ -8,7 +8,7 @@ public class User {
 	private String email;
 	private String token;
 	private String profile_photo;
-	private String newPassword;
+
 	
 	private static User instance = new User();
 	
@@ -52,27 +52,20 @@ public class User {
 	}
 
 	public String getBio() {
-		return bio;
+		return instance.bio;
 	}
 
 	public void setBio(String bio) {
-		this.bio = bio;
+		instance.bio = bio;
 	}
 
 	public String getProfile_photo() {
-		return profile_photo;
+		return instance.profile_photo;
 	}
 
 	public void setProfile_photo(String profile_photo) {
-		this.profile_photo = profile_photo;
+		instance.profile_photo = profile_photo;
 	}
 
-	public String getNewPassword() {
-		return newPassword;
-	}
 
-	public void setNewPassword(String newPassword) {
-		this.newPassword = newPassword;
-	}
-	
 }

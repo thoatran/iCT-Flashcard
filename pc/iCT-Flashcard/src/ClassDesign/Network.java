@@ -8,6 +8,7 @@
 package ClassDesign;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import FrameDesign.DictWord;
 import FrameDesign.WordNotFound;
@@ -239,88 +240,34 @@ public Success Logout(String username, String token) throws IOException {
 	        return check;
 	        	
 	 }
-	 
-	 public void writeFlashcardData() throws IOException {
-		 	String urlString =  "https://ict-flashcard-server.herokuapp.com/pinned-flashcard.json";
-	        URL url = new URL(urlString);
-	        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-	        con.setRequestMethod("GET");
-	        con.setRequestProperty("Content-Type", "application/json");
-	        con.setRequestProperty("Accept", "application/json");
 
-	        int responseCode = con.getResponseCode();
-	        System.out.println("nSending 'GET' request to URL : " + url);
-	        System.out.println("Response Code : " + responseCode);
-
-	        BufferedReader in = new BufferedReader(
-	                new InputStreamReader(con.getInputStream()));
-	        String output;
-	        StringBuffer response = new StringBuffer();
-	        
-	        Gson gson = new Gson();
-	        PrintWriter out = new PrintWriter("flashcard.txt");
-
-	        while ((output = in.readLine()) != null) {
-	            response.append(output);
-	        }
-	        String outString = response.toString();
-	        outString.trim();
-	        System.out.println(outString);
-	        
-//        	Flashcard[] data = gson.fromJson(output, Flashcard[].class); 
-//        	
-//        	for (int i = 0; i < data.length; i++) {
-//        	out.println(data[i].getTitle());
-//        	out.println(data[i].getIpapron());
-//        	out.println(data[i].getContent());
-//        	out.println(data[i].getImage());
-//        	data[i].printInfor();
-//        	}
-        	
-	        in.close();
-	        out.close();
+	 public Success updateUserInfor(String username, String token, String oldPassword, Profile newUserInfor) throws IOException {
+		 
+		 String request = "https://ict-flashcard-server.herokuapp.com/api/user/updateinfo";
+		 JsonObject subobj = new JsonObject();
+		 if(newUserInfor.getEmail() != null) {
+			 subobj.addProperty("email", newUserInfor.getEmail());
+		 }
+		 if(newUserInfor.getBio() != null) {
+		 subobj.addProperty("bio", newUserInfor.getBio());
+		 }
+		 if(newUserInfor.getFullname() != null) {
+		 subobj.addProperty("fullname", newUserInfor.getFullname());
+		 }
+		 if(newUserInfor.getNewPassword() != null) {
+		 subobj.addProperty("newPassword", newUserInfor.getNewPassword());
+		 }
+		 JsonObject raw = new JsonObject();
+		 raw.addProperty("username", username);
+		 raw.addProperty("token", token);
+		 raw.addProperty("oldPassword", oldPassword);
+		 raw.add("newUserInfo", subobj);
+	         
+	    // Gson gson = new Gson();
+	     Success check = new Success(); 
+	     return check;
+	        	
 	 }
-	 
-//	 public UpdateInfor updateUserInfor(String username, String token, User newUserInfor) throws IOException {
-//		 
-//		 String urlParameters  = "username="+username+"&token="+token;
-//		 byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
-//		 int    postDataLength = postData.length;
-//		 String request        = "https://ict-flashcard-server.herokuapp.com/api/user/getinfo";
-//		 URL    url            = new URL( request );
-//		 HttpURLConnection connection= (HttpURLConnection) url.openConnection();           
-//		 connection.setDoOutput( true );
-//		 connection.setInstanceFollowRedirects( false );
-//		 connection.setRequestMethod( "POST" );
-//		 connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
-//		 connection.setRequestProperty( "charset", "utf-8");
-//		 connection.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
-//		 connection.setUseCaches( false );
-//	         
-//	        // Write data
-//
-//		DataOutputStream wr = new DataOutputStream( connection.getOutputStream());
-//			   wr.write( postData );
-//			
-//	         
-//	        // Read response
-//	        StringBuilder responseSB = new StringBuilder();
-//	        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//	          
-//	        String line;
-//	        while ( (line = br.readLine()) != null)
-//	            responseSB.append(line);
-//	                 
-//	        // Close streams
-//	        br.close();
-//	        wr.close();
-//	        String result = responseSB.toString();
-//	        System.out.println(result);
-//	        Gson gson = new Gson();
-//	        UserInfor check = gson.fromJson(result, UserInfor.class); 
-//	        return check;
-//	        	
-//	 }
 
 }
 

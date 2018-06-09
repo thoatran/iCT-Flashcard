@@ -1,20 +1,19 @@
 package ClassDesign;
 
-public class UserInfor {
+public class FlashcardInfor {
 	private String success;
-	private Profile data;
+	private Flashcard[] data;
+	public Flashcard[] getData() {
+		return data;
+	}
+	public void setData(Flashcard[] data) {
+		this.data = data;
+	}
 	public String getSuccess() {
 		return success;
 	}
 	public void setSuccess(String success) {
 		this.success = success;
 	}
-	public Profile getData() {
-		return data;
-	}
-	public void setData(Profile data) {
-		this.data = data;
-	}
-
 
 }
