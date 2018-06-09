@@ -141,6 +141,7 @@ function hideLoadingModal() {
 }
 
 
+// Function to change global language
 function changeLanguage(lang) {
     localStorage.language = lang;
 
