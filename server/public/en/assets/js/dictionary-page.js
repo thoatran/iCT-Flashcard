@@ -20,7 +20,7 @@ function findWord(word) {
         success: function(data) {
             console.log(data);
             if (data.success != true) {
-                $( "#meaning-wrapper" ).html("Không tìm thấy từ bạn yêu cầu.");
+                $( "#meaning-wrapper" ).html("Not foung the word you want.");
             } else {
                 // Load Quick Search
                 $( "#meaning-wrapper" ).html(`
@@ -40,7 +40,7 @@ function findWord(word) {
             }
 
         }, error: function(xhr) {
-            $( "#meaning-wrapper" ).html("Không tìm thấy từ bạn yêu cầu.");
+            $( "#meaning-wrapper" ).html("Not found the word you want");
         }});
 
 }
@@ -74,7 +74,7 @@ var updateRecentWordList = function(word) {
     
         // Show recent words
         if (recentWordList.length > 0) {
-            let wordListBtns = "<h6 class='m-1'>Các từ vừa tra</h6>";
+            let wordListBtns = "<h6 class='m-1'>Looked up word</h6>";
             for (let i = 0; i < recentWordList.length; i++) {
                 wordListBtns += `<button class="btn btn-light m-1" onclick="findWord('`+recentWordList[i]+`')">`+recentWordList[i]+`</button>`;
             }
