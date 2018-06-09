@@ -116,11 +116,15 @@ UserModel.checkValidLogin = function(user, token, cbSuccess, cbFail) {
 				return cbFail();
 			} else {
 
+				if (typeof results[0].username == "undefined") {
+					cbFail();
+				}
+
 				let displayName = results[0].fullname;
 				if (displayName == null
 				|| displayName == ''
 				) {
-					displayName = results[0].username;
+					displayName = results[0].username || '';
 				}
 
 				return cbSuccess(
