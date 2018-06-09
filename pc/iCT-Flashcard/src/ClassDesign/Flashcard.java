@@ -1,4 +1,4 @@
-package FrameDesign;
+package ClassDesign;
 
 public class Flashcard {
 	private String title;

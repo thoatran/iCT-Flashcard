@@ -30,6 +30,7 @@ import javax.swing.border.LineBorder;
 import ClassDesign.CheckLogin;
 import ClassDesign.Network;
 import ClassDesign.User;
+import ClassDesign.UserInfor;
 
 import javax.swing.JTextPane;
 
@@ -197,7 +198,8 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Network check = new Network();
 				CheckLogin loginState = new CheckLogin();
-				User mainuser;
+				User mainuser = User.getUser();
+				UserInfor info;
 				String user = UsernameLogin.getText();
 				String pw = PasswordLogin.getText();
 				System.out.println("Login Infor: " + user +" - "+ pw);
@@ -208,19 +210,26 @@ public class Login extends JFrame {
 					e.printStackTrace();
 				}
 				if(loginState.getSuccess().equals("true")) {
-					mainuser = User.getUser();
-					mainuser.setToken(loginState.getToken());
-					mainuser.setUsername(user);
-					mainuser.setPassword(pw);
-					System.out.println(mainuser.getToken());
-				Dashboard main = new Dashboard();
-				main.setVisible(true);
-//				try {
-//					check.writeFlashcardData();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+					try {
+						info = check.getUserInfor(user, loginState.getToken());
+						mainuser.setToken(loginState.getToken());
+						mainuser.setUsername(user);
+						mainuser.setPassword(pw);
+						mainuser.setBio(info.getData().getBio());
+						mainuser.setEmail(info.getData().getEmail());
+						mainuser.setFullname(info.getData().getFullname());
+						mainuser.setProfile_photo(info.getData().getProfile_photo());
+						System.out.println(mainuser.getToken());
+						System.out.println(mainuser.getEmail());
+						System.out.println(mainuser.getFullname());
+						System.out.println(mainuser.getBio());
+						
+						Dashboard main = new Dashboard();
+						main.setVisible(true);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				dispose();
 				} else {
 					LoginFalsePane.setVisible(true);

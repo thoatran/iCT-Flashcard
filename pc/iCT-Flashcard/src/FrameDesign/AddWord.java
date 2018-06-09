@@ -21,6 +21,8 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
+import javax.swing.JTextPane;
+import javax.swing.JTextArea;
 
 public class AddWord extends JFrame {
 
@@ -33,6 +35,9 @@ public class AddWord extends JFrame {
 	private JTextField inputPronounciation;
 	private JTextField inputMean;
 	private JTextField pathPicture;
+	private JTextField txtBFlashcard;
+	private JTextField txtT;
+	private JTextField txtPhinm;
 
 	/**
 	 * Launch the application.
@@ -55,7 +60,7 @@ public class AddWord extends JFrame {
 	 */
 	public AddWord() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(350, 210, 629, 356);
+		setBounds(350, 210, 700, 400);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new LineBorder(new Color(192, 192, 192), 2));
@@ -63,7 +68,7 @@ public class AddWord extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel TopPanel = new JPanel();
-		TopPanel.setBounds(0, 0, 629, 32);
+		TopPanel.setBounds(0, 0, 700, 32);
 		TopPanel.setBackground(new Color(119, 136, 153));
 		contentPane.add(TopPanel);
 		TopPanel.setLayout(null);
@@ -80,7 +85,7 @@ public class AddWord extends JFrame {
 		Close.setForeground(new Color(255, 255, 255));
 		Close.setFont(new Font("Tahoma", Font.BOLD, 15));
 		Close.setHorizontalAlignment(SwingConstants.CENTER);
-		Close.setBounds(570, 0, 59, 31);
+		Close.setBounds(641, 0, 59, 31);
 		TopPanel.add(Close);
 		
 		JLabel Miniature = new JLabel("_");
@@ -93,7 +98,7 @@ public class AddWord extends JFrame {
 		Miniature.setHorizontalAlignment(SwingConstants.CENTER);
 		Miniature.setForeground(new Color(255, 255, 255));
 		Miniature.setFont(new Font("Tahoma", Font.BOLD, 16));
-		Miniature.setBounds(538, 0, 46, 31);
+		Miniature.setBounds(609, 0, 46, 31);
 		TopPanel.add(Miniature);
 		
 		JLabel lbiCT = new JLabel("iCT Flashcard");
@@ -105,28 +110,22 @@ public class AddWord extends JFrame {
 		
 		JLabel lbAddFlc = new JLabel("  TH\u00CAM FLASHCARD");
 		lbAddFlc.setIcon(new ImageIcon(AddWord.class.getResource("/images/Webp.net-resizeimage(3).png")));
-		lbAddFlc.setBounds(49, 43, 518, 35);
+		lbAddFlc.setBounds(49, 43, 596, 35);
 		lbAddFlc.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lbAddFlc.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lbAddFlc);
 		
-		JLabel lbPre = new JLabel("M\u1EB7t tr\u01B0\u1EDBc");
-		lbPre.setBounds(110, 322, 181, 23);
-		lbPre.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbPre.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lbPre);
-		
-		JLabel lbBehind = new JLabel("M\u1EB7t sau");
-		lbBehind.setBounds(346, 322, 181, 23);
-		lbBehind.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbBehind.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lbBehind);
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(220, 85, 414, 276);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
 		JPanel PrePanel = new JPanel();
+		PrePanel.setBounds(187, 189, -147, -175);
+		panel.add(PrePanel);
 		PrePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		PrePanel.setBackground(new Color(255, 255, 255));
-		PrePanel.setBounds(110, 89, 181, 224);
-		contentPane.add(PrePanel);
 		PrePanel.setLayout(null);
 		
 		JButton btnUploadPicture = new JButton("Upload");
@@ -159,10 +158,10 @@ public class AddWord extends JFrame {
 		PrePanel.add(lbPicture);
 		
 		JPanel BehindPanel = new JPanel();
+		BehindPanel.setBounds(193, 13, 1, 1);
+		panel.add(BehindPanel);
 		BehindPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		BehindPanel.setBackground(Color.WHITE);
-		BehindPanel.setBounds(346, 89, 181, 224);
-		contentPane.add(BehindPanel);
 		BehindPanel.setLayout(null);
 		
 		inputPronounciation = new JTextField();
@@ -187,6 +186,108 @@ public class AddWord extends JFrame {
 		lbMean.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lbMean.setBounds(24, 105, 46, 26);
 		BehindPanel.add(lbMean);
+		
+		JLabel lbBehind = new JLabel("M\u1EB7t sau");
+		lbBehind.setBounds(217, 245, 181, 23);
+		panel.add(lbBehind);
+		lbBehind.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbBehind.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JLabel lbPre = new JLabel("M\u1EB7t tr\u01B0\u1EDBc");
+		lbPre.setBounds(13, 245, 181, 23);
+		panel.add(lbPre);
+		lbPre.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbPre.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		panel_2.setBackground(Color.WHITE);
+		panel_2.setBounds(13, 13, 181, 221);
+		panel.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(0, 0, 181, 112);
+		panel_2.add(panel_5);
+		panel_5.setLayout(null);
+		
+		JButton button_1 = new JButton("Upload ảnh");
+		button_1.setBounds(48, 89, 89, 23);
+		panel_5.add(button_1);
+		
+		txtT = new JTextField();
+		txtT.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtT.setText("Từ");
+		txtT.setBounds(10, 134, 161, 31);
+		panel_2.add(txtT);
+		txtT.setColumns(10);
+		
+		txtPhinm = new JTextField();
+		txtPhinm.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtPhinm.setText("Phiên âm");
+		txtPhinm.setColumns(10);
+		txtPhinm.setBounds(10, 179, 161, 31);
+		panel_2.add(txtPhinm);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		panel_3.setBackground(Color.WHITE);
+		panel_3.setBounds(217, 13, 181, 221);
+		panel.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JTextPane txtpnNgha = new JTextPane();
+		txtpnNgha.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtpnNgha.setText("Nghĩa");
+		txtpnNgha.setBounds(20, 26, 140, 173);
+		txtpnNgha.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		panel_3.add(txtpnNgha);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBounds(23, 85, 176, 276);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(0, 11, 176, 110);
+		panel_1.add(panel_4);
+		panel_4.setLayout(null);
+		
+		JButton button = new JButton("Upload ảnh");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		button.setBounds(42, 87, 89, 23);
+		panel_4.add(button);
+		
+		txtBFlashcard = new JTextField();
+		txtBFlashcard.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtBFlashcard.setText("Bộ Flashcard");
+		txtBFlashcard.setBounds(10, 132, 156, 30);
+		panel_1.add(txtBFlashcard);
+		txtBFlashcard.setColumns(10);
+		
+		JTextArea txtrMT = new JTextArea();
+		txtrMT.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtrMT.setText("Mô tả");
+		txtrMT.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		txtrMT.setBackground(Color.WHITE);
+		txtrMT.setBounds(10, 173, 156, 80);
+		panel_1.add(txtrMT);
+		
+		JLabel label = new JLabel("");
+		label.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+			}
+		});
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setIcon(new ImageIcon(AddWord.class.getResource("/images/right-arrow (1).png")));
+		label.setBounds(644, 179, 46, 71);
+		contentPane.add(label);
 		
 		btnUploadPicture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
