@@ -1,3 +1,6 @@
+// Import language service
+var Language = require('../services/language');
+
 // Load required packages
 var UserModel = require('../models/user');
 
@@ -11,6 +14,7 @@ var MailService = require('../services/mailer');
 
 // ### User Login
 UserController.login = function(req, res) {
+  const getText = Language.getText(req);
 
   if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("password")) {
     return res.json({"success": false});
@@ -28,6 +32,7 @@ UserController.login = function(req, res) {
 
 // ### User logout
 UserController.logout = function(req, res) {
+  const getText = Language.getText(req);
 
   if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
     return;
@@ -45,6 +50,7 @@ UserController.logout = function(req, res) {
 
 // ### User Register
 UserController.register = function(req, res) {
+  const getText = Language.getText(req);
 
   if (!req.body.hasOwnProperty("username")
     || !req.body.hasOwnProperty("password")
@@ -89,6 +95,7 @@ UserController.register = function(req, res) {
 
 // ### Check login state
 UserController.checkValidLogin = function(req, res) {
+  const getText = Language.getText(req);
 
   if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
     return res.json({"success": false});
@@ -108,6 +115,7 @@ UserController.checkValidLogin = function(req, res) {
 
 // ### Get user info
 UserController.getUserInfo = function(req, res) {
+  const getText = Language.getText(req);
 
   if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")
   ) {
@@ -135,6 +143,7 @@ UserController.getUserInfo = function(req, res) {
 
 // ### Update user info
 UserController.updateUserInfo = function(req, res) {
+  const getText = Language.getText(req);
 
   if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")
     || !req.body.hasOwnProperty("newUserInfo")
@@ -163,6 +172,7 @@ UserController.updateUserInfo = function(req, res) {
 
 // ### Forgot password
 UserController.forgotPassword = function(req, res) {
+  const getText = Language.getText(req);
 
 	if (!req.body.hasOwnProperty("email")) {
 		return res.json({"success": false,
