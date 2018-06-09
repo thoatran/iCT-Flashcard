@@ -243,10 +243,10 @@ FlashcardController.getFlashcard = function(req, res) {
     return UserModel.checkValidLogin(req.body.username, req.body.token, function(userInfo) {
 
         // Check permission
-        FlashcardModel.havePermission(username, flashcard_id, function() {
+        FlashcardModel.havePermission(req.body.username, req.body.flashcard_id, function() {
             // Success
             // Get info
-            FlashcardModel.getFlashcardInfo(flashcard_id, function(flashcardInfo) {
+            FlashcardModel.getFlashcardInfo(req.body.flashcard_id, function(flashcardInfo) {
                 return res.json({"success": true,
                     'data': flashcardInfo
                 });
@@ -286,10 +286,10 @@ FlashcardController.deleteFlashcard = function(req, res) {
     return UserModel.checkValidLogin(req.body.username, req.body.token, function(userInfo) {
 
         // Check permission
-        FlashcardModel.havePermission(username, flashcard_id, function() {
+        FlashcardModel.havePermission(req.body.username, req.body.flashcard_id, function() {
             // Success
             // Delete flashcard
-            FlashcardModel.deleteFlashcard(flashcard_id, function() {
+            FlashcardModel.deleteFlashcard(req.body.flashcard_id, function() {
                 return res.json({"success": true});
             }, function() {
                 return res.json({"success": false});

@@ -1,0 +1,396 @@
+{
+	"info": {
+		"_postman_id": "8507df9f-62f1-4a4d-907f-6d30a4c9e0c9",
+		"name": "user",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://ict-flashcard-server.herokuapp.com/api/user/register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "67c682be-0f9c-4df4-837b-90dd04a36e86",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "Noone",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "bombingnava",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "tieuvuhau@gmail.com",
+							"description": "e",
+							"type": "text"
+						},
+						{
+							"key": "fullname",
+							"value": "Tran Vu Hai",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://ict-flashcard-server.herokuapp.com/api/user/register",
+					"protocol": "https",
+					"host": [
+						"ict-flashcard-server",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ict-flashcard-server.herokuapp.com/api/user/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "403c203b-772d-473b-902f-989cc572f30e",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "Noone",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "bombingnava",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://ict-flashcard-server.herokuapp.com/api/user/login",
+					"protocol": "https",
+					"host": [
+						"ict-flashcard-server",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ict-flashcard-server.herokuapp.com/api/user/logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e5706434-d11b-45b7-afba-8f9932e89721",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "Noone",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "8727c2aa47bac2c94a2efaf53567f05253a4ddc2",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://ict-flashcard-server.herokuapp.com/api/user/logout",
+					"protocol": "https",
+					"host": [
+						"ict-flashcard-server",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ict-flashcard-server.herokuapp.com/api/user/islogin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "28438977-5889-4a9d-ae5b-794ae56dcbd5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "Noone",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "8a3b9a4c812017ca5b8106065c366e621b2d50a5",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://ict-flashcard-server.herokuapp.com/api/user/islogin",
+					"protocol": "https",
+					"host": [
+						"ict-flashcard-server",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"islogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ict-flashcard-server.herokuapp.com/api/user/islogin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "Noone",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "8727c2aa47bac2c94a2efaf53567f05253a4ddc2",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://ict-flashcard-server.herokuapp.com/api/user/islogin",
+					"protocol": "https",
+					"host": [
+						"ict-flashcard-server",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"islogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ict-flashcard-server.herokuapp.com/api/user/getinfo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6f2580c5-f9c4-4341-8c2d-09f87d03805c",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"tieuvuhau@gmail.com\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"username\": \"noone\",\r\n\"token\": \"8a3b9a4c812017ca5b8106065c366e621b2d50a5\"\r\n}"
+				},
+				"url": {
+					"raw": "https://ict-flashcard-server.herokuapp.com/api/user/getinfo",
+					"protocol": "https",
+					"host": [
+						"ict-flashcard-server",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"getinfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ict-flashcard-server.herokuapp.com/api/user/updateinfo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "545766ec-f04e-4a81-a70d-7fcccf651f8b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"noone\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"Noone\", \"token\": \"8a3b9a4c812017ca5b8106065c366e621b2d50a5\",\r\n\"oldPassword\": \"bombingnava\",\r\n\"newUserInfo\": {\r\n\"email\" : \"tieuvuhau@gmail.com\",\r\n\"bio\" : null,\r\n\"fullname\" : \"TranVuHai\",\r\n\"newPassword\" : \"bombingnaval\"\r\n}\r\n}"
+				},
+				"url": {
+					"raw": "https://ict-flashcard-server.herokuapp.com/api/user/updateinfo",
+					"protocol": "https",
+					"host": [
+						"ict-flashcard-server",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"updateinfo"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
