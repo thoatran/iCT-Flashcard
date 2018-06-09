@@ -8,7 +8,7 @@ var ImageModel = require('../models/image');
 var connection = require('../models/database');
 
 // Load language file
-var getText = require('../error_msg_vi.json');
+var getText = require('../languages/vi.json');
 
 /*configure our cloudinary*/
 cloudinary.config({

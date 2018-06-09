@@ -2,7 +2,7 @@ const evDict = require('./dict_data.json');
 
 
 // Load language file
-var getText = require('../error_msg_vi.json');
+var getText = require('../languages/vi.json');
 
 var DictionaryModel = {};
 DictionaryModel.lookup = function(word, callback) {

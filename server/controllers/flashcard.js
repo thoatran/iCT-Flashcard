@@ -6,7 +6,7 @@ const UserModel = require('../models/user');
 var FlashcardController = {};
 
 // Load language file
-var getText = require('../error_msg_vi.json');
+var getText = require('../languages/vi.json');
 
 
 FlashcardController.createFlashcard = function(req, res) {
