@@ -1,0 +1,7 @@
+Postman Test Instruction
+1. Install Node.js
+2. Install npm package (Newman) via command line "npm install -g Newman”.
+3. set path to parent directory of collection file (.json)
+4. to view result in command shell, type "newman -c CollectionName.json – H Reports.html"
+5. to view result in HTML file, type "newman -c CollectionName.json  -O output.json – H Reports.html".
+6. To edit collection,test ... import collection file to Postman (Import). 
