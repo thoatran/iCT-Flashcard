@@ -4,6 +4,7 @@ const path = require("path");
 
 // Load required packages
 var UserModel = require('../models/user');
+var ImageModel = require('../models/image');
 var connection = require('../models/database');
 
 // Load language file
@@ -54,24 +55,17 @@ ImageController.uploadImage = function(req, res) {
     
             if(result) {
 
-                // Save image in image list of user
-                connection.query(`INSERT INTO images
-                (user_id, image) VALUES (?, ?);
-                `, [userInfo['user_id'], result.secure_url], function (error) {
-
-                    if (error) {
-                        return res.json({
-                            success: false,
-                            message: getText['18402']
-                        });
-                    }
-
+                ImageModel.saveImage(userInfo['user_id'], result.secure_url, function() {
                     return res.json({
                         success: true,
                         message: getText['10401'],
                         imageUrl: result.secure_url
                     });
-
+                }, function() {
+                    return res.json({
+                        success: false,
+                        message: getText['18402']
+                    });
                 });
 
             } else {
@@ -81,7 +75,6 @@ ImageController.uploadImage = function(req, res) {
                 });
             }   
         });
-
 
 
     }, function() {
