@@ -20,10 +20,13 @@ FlashcardModel.createFlashcard = function(word, pronunciation, meaning, image, o
 };
 
 FlashcardModel.havePermission = function(checking_username, flashcard_id, cbSuccess, cbFail) {
+    
     connection.query(`SELECT collection_id
     FROM cards
     WHERE id = ?
     `, [flashcard_id], function (error, results) {
+
+        console.log("DEBUG: Flashcard id: " + flashcard_id);
 
         if (error) {
             return cbFail();
@@ -34,8 +37,6 @@ FlashcardModel.havePermission = function(checking_username, flashcard_id, cbSucc
         }
     
         let collection_id = results[0].collection_id;
-
-        console.log("DEBUG: Collection id: " + collection_id);
 
         connection.query(`SELECT user_id
         FROM collections
@@ -52,8 +53,6 @@ FlashcardModel.havePermission = function(checking_username, flashcard_id, cbSucc
 
             let user_id = results[0].user_id;
 
-            console.log("DEBUG: user id: " + user_id);
-
             connection.query(`SELECT username
             FROM users
             WHERE id = ?
@@ -68,8 +67,6 @@ FlashcardModel.havePermission = function(checking_username, flashcard_id, cbSucc
                 }
 
                 let username = results[0].username;
-
-                console.log("DEBUG: username: " + username);
 
                 if (UserModel.usernameStandardlize(checking_username) == username)
                     return cbSuccess();
@@ -116,7 +113,7 @@ FlashcardModel.getFlashcardInfo = function(flashcard_id, cbSuccess, cbFail) {
             return cbFail();
         }
 
-        if (results < 1) {
+        if (results.length < 1) {
             return cbFail();
         }
     
