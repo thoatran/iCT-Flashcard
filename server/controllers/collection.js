@@ -6,7 +6,7 @@ var UserModel = require('../models/user');
 var CollectionController = {};
 
 // Load language file
-var getText = require('../error_msg_vi.json');
+var getText = require('../languages/vi.json');
 
 
 CollectionController.createCollection = function(req, res) {

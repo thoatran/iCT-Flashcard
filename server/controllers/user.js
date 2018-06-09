@@ -4,7 +4,7 @@ var UserModel = require('../models/user');
 var UserController = {};
 
 // Load language file
-var getText = require('../error_msg_vi.json');
+var getText = require('../languages/vi.json');
 
 var MailService = require('../services/mailer');
 

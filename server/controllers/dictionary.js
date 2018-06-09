@@ -4,7 +4,7 @@ var DictionaryModel = require('../models/dictionary');
 var DictionaryController = {};
 
 // Load language file
-var getText = require('../error_msg_vi.json');
+var getText = require('../languages/vi.json');
 
 /// ### E-V Dictionary
 DictionaryController.lookup = function(req, res) {

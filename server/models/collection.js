@@ -1,5 +1,5 @@
 // Load language file
-var getText = require('../error_msg_vi.json');
+var getText = require('../languages/vi.json');
 var connection = require('../models/database');
 
 
