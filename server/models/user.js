@@ -100,7 +100,8 @@ UserModel.checkValidLogin = function(user, token, cbSuccess, cbFail) {
 	token = String(token);
 	
 	// Query password
-	connection.query(`SELECT users.id, users.username, users.fullname FROM users
+	connection.query(`SELECT users.id as id, users.username as username, users.fullname as fullname
+		FROM users
 		INNER JOIN tokens ON users.id = tokens.user_id
 		WHERE users.username = ?
 		AND tokens.token = ?
