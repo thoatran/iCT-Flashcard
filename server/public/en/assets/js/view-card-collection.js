@@ -69,7 +69,7 @@ $(document).ready(function(){
                                                         </div>
                                                     <div flashcard="#fc-`+i+`" class="card-footer text-muted flip-card-btn">
                                                             <i class="fa fa-mail-forward"></i>
-                                                            Behind:
+                                                            Back
                                                     </div>
                                                 </div>
                                             </div>
