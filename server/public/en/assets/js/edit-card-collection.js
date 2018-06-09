@@ -263,7 +263,7 @@ $(document).ready(function(){
                                     left: 0;
                                     opacity: 0.5;">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
-                            Thay hình
+                            Change image
                         </button>
                         <input card style="display: none" type="file" class="form-control-file"  id="input-flashcard-fphoto-`+flashcardInfo.id+`"
                         onchange="$.fn.updateFlashcardPhoto(`+flashcardInfo.id+`)">
