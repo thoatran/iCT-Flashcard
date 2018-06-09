@@ -23,7 +23,7 @@ let card = data;
                       </div>
                     <div flashcard="#fc-`+i+`" class="card-footer text-muted flip-card-btn">
                         <i class="fa fa-mail-forward"></i>
-                        Mặt sau
+                        Back
                     </div>
                   </div>
                 </div>
@@ -38,12 +38,12 @@ let card = data;
                         <p class="card-text">`+card[i].content+`</p>
                         <a href="#" class="card-link">
                           <i class="fa fa-pencil" aria-hidden="true"></i>
-                          Chỉnh sửa card</a>
+                          Edit card</a>
                       </div>
                     </div>
                     <div flashcard="#fc-`+i+`" class="card-footer text-muted flip-card-btn">
                         <i class="fa fa-mail-forward"></i>
-                        Mặt trước
+                        Front
                     </div>
                   </div>
                 </div>
