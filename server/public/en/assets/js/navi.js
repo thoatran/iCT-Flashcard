@@ -34,7 +34,7 @@ function NaviGoto(page, isKeepParam) {
     page = encodeURI(page);
     $.ajax({
         type: 'GET',
-        url: "/vi/" + page + ".html",
+        url: "/en/" + page + ".html",
         contentType: 'application/json; charset=utf-8',
         cache: false,
         success: function(data) {
@@ -78,12 +78,12 @@ function updatePageInfo() {
     // Check support for HTML5 Local Storage
     if (typeof(Storage) === "undefined") {
         if (NaviGetCurrentPage() != 'browser-not-supported') {
-            window.location = "/vi/navi.html?get=browser-not-supported";
+            window.location = "/en/navi.html?get=browser-not-supported";
         }
     }
 
     if (!localStorage.username || !localStorage.token) {
-        window.location = "/vi/login.html"; 
+        window.location = "/en/login.html"; 
     }
 
     $.ajax({
@@ -96,7 +96,7 @@ function updatePageInfo() {
             if (response['success'] != false && response['isLoggedIn'] == true) {
                 return updateUserInfo(response);
             } else {
-                window.location = "/vi/login.html"; 
+                window.location = "/en/login.html"; 
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -148,7 +148,7 @@ function changeLanguage(lang) {
     if (lang == "en") {
         window.location = "/en/";
     } else {
-        window.location = "/vi/";
+        window.location = "/en/";
     }
     
 }
