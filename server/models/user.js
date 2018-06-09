@@ -131,7 +131,6 @@ UserModel.checkValidLogin = function(user, token, cbSuccess, cbFail) {
 					{
 						"displayName": displayName,
 						"user_id": results[0].id
-						""
 					}
 				);
 			}
