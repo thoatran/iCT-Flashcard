@@ -139,3 +139,15 @@ function hideLoadingModal() {
     $("#loading-modal").hide();
     $("#loading-modal").remove();
 }
+
+
+function changeLanguage(lang) {
+    localStorage.language = lang;
+
+    if (lang == "en") {
+        window.location = "/en/";
+    } else {
+        window.location = "/vi/";
+    }
+    
+}

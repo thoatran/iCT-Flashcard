@@ -1,3 +1,6 @@
+// Import language service
+var Language = require('../services/language');
+
 // Load required packages
 var CollectionModel = require('../models/collection');
 var FlashcardModel = require('../models/flashcard');
@@ -10,6 +13,8 @@ var getText = require('../languages/vi.json');
 
 
 CollectionController.createCollection = function(req, res) {
+    const getText = Language.getText(req);
+
     if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
         return res.json({"success": false});
     }
@@ -40,6 +45,8 @@ CollectionController.createCollection = function(req, res) {
 }
 
 CollectionController.deleteCollection = function(req, res) {
+    const getText = Language.getText(req);
+
     if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
         return res.json({"success": false});
     }
@@ -64,6 +71,7 @@ CollectionController.deleteCollection = function(req, res) {
 }
 
 CollectionController.updateCollection = function(req, res) {
+    const getText = Language.getText(req);
 
     if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
         return res.json({"success": false});
@@ -118,6 +126,7 @@ CollectionController.updateCollection = function(req, res) {
 }
 
 CollectionController.getAllCollection = function(req, res) {
+    const getText = Language.getText(req);
 
     if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
         return res.json({"success": false});
@@ -143,6 +152,7 @@ CollectionController.getAllCollection = function(req, res) {
 
 
 CollectionController.getCollection = function(req, res) {
+    const getText = Language.getText(req);
 
     if (!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")) {
         return res.json({"success": false});
