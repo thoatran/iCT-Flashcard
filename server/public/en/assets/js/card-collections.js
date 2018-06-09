@@ -75,7 +75,7 @@ $(document).ready(function(){
                                 <div class="card-body">
                                 <h4 class="card-title">`+collectionList[i].name+`</h4>
                                 <p class="card-text">`+collectionList[i].description+`</p>
-                                <p class="m-0">Đã thuộc: `+collectionList[i].remember_score+`%</p>
+                                <p class="m-0">Remembered: `+collectionList[i].remember_score+`%</p>
                                 <div class="progress mb-2">
                                     <div class="progress-bar" style="width:`+collectionList[i].remember_score+`%"></div>
                                 </div>
