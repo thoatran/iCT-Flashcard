@@ -94,7 +94,7 @@
 						},
 						{
 							"key": "collection_id",
-							"value": "6",
+							"value": "16",
 							"description": "",
 							"type": "text"
 						},
@@ -162,7 +162,7 @@
 						},
 						{
 							"key": "collection_id",
-							"value": "6",
+							"value": "16",
 							"description": "",
 							"type": "text"
 						}
@@ -256,7 +256,7 @@
 						},
 						{
 							"key": "collection_id",
-							"value": "6",
+							"value": "18",
 							"description": "",
 							"type": "text"
 						},
@@ -336,7 +336,7 @@
 						},
 						{
 							"key": "collection_id",
-							"value": "6",
+							"value": "18",
 							"description": "",
 							"type": "text"
 						}
@@ -371,7 +371,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"username\": \"Noone\",\r\n\"token\": \"8a3b9a4c812017ca5b8106065c366e621b2d50a5\",\r\n\"collection_id\": \"6\",\r\n\"data\": [{\r\n\"id\": \"67\",\r\n\"word\": \"mouse\",\r\n\"pronunciation\": null,\r\n\"meaning\": \"chuot\",\r\n\"image\": null,\r\n\"order\": \"1\"\r\n}]\r\n}"
+					"raw": "{\r\n\"username\": \"Noone\",\r\n\"token\": \"8a3b9a4c812017ca5b8106065c366e621b2d50a5\",\r\n\"collection_id\": \"16\",\r\n\"data\": [{\r\n\"id\": \"159\",\r\n\"word\": \"mouse\",\r\n\"pronunciation\": null,\r\n\"meaning\": \"chuot\",\r\n\"image\": null,\r\n\"order\": \"1\"\r\n}]\r\n}"
 				},
 				"url": {
 					"raw": "https://ict-flashcard-server.herokuapp.com/api/flashcard/updateall",
@@ -385,6 +385,248 @@
 						"api",
 						"flashcard",
 						"updateall"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ict-flashcard-server.herokuapp.com/api/flashcard/updateall Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"username\": \"Noone\",\r\n\"token\": \"8a3b9a4c812017ca5b8106065c366e621b2d50a5\",\r\n\"data\": [{\r\n\"id\": \"159\",\r\n\"word\": \"rat\",\r\n\"pronunciation\": null,\r\n\"meaning\": \"chuot\",\r\n\"image\": null,\r\n\"order\": \"1\"\r\n}]\r\n}"
+				},
+				"url": {
+					"raw": "https://ict-flashcard-server.herokuapp.com/api/flashcard/updateall",
+					"protocol": "https",
+					"host": [
+						"ict-flashcard-server",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"flashcard",
+						"updateall"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ict-flashcard-server.herokuapp.com/api/flashcard/get",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"username\": \"Noone\",\r\n\"token\": \"8a3b9a4c812017ca5b8106065c366e621b2d50a5\",\r\n\"flashcard_id\": \"164\"\r\n}"
+				},
+				"url": {
+					"raw": "https://ict-flashcard-server.herokuapp.com/api/flashcard/get",
+					"protocol": "https",
+					"host": [
+						"ict-flashcard-server",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"flashcard",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ict-flashcard-server.herokuapp.com/api/flashcard/update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "Noone",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "8a3b9a4c812017ca5b8106065c366e621b2d50a5",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "flashcard_id",
+							"value": "164",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "word",
+							"value": "mouse",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "pronunciation",
+							"value": "null",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "meaning",
+							"value": "chuot",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "null",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "order",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://ict-flashcard-server.herokuapp.com/api/flashcard/update",
+					"protocol": "https",
+					"host": [
+						"ict-flashcard-server",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"flashcard",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ict-flashcard-server.herokuapp.com/api/flashcard/delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "Noone",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "8a3b9a4c812017ca5b8106065c366e621b2d50a5",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "flashcard_id",
+							"value": "164",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://ict-flashcard-server.herokuapp.com/api/flashcard/delete",
+					"protocol": "https",
+					"host": [
+						"ict-flashcard-server",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"flashcard",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ict-flashcard-server.herokuapp.com/api/collection/delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "Noone",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "8a3b9a4c812017ca5b8106065c366e621b2d50a5",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "collection_id",
+							"value": "6",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://ict-flashcard-server.herokuapp.com/api/collection/delete",
+					"protocol": "https",
+					"host": [
+						"ict-flashcard-server",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"collection",
+						"delete"
 					]
 				}
 			},
