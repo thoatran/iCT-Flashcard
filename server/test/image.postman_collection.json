@@ -7,6 +7,22 @@
 	"item": [
 		{
 			"name": "https://ict-flashcard-server.herokuapp.com/api/image/upload",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d49ae6cd-26ac-42e6-9775-27f10ace5500",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -26,7 +42,7 @@
 						},
 						{
 							"key": "token",
-							"value": "5419266c755a7bdb4976e17f862fb106d8e1505d",
+							"value": "8a3b9a4c812017ca5b8106065c366e621b2d50a5",
 							"description": "",
 							"type": "text"
 						},
