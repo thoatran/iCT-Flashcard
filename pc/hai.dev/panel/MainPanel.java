@@ -2,7 +2,10 @@ package demo.panel;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import demo.flashcard.CardList;
@@ -24,6 +27,16 @@ public class MainPanel {
 	     ThemNhanh.createThemNhanh();
 	     container.add(ThemNhanh.ThemNhanh,"Them Nhanh FlashCard");
 	     container.setVisible(true);
+	     cards.show(container, "Dashboard");
+	     
+	     /*butt.addActionListener(
+	                new ActionListener() {
+	                    public void actionPerformed(ActionEvent actionEvent) {
+	                        cards.show(container, "index");
+
+	                    }
+	                }
+	        );*/
 	}
 
 }

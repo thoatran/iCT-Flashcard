@@ -44,9 +44,15 @@ public class ThemNhanh {
 			card2.setAlignmentX(Component.LEFT_ALIGNMENT);
 			
 			JButton Xem=new JButton("Xem");
+			Xem.setBackground(Color.BLACK);
+	        Xem.setForeground(Color.WHITE);
+	        Xem.setBorder(new LineBorder(Color.GRAY, 1, true));
 			card2.add(Xem);
 			
 			JButton On_tap=new JButton("On Tap");
+			On_tap.setBackground(Color.BLACK);
+	        On_tap.setForeground(Color.WHITE);
+	        On_tap.setBorder(new LineBorder(Color.GRAY, 1, true));
 			card2.add(On_tap);
 			
 			JPanel card3=new JPanel();
@@ -55,9 +61,15 @@ public class ThemNhanh {
 			card3.setAlignmentX(Component.LEFT_ALIGNMENT);
 			
 			JButton Chinh_sua=new JButton("Chinh sua");
+			Chinh_sua.setBackground(Color.BLACK);
+			Chinh_sua.setForeground(Color.WHITE);
+			Chinh_sua.setBorder(new LineBorder(Color.GRAY, 1, true));
 			card3.add(Chinh_sua);
 			
 			JButton Xoa=new JButton("Xoa");
+			Xoa.setBackground(Color.BLACK);
+			Xoa.setForeground(Color.WHITE);
+			Xoa.setBorder(new LineBorder(Color.GRAY, 1, true));
 			card3.add(Xoa);
 			
 			card.add(card2);
