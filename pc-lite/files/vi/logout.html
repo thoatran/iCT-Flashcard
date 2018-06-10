@@ -1,0 +1,26 @@
+<p> Đang đăng xuất. </p>
+<p> Xin chờ trong giây lát... </p>
+
+<!-- Server Info -->
+<script  src="assets/js/server_info.js"></script>
+
+<!-- Jquery -->
+<script
+src="assets/jquery-3.3.1.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    
+    $.ajax({
+        url: SERVER_ADDRESS+"/api/user/logout",
+        type: "post",
+        data: {"username": localStorage.username,
+            "token": localStorage.token
+        }
+    }).done(function() {
+        localStorage.removeItem("username");
+        localStorage.removeItem("token");
+        window.location="login.html";
+    });
+});
+</script>

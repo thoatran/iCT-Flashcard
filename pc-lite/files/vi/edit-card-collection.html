@@ -1,0 +1,46 @@
+<div class="my-3 p-3 bg-white rounded box-shadow">
+    <ul class="nav nav-tabs mb-1">
+        <li class="nav-item">
+            <a class="nav-link" href="javascript:void" onclick="NaviGoto('view-card-collection', true)">Xem</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="javascript:void">Chỉnh sửa</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="javascript:void" onclick="NaviGoto('review-card-collection', true)">Ôn tập</a>
+        </li>
+    </ul>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card-collection-info-wrapper mb-3" style="position: relative;">
+                <img id="collection-image" src="assets/images/placeholder333x333.png" class="rounded img-thumbnail" style="max-width: 10rem">
+
+                <div class="form-group">
+                    <input type="file" class="form-control-file" id="input-collection-fphoto" aria-describedby="selectCollectionPhotoHelp">
+                    <small id="selectCollectionPhotoHelp" class="form-text text-muted">Upload hình đại diện cho bộ flashcard của bạn. Vui lòng chọn file tại đây.</small>
+                </div>
+            </div>
+
+            <input id="input-collection-name" class="form-control" type="text" placeholder="Tên gói flashcard">
+            <input id="input-collection-description" class="form-control mt-1" type="text" placeholder="Mô tả ngắn">
+            <button id="btn-save-collection-info" class="btn btn-primary mt-1">
+                Lưu lại chỉnh sửa
+            </button>
+        
+        </div>
+    
+        <div class="col-md-9 col-md-offset-1">
+                <h3 class="border-bottom border-gray mb-3">Chỉnh sửa gói flashcard</h3>
+                
+                <div class="edit-flashcards" id="flashcard-tree">
+
+                </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="assets/js/edit-card-collection.js
+"></script>

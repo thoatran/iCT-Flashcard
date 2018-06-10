@@ -1,0 +1,33 @@
+<div class="my-3 p-3 bg-white rounded box-shadow">
+    <h3 class="d-flex border-bottom border-gray pb-2 mb-2">Các bộ Flashcard bạn đang có</h3>
+    <div class="p-1">
+        <a id="new-collection" href="javascript:void" class="btn btn-success">
+            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+            Tạo mới
+        </a>
+    </div>
+    <div class="flashcard-collections">
+        <div class="container">
+            <div id="collection-list-view" class="row">
+                
+            </div>
+        </div>
+           
+    </div>
+</div>
+
+<style>
+.flashcard-collections {
+    max-height: 500px;
+    overflow: auto;
+}
+.collection-actions a {
+    background: rgba(0,0,0,0.05);
+    margin-top: 4px;
+    padding: 5px;
+    border-radius: 2px;
+}
+</style>
+
+<script src="assets/js/card-collections.js
+"></script>

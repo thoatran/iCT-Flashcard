@@ -1,0 +1,1 @@
+var SERVER_ADDRESS = "https://ict-flashcard-server.herokuapp.com";

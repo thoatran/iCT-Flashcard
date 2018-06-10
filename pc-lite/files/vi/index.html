@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>iCT Flashcard - Homepage</title>
+</head>
+<body>
+    
+    <a href="/vi/navi.html">Please click here if you are not redirected within a few seconds.</a>
+    
+    <!-- Server Info -->
+    <script  src="assets/js/server_info.js"></script>
+    <!-- Jquery -->
+    <script src="assets/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/URI.min.js"></script>
+    <script
+  src="assets/js/navi.js"></script>
+
+
+    <script>
+        if (!localStorage.language) {
+            localStorage.language = "vi";
+        }
+
+        window.location.href = 'navi.html';
+        // window.location.href = "/"+localStorage.language+"/navi.html";
+        function updatePageInfo() {
+
+            // Check support for HTML5 Local Storage
+            if (typeof(Storage) === "undefined") {
+                if (NaviGetCurrentPage() != 'browser-not-supported') {
+                    window.location = "/"+localStorage.language+"/navi.html?get=browser-not-supported";
+                }
+            }
+
+            if (!localStorage.username || !localStorage.token) {
+                window.location = "/"+localStorage.language+"/login.html"; 
+            }
+
+            $.ajax({
+                url: SERVER_ADDRESS+"/api/user/islogin",
+                type: "post",
+                data: {"username": localStorage.username,
+                    "token": localStorage.token
+                },
+                success: function (response) {
+                    if (response['success'] != false && response['isLoggedIn'] == true) {
+                        return updateUserInfo(response);
+                    } else {
+                        window.location = "/"+localStorage.language+"/login.html"; 
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    return resetDataOnError();
+                }
+            });
+
+        }
+    </script>
+    
+</body>
+</html>

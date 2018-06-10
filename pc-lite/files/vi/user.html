@@ -1,0 +1,100 @@
+<div class="my-3 p-3 bg-white rounded box-shadow">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="profile-photo-wrapper mb-3" style="position: relative;">
+                <img id="profile_photo" src="assets/images/default-profile-photo.png" class="rounded img-thumbnail" style="max-width: 10rem">
+            
+                <button onclick="$('#btn-select-profilephoto').click()" class="btn btn-light" style="position: absolute;
+                bottom: 0;
+                left: 0;
+                opacity: 0.5;">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                    Thay hình
+                </button>
+            </div>
+           
+            <input style="display: none" type="file" class="form-control-file"  id="btn-select-profilephoto"
+            onchange="updateProfilePhoto()">
+        </div>
+    
+        <div class="col-md-6">
+            <form id="change-user-info">
+                <h3 class="border-bottom border-gray mb-3">Thay đổi thông tin người dùng</h3>
+                <div class="form-group row">
+                    <label for="userinfo-fullname" class="col-sm-2 col-form-label">Họ tên</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id="userinfo-fullname" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                        <label for="userinfo-bio">Giới thiệu</label>
+                        <textarea class="form-control" id="userinfo-bio" rows="3"></textarea>
+                      </div>
+                <div class="form-group row">
+                    <label for="userinfo-email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id="userinfo-email" value="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="userinfo-newpassword" class="col-sm-2 col-form-label">Mật khẩu</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id="userinfo-newpassword" data-toggle="modal" data-target="#change-password-modal" placeholder="Ấn vào đây để đổi mật khẩu"
+                    readonly
+                    >
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-3">
+            <button id="save-user-info" class="btn btn-primary btn-lg" type="button">Lưu lại</button>
+        </div>
+    </div>
+</div>
+  
+<!-- Change Password Modal -->
+<div class="modal fade" id="change-password-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Đổi mật khẩu</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <label for="inp-old-password">Mật khẩu cũ</label>
+                  <input type="password" class="form-control" id="inp-old-password" placeholder="**********">
+                </div>
+                <div class="form-group">
+                  <label for="inp-new-password">Mật khẩu mới</label>
+                  <input type="password" class="form-control" id="inp-new-password" placeholder="**********">
+                </div>
+                <div class="form-group">
+                    <label for="inp-new-password-2">Nhập lại mật khẩu mới</label>
+                    <input type="password" class="form-control" id="inp-new-password-2" placeholder="**********">
+                  </div>
+                <button id="btn-change-password" class="btn btn-primary">Đổi mật khẩu</button>
+            </form>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="assets/js/user-page.js"></script>
