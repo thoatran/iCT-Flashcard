@@ -1,4 +1,4 @@
-package pc;
+package FrameDesign;
 
 import java.awt.Color;
 import java.awt.EventQueue;
