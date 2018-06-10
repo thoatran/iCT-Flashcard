@@ -1,13 +1,24 @@
 package demo.flashcard;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import demo.media.Sound;
+import sun.applet.Main;
+
 public class FlashCard {
 	private JPanel FlashCard=new JPanel();
+	private Sound Engsound = new Sound();
+	private Sound Viesound = new Sound();
 
-	public JPanel Card(ImageIcon icon1) {
+	public JPanel Card(ImageIcon icon1,String Engpath,String Viepath) {
 		FlashCard.setPreferredSize(new Dimension(200,250));
         GridBagLayout layout = new GridBagLayout();
         GridBagConstraints constraints = new GridBagConstraints();
@@ -37,13 +48,37 @@ public class FlashCard {
         sound.setBackground(Color.WHITE);
 
         JButton Eng_sound = new JButton();
+        Eng_sound.setBackground(Color.WHITE);
+        Eng_sound.setForeground(Color.BLACK);
         Eng_sound.setPreferredSize(new Dimension(60,30));
+        Eng_sound.setBorder(new LineBorder(Color.GRAY, 1, true));
+        
+        Engsound.SetSound(Engpath);
+        Eng_sound.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				Engsound.play();
+				
+			}
+		});        
         sound.add(Eng_sound);
         
         sound.add(Box.createRigidArea(new Dimension(2,0)));
 
         JButton Vie_sound = new JButton();
+        Vie_sound.setBackground(Color.WHITE);
+        Vie_sound.setForeground(Color.BLACK);
         Vie_sound.setPreferredSize(new Dimension(60,30));
+        Vie_sound.setBorder(new LineBorder(Color.GRAY, 1, true));
+        
+        Viesound.SetSound(Viepath);
+        Eng_sound.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				Viesound.play();
+				
+			}
+		});        
         sound.add(Vie_sound);
 
         constraints.gridy=7;
@@ -59,7 +94,10 @@ public class FlashCard {
         FlashCard.add(separator);
 
         JButton Flip = new JButton("m„Út sau");
+        Flip.setBackground(Color.CYAN);
+        Flip.setForeground(Color.WHITE);
         Flip.setPreferredSize(new Dimension(180,30));
+        Flip.setBorder(new LineBorder(Color.GRAY,1,true));
         constraints.gridy=22;
         constraints.gridheight=1;
         layout.setConstraints(Flip,constraints);
