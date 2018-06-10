@@ -34,6 +34,7 @@ import javax.swing.DropMode;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.JProgressBar;
 
 public class Dashboard extends JFrame {
 
@@ -253,6 +254,75 @@ public class Dashboard extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 321, 551, -319);
 		table_flashcard.add(scrollPane);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
+		panel.setBounds(10, 13, 187, 284);
+		table_flashcard.add(panel);
+		panel.setLayout(null);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(240, 255, 240));
+		panel_1.setBounds(0, 0, 187, 101);
+		panel.add(panel_1);
+		
+		JLabel lblNewLabel = new JLabel("Tên gói");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(21, 112, 156, 26);
+		panel.add(lblNewLabel);
+		
+		JTextPane txtpnMT = new JTextPane();
+		txtpnMT.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtpnMT.setText("Mô tả");
+		txtpnMT.setBounds(21, 142, 156, 46);
+		panel.add(txtpnMT);
+		
+		JLabel lblNewLabel_1 = new JLabel("Xem");
+		lblNewLabel_1.setIcon(new ImageIcon(Dashboard.class.getResource("/images/004-eye-shape-variant-interface-view-symbol.png")));
+		lblNewLabel_1.setForeground(Color.DARK_GRAY);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(10, 235, 57, 26);
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblnTp = new JLabel("Ôn tập");
+		lblnTp.setIcon(new ImageIcon(Dashboard.class.getResource("/images/002-review.png")));
+		lblnTp.setForeground(Color.DARK_GRAY);
+		lblnTp.setHorizontalAlignment(SwingConstants.CENTER);
+		lblnTp.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblnTp.setBounds(93, 235, 94, 26);
+		panel.add(lblnTp);
+		
+		JLabel lblChnhSa = new JLabel("Chỉnh sửa");
+		lblChnhSa.setIcon(new ImageIcon(Dashboard.class.getResource("/images/003-edit.png")));
+		lblChnhSa.setForeground(Color.DARK_GRAY);
+		lblChnhSa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblChnhSa.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblChnhSa.setBounds(0, 258, 104, 26);
+		panel.add(lblChnhSa);
+		
+		JLabel lblXa = new JLabel("Xóa");
+		lblXa.setIcon(new ImageIcon(Dashboard.class.getResource("/images/001-rubbish-bin.png")));
+		lblXa.setForeground(Color.DARK_GRAY);
+		lblXa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblXa.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblXa.setBounds(89, 258, 88, 26);
+		panel.add(lblXa);
+		
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setValue(50);
+		progressBar.setBounds(21, 222, 146, 14);
+		panel.add(progressBar);
+		
+		JLabel lblThuc = new JLabel("Đã thuộc:");
+		lblThuc.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblThuc.setBounds(21, 199, 68, 21);
+		panel.add(lblThuc);
+		
+		JLabel label = new JLabel("50%");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		label.setBounds(89, 196, 46, 26);
+		panel.add(label);
 		
 		JPanel divPanel = new JPanel();
 		divPanel.setBounds(34, 45, 551, 3);
