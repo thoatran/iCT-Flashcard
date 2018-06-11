@@ -1,10 +1,15 @@
 # iCT Flashcard
-Flash card is a method that combining English word and a corresponding image to help people remembering words more easily and having fun with learning English.
+
+Flash card is a method that combining English word and a corresponding image to help people remembering words more easily and having fun with learning English
+
 ICT Flashcard is a multiplatform software prividing you visual flashcards.
 
-## Main feature
+## Main features
+
 => PROVIDE VISUAL FLASHCARDS: we don’t have to buy paper flashcard anymore.
+
 => LEARN EVERYWHERE: we can use both web app and Desktop app to learn.
+
 => MULTIPLE LANGUAGE SUPPORT: user can choose to use Vietnamese or English language UI.
 
 ## Environment setup
